@@ -1,5 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import {
+  Calendar,
+  Car,
+  ChevronRight,
+  Fuel,
+  Gauge,
+  MapPin,
+  MessageCircle,
+  ShieldCheck,
+} from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { formatPrice, formatKm, FUEL_LABELS, COUNTRY_LABELS } from "@/lib/format";
 
@@ -22,16 +33,37 @@ export default async function ListingDetailPage({
 
   if (!listing) notFound();
 
+  const specs = [
+    { icon: Car, label: "Marque", value: listing.make },
+    { icon: Car, label: "Modèle", value: listing.model },
+    { icon: Calendar, label: "Année", value: String(listing.year) },
+    { icon: Gauge, label: "Kilométrage", value: formatKm(listing.mileageKm) },
+    { icon: Fuel, label: "Carburant", value: FUEL_LABELS[listing.fuelType] },
+    {
+      icon: MapPin,
+      label: "Localisation",
+      value: `${listing.city}, ${COUNTRY_LABELS[listing.country]}`,
+    },
+  ];
+
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div>
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+      <nav className="mb-5 flex items-center gap-1 text-sm text-neutral-500">
+        <Link href="/voitures" className="hover:text-brand-700">
+          Voitures
+        </Link>
+        <ChevronRight size={14} />
+        <span className="truncate text-neutral-700">{listing.title}</span>
+      </nav>
+
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-5">
+        <div className="md:col-span-3">
           {listing.images.length > 0 ? (
             <div className="grid grid-cols-2 gap-2">
               {listing.images.map((img, i) => (
                 <div
                   key={img.id}
-                  className={`relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100 ${
+                  className={`relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 ${
                     i === 0 ? "col-span-2" : ""
                   }`}
                 >
@@ -45,58 +77,78 @@ export default async function ListingDetailPage({
               ))}
             </div>
           ) : (
-            <div className="flex aspect-[4/3] items-center justify-center rounded-lg bg-gray-100 text-gray-400">
-              Pas de photo
+            <div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-neutral-100 text-neutral-300">
+              <Car size={56} strokeWidth={1.5} />
             </div>
           )}
-        </div>
 
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{listing.title}</h1>
-          <p className="mt-1 text-3xl font-extrabold text-green-800">
-            {formatPrice(listing.price, listing.currency)}
-          </p>
-
-          <dl className="mt-6 grid grid-cols-2 gap-y-2 text-sm">
-            <dt className="text-gray-500">Marque</dt>
-            <dd className="font-medium">{listing.make}</dd>
-            <dt className="text-gray-500">Modèle</dt>
-            <dd className="font-medium">{listing.model}</dd>
-            <dt className="text-gray-500">Année</dt>
-            <dd className="font-medium">{listing.year}</dd>
-            <dt className="text-gray-500">Kilométrage</dt>
-            <dd className="font-medium">{formatKm(listing.mileageKm)}</dd>
-            <dt className="text-gray-500">Carburant</dt>
-            <dd className="font-medium">{FUEL_LABELS[listing.fuelType]}</dd>
-            <dt className="text-gray-500">Localisation</dt>
-            <dd className="font-medium">
-              {listing.city}, {COUNTRY_LABELS[listing.country]}
-            </dd>
-          </dl>
-
-          <div className="mt-6 rounded-lg border border-gray-200 bg-white p-4">
-            <p className="font-medium text-gray-900">
-              {listing.seller.name}{" "}
-              {listing.seller.verified && (
-                <span className="ml-1 rounded bg-green-100 px-1.5 py-0.5 text-xs font-medium text-green-800">
-                  Vérifié
-                </span>
-              )}
-            </p>
-            <button
-              className="mt-3 w-full rounded-md bg-green-700 px-4 py-2 font-medium text-white hover:bg-green-800"
-              disabled
-              title="La messagerie arrive bientôt"
-            >
-              Contacter le vendeur
-            </button>
+          <div className="card mt-6 p-5">
+            <h2 className="font-semibold text-neutral-900">Caractéristiques</h2>
+            <dl className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
+              {specs.map(({ icon: Icon, label, value }) => (
+                <div key={label} className="flex items-start gap-2.5">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
+                    <Icon size={15} />
+                  </div>
+                  <div>
+                    <dt className="text-xs text-neutral-500">{label}</dt>
+                    <dd className="text-sm font-medium text-neutral-900">
+                      {value}
+                    </dd>
+                  </div>
+                </div>
+              ))}
+            </dl>
           </div>
 
           <div className="mt-6">
-            <h2 className="font-medium text-gray-900">Description</h2>
-            <p className="mt-1 whitespace-pre-line text-gray-700">
+            <h2 className="font-semibold text-neutral-900">Description</h2>
+            <p className="mt-2 whitespace-pre-line leading-relaxed text-neutral-700">
               {listing.description}
             </p>
+          </div>
+        </div>
+
+        <div className="md:col-span-2">
+          <div className="sticky top-20 space-y-4">
+            <div className="card p-5">
+              <p className="text-sm text-neutral-500">{listing.title}</p>
+              <p className="mt-1 text-3xl font-extrabold text-brand-700">
+                {formatPrice(listing.price, listing.currency)}
+              </p>
+            </div>
+
+            <div className="card p-5">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-100 text-sm font-bold text-brand-800">
+                  {listing.seller.name.charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <p className="flex items-center gap-1.5 font-medium text-neutral-900">
+                    {listing.seller.name}
+                    {listing.seller.verified && (
+                      <span className="badge-brand !py-0.5">
+                        <ShieldCheck size={12} />
+                        Vérifié
+                      </span>
+                    )}
+                  </p>
+                  <p className="text-xs text-neutral-500">Vendeur particulier</p>
+                </div>
+              </div>
+
+              <button
+                className="btn-primary mt-4 w-full"
+                disabled
+                title="La messagerie arrive bientôt"
+              >
+                <MessageCircle size={16} />
+                Contacter le vendeur
+              </button>
+              <p className="mt-2 text-center text-xs text-neutral-400">
+                La messagerie intégrée arrive bientôt
+              </p>
+            </div>
           </div>
         </div>
       </div>
