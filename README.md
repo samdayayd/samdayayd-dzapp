@@ -25,9 +25,30 @@ Immobilier, Travail, Mariage, and the rest.
   the next iteration (in-app chat, saved listings) — not wired to any UI yet
 - "Contacter le vendeur" button is a placeholder (messaging is v2)
 
-## Local setup
+## Quickstart
 
-### 1. Start Postgres
+### Option A — Deploy to Render (get a real URL)
+
+This repo includes a [`render.yaml`](render.yaml) blueprint that provisions
+the web service + a free Postgres database together.
+
+1. Click **[Deploy to Render](https://render.com/deploy?repo=https://github.com/samdayayd/samdayayd-dzapp)**.
+2. Sign in with GitHub, connect this repo, pick the branch you're working on.
+3. Click **Apply**. Render provisions the database and does the first
+   deploy — it'll fail once, because `NEXTAUTH_URL` can't be known until
+   the service exists.
+4. Once the service has a `*.onrender.com` URL, open its **Environment**
+   tab, set `NEXTAUTH_URL` to that full URL (e.g.
+   `https://dzapp-xxxx.onrender.com`), save, and it redeploys automatically.
+5. Visit the URL — register an account and post a listing.
+
+Note: the free plan has no persistent disk, so uploaded photos won't
+survive a redeploy or restart — fine for trying it out, see `render.yaml`'s
+comments before any real usage.
+
+### Option B — run locally
+
+#### 1. Start Postgres
 
 Option A — Docker:
 
@@ -38,7 +59,7 @@ docker compose up -d
 Option B — a local Postgres install: create a `dzapp` role/database matching
 `.env.example`.
 
-### 2. Configure environment
+#### 2. Configure environment
 
 ```bash
 cp .env.example .env
@@ -46,7 +67,7 @@ cp .env.example .env
 openssl rand -base64 32   # paste into AUTH_SECRET
 ```
 
-### 3. Install deps, migrate, run
+#### 3. Install deps, migrate, run
 
 ```bash
 npm install
