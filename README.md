@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DZ APP
 
-## Getting Started
+A classifieds marketplace connecting Algerians in France and Algeria —
+"tout en un seul endroit." This repo is the **MVP**, scoped to a single
+category (**Voitures** / cars) to prove out the product before expanding to
+Immobilier, Travail, Mariage, and the rest.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, TypeScript, Tailwind CSS)
+- **Prisma** ORM + **PostgreSQL**
+- **Auth.js (NextAuth v5)** — email/password (Credentials provider, JWT
+  sessions)
+- Local filesystem image upload (`public/uploads/`) — swap for S3-compatible
+  object storage before deploying to production, since most hosts don't
+  persist local disk across deploys
+
+## What's in the MVP
+
+- Register / login
+- Browse Voitures listings with filters (ville, pays, prix)
+- Listing detail page with image gallery
+- Post a new car listing (with photo upload)
+- Data model already includes `Conversation` / `Message` / `Favorite` for
+  the next iteration (in-app chat, saved listings) — not wired to any UI yet
+- "Contacter le vendeur" button is a placeholder (messaging is v2)
+
+## Local setup
+
+### 1. Start Postgres
+
+Option A — Docker:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Option B — a local Postgres install: create a `dzapp` role/database matching
+`.env.example`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Configure environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cp .env.example .env
+# generate a real secret:
+openssl rand -base64 32   # paste into AUTH_SECRET
+```
 
-## Learn More
+### 3. Install deps, migrate, run
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+npx prisma migrate dev
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Visit http://localhost:3000.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure
 
-## Deploy on Vercel
+```
+prisma/schema.prisma       # User, Listing, ListingImage, Favorite, Conversation, Message
+src/auth.ts                 # NextAuth config (Credentials provider)
+src/app/api/register        # sign-up endpoint
+src/app/api/listings        # create listing endpoint
+src/app/api/upload          # image upload endpoint
+src/app/voitures            # feed, detail, create-listing pages
+src/app/login, /register    # auth pages
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Roadmap (post-MVP)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- In-app messaging (buyer ↔ seller, using the existing `Conversation`/`Message` models)
+- Object storage for images (S3/R2) instead of local disk
+- Phone/ID verification badge
+- Additional categories: Immobilier, Travail, Achat/Vente, Mariage, Location, Services
+- Bilingual FR/AR with RTL support
+- Saved searches + alerts
+- Admin/moderation dashboard
