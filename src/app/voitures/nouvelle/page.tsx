@@ -47,10 +47,10 @@ export default function NewListingPage() {
   }
 
   function handleFiles(fileList: FileList | null) {
-    const list = Array.from(fileList ?? []);
-    setFiles(list);
-    previews.forEach((url) => URL.revokeObjectURL(url));
-    setPreviews(list.map((f) => URL.createObjectURL(f)));
+    const newFiles = Array.from(fileList ?? []);
+    if (newFiles.length === 0) return;
+    setFiles((prev) => [...prev, ...newFiles]);
+    setPreviews((prev) => [...prev, ...newFiles.map((f) => URL.createObjectURL(f))]);
   }
 
   function removeFile(index: number) {
@@ -61,6 +61,10 @@ export default function NewListingPage() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Capture the form synchronously — React nulls out a synthetic event's
+    // currentTarget once the handler yields on an await, so this must
+    // happen before any async work below.
+    const form = e.currentTarget;
     setError(null);
     setSubmitting(true);
 
@@ -75,7 +79,6 @@ export default function NewListingPage() {
         imageUrls.push(data.url);
       }
 
-      const form = e.currentTarget;
       const fd = new FormData(form);
       const payload = {
         title: fd.get("title"),
@@ -260,7 +263,10 @@ export default function NewListingPage() {
               type="file"
               accept="image/jpeg,image/png,image/webp"
               multiple
-              onChange={(e) => handleFiles(e.target.files)}
+              onChange={(e) => {
+                handleFiles(e.target.files);
+                e.target.value = "";
+              }}
               className="sr-only"
             />
           </label>
