@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# SQLite dev database
+/prisma/dev.db
+/prisma/dev.db-journal
+
 # user-uploaded content (local dev only — use object storage in production)
 /public/uploads/
 

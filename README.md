@@ -8,7 +8,10 @@ Immobilier, Travail, Mariage, and the rest.
 ## Stack
 
 - **Next.js 16** (App Router, TypeScript, Tailwind CSS)
-- **Prisma** ORM + **PostgreSQL**
+- **Prisma** ORM + **SQLite** — chosen for this MVP stage so it runs
+  anywhere (including a free Render deploy) with zero external database
+  setup; see `prisma/schema.prisma` for notes on moving to Postgres once
+  there's real user data to persist
 - **Auth.js (NextAuth v5)** — email/password (Credentials provider, JWT
   sessions)
 - Local filesystem image upload (`public/uploads/`) — swap for S3-compatible
@@ -29,47 +32,28 @@ Immobilier, Travail, Mariage, and the rest.
 
 ### Option A — Deploy to Render (get a real URL)
 
-This repo includes a [`render.yaml`](render.yaml) blueprint that provisions
-the web service + a free Postgres database together.
+This repo includes a [`render.yaml`](render.yaml) blueprint.
 
 1. Click **[Deploy to Render](https://render.com/deploy?repo=https://github.com/samdayayd/samdayayd-dzapp)**.
 2. Sign in with GitHub, connect this repo, pick the branch you're working on.
-3. Click **Apply**. Render provisions the database and does the first
-   deploy — it'll fail once, because `NEXTAUTH_URL` can't be known until
-   the service exists.
+3. Click **Apply**. Render does the first deploy — it'll fail once, because
+   `NEXTAUTH_URL` can't be known until the service exists.
 4. Once the service has a `*.onrender.com` URL, open its **Environment**
    tab, set `NEXTAUTH_URL` to that full URL (e.g.
    `https://dzapp-xxxx.onrender.com`), save, and it redeploys automatically.
 5. Visit the URL — register an account and post a listing.
 
-Note: the free plan has no persistent disk, so uploaded photos won't
-survive a redeploy or restart — fine for trying it out, see `render.yaml`'s
-comments before any real usage.
+Note: the free plan has no persistent disk, so both the SQLite database and
+uploaded photos reset on every redeploy or restart — fine for trying it
+out, see `render.yaml`'s comments before any real usage.
 
 ### Option B — run locally
 
-#### 1. Start Postgres
-
-Option A — Docker:
-
-```bash
-docker compose up -d
-```
-
-Option B — a local Postgres install: create a `dzapp` role/database matching
-`.env.example`.
-
-#### 2. Configure environment
-
 ```bash
 cp .env.example .env
-# generate a real secret:
-openssl rand -base64 32   # paste into AUTH_SECRET
-```
+# generate a real secret and paste it into AUTH_SECRET in .env:
+openssl rand -base64 32
 
-#### 3. Install deps, migrate, run
-
-```bash
 npm install
 npx prisma migrate dev
 npm run dev
@@ -92,6 +76,7 @@ src/app/login, /register    # auth pages
 ## Roadmap (post-MVP)
 
 - In-app messaging (buyer ↔ seller, using the existing `Conversation`/`Message` models)
+- Move from SQLite to Postgres once there's real user data to persist
 - Object storage for images (S3/R2) instead of local disk
 - Phone/ID verification badge
 - Additional categories: Immobilier, Travail, Achat/Vente, Mariage, Location, Services

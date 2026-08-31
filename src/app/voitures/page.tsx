@@ -22,10 +22,8 @@ export default async function VoituresPage({
   const listings = await prisma.listing.findMany({
     where: {
       status: "ACTIVE",
-      ...(params.ville
-        ? { city: { contains: params.ville, mode: "insensitive" } }
-        : {}),
-      ...(params.pays ? { country: params.pays as "FRANCE" | "ALGERIE" } : {}),
+      ...(params.ville ? { city: { contains: params.ville } } : {}),
+      ...(params.pays ? { country: params.pays } : {}),
       ...(params.prixMin || params.prixMax
         ? {
             price: {
