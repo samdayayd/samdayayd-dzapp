@@ -27,21 +27,23 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white p-0.5 text-xs">
-      <Globe size={14} className="ms-1.5 text-neutral-400" />
-      {locales.map((l) => (
-        <button
-          key={l}
-          onClick={() => handleChange(l)}
-          className={`rounded-md px-2 py-1 font-medium transition ${
-            l === locale
-              ? "bg-brand-600 text-white"
-              : "text-neutral-500 hover:bg-neutral-100"
-          }`}
-        >
-          {LABELS[l]}
-        </button>
-      ))}
+    <div className="relative flex items-center">
+      <Globe
+        size={14}
+        className="pointer-events-none absolute start-2 text-neutral-400"
+      />
+      <select
+        aria-label="Language"
+        value={locale}
+        onChange={(e) => handleChange(e.target.value as Locale)}
+        className="cursor-pointer appearance-none rounded-lg border border-neutral-200 bg-white py-1.5 ps-7 pe-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+      >
+        {locales.map((l) => (
+          <option key={l} value={l}>
+            {LABELS[l]}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

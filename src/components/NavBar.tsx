@@ -2,7 +2,7 @@
 
 import { useSession, signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { Car, LogOut, Plus, User } from "lucide-react";
+import { Car, LogIn, LogOut, Plus, User } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -54,11 +54,17 @@ export function NavBar() {
             <div className="h-9 w-24" />
           ) : (
             <>
-              <Link href="/login" className="btn-ghost">
-                {t("login")}
+              <Link
+                href="/login"
+                title={t("login")}
+                className="btn-ghost !px-2.5 sm:!px-4"
+              >
+                <LogIn size={16} className="sm:hidden" />
+                <span className="hidden sm:inline">{t("login")}</span>
               </Link>
-              <Link href="/register" className="btn-primary">
-                {t("register")}
+              <Link href="/register" className="btn-primary !px-3 sm:!px-4">
+                <span className="hidden sm:inline">{t("register")}</span>
+                <span className="sm:hidden">{t("registerShort")}</span>
               </Link>
             </>
           )}

@@ -5,6 +5,7 @@
     "publishShort": "Post",
     "login": "Log in",
     "register": "Create account",
+    "registerShort": "Sign up",
     "logout": "Log out"
   },
   "footer": {
@@ -14,11 +15,11 @@
   },
   "home": {
     "badge": "New — Cars listings in early access",
-    "titleLine1": "Everything in one place,",
+    "titleLine1": "The trusted marketplace",
     "titleFrance": "between France",
     "titleEt": "and",
     "titleAlgerie": "Algeria.",
-    "subtitle": "The listings platform built for the diaspora — cars, real estate, jobs and more, all coming together in one place.",
+    "subtitle": "The leading listings platform for the diaspora — cars, real estate, jobs and more, all in one place.",
     "ctaBrowse": "Browse Cars listings",
     "ctaPublish": "Post an ad",
     "trust1Title": "France & Algeria",
