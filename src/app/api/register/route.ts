@@ -6,18 +6,15 @@ export async function POST(req: Request) {
   const { email, password, name } = await req.json();
 
   if (!email || !password || !name) {
-    return NextResponse.json({ error: "Champs manquants" }, { status: 400 });
+    return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
   }
   if (typeof password !== "string" || password.length < 8) {
-    return NextResponse.json(
-      { error: "Le mot de passe doit contenir au moins 8 caractères" },
-      { status: 400 }
-    );
+    return NextResponse.json({ code: "PASSWORD_TOO_SHORT" }, { status: 400 });
   }
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
-    return NextResponse.json({ error: "Cet email est déjà utilisé" }, { status: 409 });
+    return NextResponse.json({ code: "EMAIL_TAKEN" }, { status: 409 });
   }
 
   const passwordHash = await bcrypt.hash(password, 12);

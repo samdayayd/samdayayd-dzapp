@@ -10,20 +10,20 @@ const MAX_SIZE = 8 * 1024 * 1024; // 8MB
 export async function POST(req: Request) {
   const session = await auth();
   if (!session?.user) {
-    return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    return NextResponse.json({ code: "UNAUTHORIZED" }, { status: 401 });
   }
 
   const formData = await req.formData();
   const file = formData.get("file");
 
   if (!(file instanceof File)) {
-    return NextResponse.json({ error: "Fichier manquant" }, { status: 400 });
+    return NextResponse.json({ code: "FILE_MISSING" }, { status: 400 });
   }
   if (!ALLOWED_TYPES.has(file.type)) {
-    return NextResponse.json({ error: "Type de fichier non supporté" }, { status: 400 });
+    return NextResponse.json({ code: "INVALID_FILE_TYPE" }, { status: 400 });
   }
   if (file.size > MAX_SIZE) {
-    return NextResponse.json({ error: "Fichier trop volumineux (max 8MB)" }, { status: 400 });
+    return NextResponse.json({ code: "FILE_TOO_LARGE" }, { status: 400 });
   }
 
   const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";

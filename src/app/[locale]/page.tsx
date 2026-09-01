@@ -1,13 +1,10 @@
-import Link from "next/link";
-import {
-  Car,
-  MapPin,
-  MessageCircle,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Car, MapPin, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 export default function Home() {
+  const t = useTranslations("home");
+
   return (
     <div>
       {/* Hero */}
@@ -23,29 +20,27 @@ export default function Home() {
         <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
           <span className="badge bg-white/10 text-brand-50 ring-1 ring-inset ring-white/20">
             <Sparkles size={13} />
-            Nouveau — annonces Voitures en avant-première
+            {t("badge")}
           </span>
 
           <h1 className="mt-5 max-w-2xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Tout en un seul endroit,{" "}
-            <span className="text-brand-200">entre la France</span> et{" "}
-            <span className="text-accent-400">l&apos;Algérie</span>.
+            {t("titleLine1")}{" "}
+            <span className="text-brand-200">{t("titleFrance")}</span>{" "}
+            {t("titleEt")}{" "}
+            <span className="text-accent-400">{t("titleAlgerie")}</span>
           </h1>
-          <p className="mt-4 max-w-xl text-lg text-brand-100/90">
-            La plateforme d&apos;annonces pensée pour la diaspora — voitures,
-            immobilier, emploi et bien plus, bientôt réunis au même endroit.
-          </p>
+          <p className="mt-4 max-w-xl text-lg text-brand-100/90">{t("subtitle")}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/voitures" className="btn-primary !bg-white !text-brand-800 hover:!bg-brand-50">
               <Car size={17} strokeWidth={2.5} />
-              Voir les annonces Voitures
+              {t("ctaBrowse")}
             </Link>
             <Link
               href="/voitures/nouvelle"
               className="btn !border !border-white/30 !bg-transparent !text-white hover:!bg-white/10"
             >
-              Publier une annonce
+              {t("ctaPublish")}
             </Link>
           </div>
         </div>
@@ -59,12 +54,8 @@ export default function Home() {
               <MapPin size={18} />
             </div>
             <div>
-              <p className="text-sm font-semibold text-neutral-900">
-                France &amp; Algérie
-              </p>
-              <p className="text-sm text-neutral-500">
-                Des annonces des deux côtés de la Méditerranée.
-              </p>
+              <p className="text-sm font-semibold text-neutral-900">{t("trust1Title")}</p>
+              <p className="text-sm text-neutral-500">{t("trust1Body")}</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
@@ -72,12 +63,8 @@ export default function Home() {
               <ShieldCheck size={18} />
             </div>
             <div>
-              <p className="text-sm font-semibold text-neutral-900">
-                100% gratuit pour publier
-              </p>
-              <p className="text-sm text-neutral-500">
-                Aucune commission sur vos annonces.
-              </p>
+              <p className="text-sm font-semibold text-neutral-900">{t("trust2Title")}</p>
+              <p className="text-sm text-neutral-500">{t("trust2Body")}</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
@@ -85,12 +72,8 @@ export default function Home() {
               <MessageCircle size={18} />
             </div>
             <div>
-              <p className="text-sm font-semibold text-neutral-900">
-                Simple et rapide
-              </p>
-              <p className="text-sm text-neutral-500">
-                Publiez une annonce en quelques minutes.
-              </p>
+              <p className="text-sm font-semibold text-neutral-900">{t("trust3Title")}</p>
+              <p className="text-sm text-neutral-500">{t("trust3Body")}</p>
             </div>
           </div>
         </div>
@@ -100,10 +83,8 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="mb-6 flex items-end justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-neutral-900">Catégories</h2>
-            <p className="mt-1 text-neutral-500">
-              On commence par Voitures — les autres arrivent bientôt.
-            </p>
+            <h2 className="text-2xl font-bold text-neutral-900">{t("categoriesTitle")}</h2>
+            <p className="mt-1 text-neutral-500">{t("categoriesSubtitle")}</p>
           </div>
         </div>
 
@@ -116,17 +97,15 @@ export default function Home() {
               <Car size={22} />
             </div>
             <div className="mt-8">
-              <p className="text-lg font-semibold text-neutral-900">Voitures</p>
-              <p className="mt-1 text-sm text-neutral-500">
-                Achat, vente, toutes marques
-              </p>
+              <p className="text-lg font-semibold text-neutral-900">{t("catVoituresName")}</p>
+              <p className="mt-1 text-sm text-neutral-500">{t("catVoituresNote")}</p>
             </div>
-            <span className="absolute right-5 top-5 badge-brand">Disponible</span>
+            <span className="badge-brand absolute end-5 top-5">{t("catAvailable")}</span>
           </Link>
 
           {[
-            { name: "Immobilier", note: "Vente, location" },
-            { name: "Travail", note: "Chercher ou proposer" },
+            { name: t("catImmobilierName"), note: t("catImmobilierNote") },
+            { name: t("catTravailName"), note: t("catTravailNote") },
           ].map((cat) => (
             <div
               key={cat.name}
@@ -136,12 +115,10 @@ export default function Home() {
                 <Sparkles size={20} />
               </div>
               <div className="mt-8">
-                <p className="text-lg font-semibold text-neutral-700">
-                  {cat.name}
-                </p>
+                <p className="text-lg font-semibold text-neutral-700">{cat.name}</p>
                 <p className="mt-1 text-sm text-neutral-400">{cat.note}</p>
               </div>
-              <span className="mt-4 badge-neutral w-fit">Bientôt</span>
+              <span className="mt-4 badge-neutral w-fit">{t("catComingSoon")}</span>
             </div>
           ))}
         </div>

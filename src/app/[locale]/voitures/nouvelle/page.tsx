@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import {
   AlertCircle,
   Camera,
@@ -13,12 +12,18 @@ import {
   LogIn,
   X,
 } from "lucide-react";
+import { Link, useRouter } from "@/i18n/navigation";
+import { readErrorCode } from "@/lib/apiError";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 export default function NewListingPage() {
   const router = useRouter();
   const { status } = useSession();
+  const t = useTranslations("voitures.create");
+  const tFuel = useTranslations("voitures.fuel");
+  const tCountry = useTranslations("voitures.country");
+  const tErrors = useTranslations("errors");
 
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
@@ -34,13 +39,11 @@ export default function NewListingPage() {
           <LogIn size={26} />
         </div>
         <p className="mt-4 text-lg font-medium text-neutral-900">
-          Connectez-vous pour publier
+          {t("loginRequiredTitle")}
         </p>
-        <p className="mt-1 text-sm text-neutral-500">
-          Vous devez avoir un compte DZ APP pour publier une annonce.
-        </p>
+        <p className="mt-1 text-sm text-neutral-500">{t("loginRequiredBody")}</p>
         <Link href="/login" className="btn-primary mt-6">
-          Se connecter
+          {t("loginCta")}
         </Link>
       </div>
     );
@@ -74,7 +77,10 @@ export default function NewListingPage() {
         const fd = new FormData();
         fd.append("file", file);
         const res = await fetch("/api/upload", { method: "POST", body: fd });
-        if (!res.ok) throw new Error("Échec de l'envoi d'une image");
+        if (!res.ok) {
+          const code = await readErrorCode(res);
+          throw new Error(tErrors(code));
+        }
         const data = await res.json();
         imageUrls.push(data.url);
       }
@@ -101,14 +107,14 @@ export default function NewListingPage() {
       });
 
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? "Une erreur est survenue");
+        const code = await readErrorCode(res);
+        throw new Error(tErrors(code));
       }
 
       const { id } = await res.json();
       router.push(`/voitures/${id}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Une erreur est survenue");
+      setError(err instanceof Error ? err.message : tErrors("GENERIC"));
     } finally {
       setSubmitting(false);
     }
@@ -121,23 +127,21 @@ export default function NewListingPage() {
           <Car size={22} />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900">
-            Publier une annonce
-          </h1>
-          <p className="text-sm text-neutral-500">Catégorie Voitures</p>
+          <h1 className="text-2xl font-bold text-neutral-900">{t("title")}</h1>
+          <p className="text-sm text-neutral-500">{t("subtitle")}</p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="card space-y-6 p-6">
         <div>
           <label className="field-label" htmlFor="title">
-            Titre de l&apos;annonce
+            {t("titleLabel")}
           </label>
           <input
             id="title"
             name="title"
             required
-            placeholder="ex: Peugeot 208 2020, très bon état"
+            placeholder={t("titlePlaceholder")}
             className="field-input"
           />
         </div>
@@ -145,13 +149,13 @@ export default function NewListingPage() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="field-label" htmlFor="make">
-              Marque
+              {t("makeLabel")}
             </label>
             <input id="make" name="make" required className="field-input" />
           </div>
           <div>
             <label className="field-label" htmlFor="model">
-              Modèle
+              {t("modelLabel")}
             </label>
             <input id="model" name="model" required className="field-input" />
           </div>
@@ -160,7 +164,7 @@ export default function NewListingPage() {
         <div className="grid grid-cols-3 gap-4">
           <div>
             <label className="field-label" htmlFor="year">
-              Année
+              {t("yearLabel")}
             </label>
             <input
               id="year"
@@ -174,7 +178,7 @@ export default function NewListingPage() {
           </div>
           <div>
             <label className="field-label" htmlFor="mileageKm">
-              Kilométrage
+              {t("mileageLabel")}
             </label>
             <input
               id="mileageKm"
@@ -187,14 +191,14 @@ export default function NewListingPage() {
           </div>
           <div>
             <label className="field-label" htmlFor="fuelType">
-              Carburant
+              {t("fuelLabel")}
             </label>
             <select id="fuelType" name="fuelType" required className="field-select">
-              <option value="ESSENCE">Essence</option>
-              <option value="DIESEL">Diesel</option>
-              <option value="ELECTRIQUE">Électrique</option>
-              <option value="HYBRIDE">Hybride</option>
-              <option value="GPL">GPL</option>
+              <option value="ESSENCE">{tFuel("ESSENCE")}</option>
+              <option value="DIESEL">{tFuel("DIESEL")}</option>
+              <option value="ELECTRIQUE">{tFuel("ELECTRIQUE")}</option>
+              <option value="HYBRIDE">{tFuel("HYBRIDE")}</option>
+              <option value="GPL">{tFuel("GPL")}</option>
             </select>
           </div>
         </div>
@@ -202,7 +206,7 @@ export default function NewListingPage() {
         <div className="grid grid-cols-3 gap-4">
           <div>
             <label className="field-label" htmlFor="price">
-              Prix
+              {t("priceLabel")}
             </label>
             <input
               id="price"
@@ -215,16 +219,16 @@ export default function NewListingPage() {
           </div>
           <div>
             <label className="field-label" htmlFor="country">
-              Pays
+              {t("paysLabel")}
             </label>
             <select id="country" name="country" required className="field-select">
-              <option value="FRANCE">France</option>
-              <option value="ALGERIE">Algérie</option>
+              <option value="FRANCE">{tCountry("FRANCE")}</option>
+              <option value="ALGERIE">{tCountry("ALGERIE")}</option>
             </select>
           </div>
           <div>
             <label className="field-label" htmlFor="city">
-              Ville
+              {t("villeLabel")}
             </label>
             <input id="city" name="city" required className="field-input" />
           </div>
@@ -232,32 +236,30 @@ export default function NewListingPage() {
 
         <div>
           <label className="field-label" htmlFor="description">
-            Description
+            {t("descriptionLabel")}
           </label>
           <textarea
             id="description"
             name="description"
             required
             rows={5}
-            placeholder="État du véhicule, entretien, options, raison de la vente…"
+            placeholder={t("descriptionPlaceholder")}
             className="field-input resize-none"
           />
         </div>
 
         <div>
-          <label className="field-label">Photos</label>
+          <label className="field-label">{t("photosLabel")}</label>
           <label
             htmlFor="photos"
             className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-neutral-300 bg-neutral-50 px-4 py-8 text-center transition hover:border-brand-400 hover:bg-brand-50/50"
           >
             <ImagePlus size={22} className="text-neutral-400" />
             <span className="text-sm text-neutral-600">
-              <span className="font-medium text-brand-700">
-                Cliquez pour ajouter des photos
-              </span>{" "}
-              ou glissez-déposez
+              <span className="font-medium text-brand-700">{t("photosCta")}</span>{" "}
+              {t("photosOr")}
             </span>
-            <span className="text-xs text-neutral-400">JPG, PNG, WebP — 8MB max</span>
+            <span className="text-xs text-neutral-400">{t("photosHint")}</span>
             <input
               id="photos"
               type="file"
@@ -283,13 +285,13 @@ export default function NewListingPage() {
                   <button
                     type="button"
                     onClick={() => removeFile(i)}
-                    className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition group-hover:opacity-100"
+                    className="absolute end-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition group-hover:opacity-100"
                   >
                     <X size={12} />
                   </button>
                   {i === 0 && (
-                    <span className="badge-neutral absolute bottom-1 left-1 !bg-white/90 !py-0.5 !text-[10px]">
-                      <Camera size={10} /> Principale
+                    <span className="badge-neutral absolute bottom-1 start-1 !bg-white/90 !py-0.5 !text-[10px]">
+                      <Camera size={10} /> {t("photoMain")}
                     </span>
                   )}
                 </div>
@@ -309,10 +311,10 @@ export default function NewListingPage() {
           {submitting ? (
             <>
               <Loader2 size={16} className="animate-spin" />
-              Publication...
+              {t("submitting")}
             </>
           ) : (
-            "Publier l'annonce"
+            t("submit")
           )}
         </button>
       </form>

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   Calendar,
   Car,
@@ -11,8 +11,9 @@ import {
   MessageCircle,
   ShieldCheck,
 } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { prisma } from "@/lib/prisma";
-import { formatPrice, formatKm, FUEL_LABELS, COUNTRY_LABELS } from "@/lib/format";
+import { formatPrice, formatKm } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,8 @@ export default async function ListingDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const locale = await getLocale();
+  const t = await getTranslations("voitures");
 
   const listing = await prisma.listing.findUnique({
     where: { id },
@@ -34,15 +37,15 @@ export default async function ListingDetailPage({
   if (!listing) notFound();
 
   const specs = [
-    { icon: Car, label: "Marque", value: listing.make },
-    { icon: Car, label: "Modèle", value: listing.model },
-    { icon: Calendar, label: "Année", value: String(listing.year) },
-    { icon: Gauge, label: "Kilométrage", value: formatKm(listing.mileageKm) },
-    { icon: Fuel, label: "Carburant", value: FUEL_LABELS[listing.fuelType] },
+    { icon: Car, label: t("detail.make"), value: listing.make },
+    { icon: Car, label: t("detail.model"), value: listing.model },
+    { icon: Calendar, label: t("detail.year"), value: String(listing.year) },
+    { icon: Gauge, label: t("detail.mileage"), value: formatKm(listing.mileageKm, locale) },
+    { icon: Fuel, label: t("detail.fuel"), value: t(`fuel.${listing.fuelType}`) },
     {
       icon: MapPin,
-      label: "Localisation",
-      value: `${listing.city}, ${COUNTRY_LABELS[listing.country]}`,
+      label: t("detail.location"),
+      value: `${listing.city}, ${t(`country.${listing.country}`)}`,
     },
   ];
 
@@ -50,9 +53,9 @@ export default async function ListingDetailPage({
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
       <nav className="mb-5 flex items-center gap-1 text-sm text-neutral-500">
         <Link href="/voitures" className="hover:text-brand-700">
-          Voitures
+          {t("category")}
         </Link>
-        <ChevronRight size={14} />
+        <ChevronRight size={14} className="rtl:rotate-180" />
         <span className="truncate text-neutral-700">{listing.title}</span>
       </nav>
 
@@ -83,7 +86,7 @@ export default async function ListingDetailPage({
           )}
 
           <div className="card mt-6 p-5">
-            <h2 className="font-semibold text-neutral-900">Caractéristiques</h2>
+            <h2 className="font-semibold text-neutral-900">{t("detail.specsTitle")}</h2>
             <dl className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
               {specs.map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-start gap-2.5">
@@ -102,7 +105,7 @@ export default async function ListingDetailPage({
           </div>
 
           <div className="mt-6">
-            <h2 className="font-semibold text-neutral-900">Description</h2>
+            <h2 className="font-semibold text-neutral-900">{t("detail.descriptionTitle")}</h2>
             <p className="mt-2 whitespace-pre-line leading-relaxed text-neutral-700">
               {listing.description}
             </p>
@@ -114,7 +117,7 @@ export default async function ListingDetailPage({
             <div className="card p-5">
               <p className="text-sm text-neutral-500">{listing.title}</p>
               <p className="mt-1 text-3xl font-extrabold text-brand-700">
-                {formatPrice(listing.price, listing.currency)}
+                {formatPrice(listing.price, listing.currency, locale)}
               </p>
             </div>
 
@@ -129,24 +132,24 @@ export default async function ListingDetailPage({
                     {listing.seller.verified && (
                       <span className="badge-brand !py-0.5">
                         <ShieldCheck size={12} />
-                        Vérifié
+                        {t("detail.verified")}
                       </span>
                     )}
                   </p>
-                  <p className="text-xs text-neutral-500">Vendeur particulier</p>
+                  <p className="text-xs text-neutral-500">{t("detail.sellerDefault")}</p>
                 </div>
               </div>
 
               <button
                 className="btn-primary mt-4 w-full"
                 disabled
-                title="La messagerie arrive bientôt"
+                title={t("detail.messagingSoon")}
               >
                 <MessageCircle size={16} />
-                Contacter le vendeur
+                {t("detail.contactSeller")}
               </button>
               <p className="mt-2 text-center text-xs text-neutral-400">
-                La messagerie intégrée arrive bientôt
+                {t("detail.messagingSoon")}
               </p>
             </div>
           </div>

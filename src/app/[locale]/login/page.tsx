@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { AlertCircle, Loader2, LogIn, Mail, Lock } from "lucide-react";
+import { Link, useRouter } from "@/i18n/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
+  const t = useTranslations("auth.login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +28,7 @@ export default function LoginPage() {
     setLoading(false);
 
     if (res?.error) {
-      setError("Email ou mot de passe incorrect");
+      setError(t("invalidCredentials"));
       return;
     }
     router.push("/");
@@ -40,42 +41,40 @@ export default function LoginPage() {
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700">
           <LogIn size={22} />
         </div>
-        <h1 className="mt-3 text-2xl font-bold text-neutral-900">Connexion</h1>
-        <p className="mt-1 text-sm text-neutral-500">
-          Content de vous revoir sur DZ APP.
-        </p>
+        <h1 className="mt-3 text-2xl font-bold text-neutral-900">{t("title")}</h1>
+        <p className="mt-1 text-sm text-neutral-500">{t("subtitle")}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="card space-y-4 p-6">
         <div>
           <label className="field-label" htmlFor="email">
-            Email
+            {t("emailLabel")}
           </label>
           <div className="relative">
-            <Mail size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+            <Mail size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
             <input
               id="email"
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="field-input pl-9"
+              className="field-input ps-9"
             />
           </div>
         </div>
         <div>
           <label className="field-label" htmlFor="password">
-            Mot de passe
+            {t("passwordLabel")}
           </label>
           <div className="relative">
-            <Lock size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+            <Lock size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
             <input
               id="password"
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="field-input pl-9"
+              className="field-input ps-9"
             />
           </div>
         </div>
@@ -91,18 +90,18 @@ export default function LoginPage() {
           {loading ? (
             <>
               <Loader2 size={16} className="animate-spin" />
-              Connexion...
+              {t("submitting")}
             </>
           ) : (
-            "Se connecter"
+            t("submit")
           )}
         </button>
       </form>
 
       <p className="mt-5 text-center text-sm text-neutral-500">
-        Pas encore de compte ?{" "}
+        {t("noAccount")}{" "}
         <Link href="/register" className="font-medium text-brand-700 hover:underline">
-          Créer un compte
+          {t("createAccount")}
         </Link>
       </p>
     </div>

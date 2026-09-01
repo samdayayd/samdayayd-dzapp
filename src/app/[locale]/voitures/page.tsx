@@ -1,8 +1,9 @@
-import Link from "next/link";
 import Image from "next/image";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Car, Fuel, Gauge, MapPin, Search } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { prisma } from "@/lib/prisma";
-import { formatPrice, formatKm, FUEL_LABELS, COUNTRY_LABELS } from "@/lib/format";
+import { formatPrice, formatKm } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,8 @@ export default async function VoituresPage({
   searchParams: Promise<SearchParams>;
 }) {
   const params = await searchParams;
+  const locale = await getLocale();
+  const t = await getTranslations("voitures");
 
   const listings = await prisma.listing.findMany({
     where: {
@@ -47,38 +50,39 @@ export default async function VoituresPage({
           <div className="flex items-center gap-2 text-brand-700">
             <Car size={20} strokeWidth={2.25} />
             <span className="text-sm font-semibold uppercase tracking-wide">
-              Voitures
+              {t("category")}
             </span>
           </div>
           <h1 className="mt-1 text-2xl font-bold text-neutral-900 sm:text-3xl">
-            {listings.length} annonce{listings.length !== 1 ? "s" : ""}
-            {hasFilters ? " trouvée" + (listings.length !== 1 ? "s" : "") : " disponibles"}
+            {hasFilters
+              ? t("resultsFound", { count: listings.length })
+              : t("resultsAvailable", { count: listings.length })}
           </h1>
 
           <form className="mt-6 flex flex-wrap items-end gap-3">
             <div className="min-w-[160px] flex-1">
               <label className="field-label" htmlFor="ville">
-                Ville
+                {t("filters.villeLabel")}
               </label>
               <div className="relative">
                 <Search
                   size={16}
-                  className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
+                  className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400"
                 />
                 <input
                   id="ville"
                   type="text"
                   name="ville"
-                  placeholder="ex: Lyon, Alger…"
+                  placeholder={t("filters.villePlaceholder")}
                   defaultValue={params.ville}
-                  className="field-input pl-9"
+                  className="field-input ps-9"
                 />
               </div>
             </div>
 
             <div className="w-40">
               <label className="field-label" htmlFor="pays">
-                Pays
+                {t("filters.paysLabel")}
               </label>
               <select
                 id="pays"
@@ -86,15 +90,15 @@ export default async function VoituresPage({
                 defaultValue={params.pays ?? ""}
                 className="field-select"
               >
-                <option value="">Tous les pays</option>
-                <option value="FRANCE">France</option>
-                <option value="ALGERIE">Algérie</option>
+                <option value="">{t("filters.paysAll")}</option>
+                <option value="FRANCE">{t("filters.france")}</option>
+                <option value="ALGERIE">{t("filters.algerie")}</option>
               </select>
             </div>
 
             <div className="w-28">
               <label className="field-label" htmlFor="prixMin">
-                Prix min
+                {t("filters.prixMinLabel")}
               </label>
               <input
                 id="prixMin"
@@ -108,7 +112,7 @@ export default async function VoituresPage({
 
             <div className="w-28">
               <label className="field-label" htmlFor="prixMax">
-                Prix max
+                {t("filters.prixMaxLabel")}
               </label>
               <input
                 id="prixMax"
@@ -122,7 +126,7 @@ export default async function VoituresPage({
 
             <button type="submit" className="btn-primary h-[42px]">
               <Search size={16} strokeWidth={2.5} />
-              Rechercher
+              {t("filters.search")}
             </button>
           </form>
         </div>
@@ -134,14 +138,10 @@ export default async function VoituresPage({
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-neutral-100 text-neutral-400">
               <Car size={26} />
             </div>
-            <p className="font-medium text-neutral-700">
-              Aucune annonce ne correspond à votre recherche.
-            </p>
-            <p className="text-sm text-neutral-500">
-              Essayez d&apos;élargir vos filtres, ou soyez le premier à publier.
-            </p>
+            <p className="font-medium text-neutral-700">{t("empty.title")}</p>
+            <p className="text-sm text-neutral-500">{t("empty.body")}</p>
             <Link href="/voitures/nouvelle" className="btn-primary mt-2">
-              Publier une annonce
+              {t("empty.cta")}
             </Link>
           </div>
         ) : (
@@ -165,8 +165,8 @@ export default async function VoituresPage({
                       <Car size={40} strokeWidth={1.5} />
                     </div>
                   )}
-                  <span className="badge-neutral absolute left-3 top-3 bg-white/90 shadow-sm">
-                    {COUNTRY_LABELS[listing.country]}
+                  <span className="badge-neutral absolute start-3 top-3 bg-white/90 shadow-sm">
+                    {t(`country.${listing.country}`)}
                   </span>
                 </div>
 
@@ -175,15 +175,15 @@ export default async function VoituresPage({
                     {listing.title}
                   </p>
                   <p className="mt-0.5 text-xl font-extrabold text-brand-700">
-                    {formatPrice(listing.price, listing.currency)}
+                    {formatPrice(listing.price, listing.currency, locale)}
                   </p>
 
                   <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-500">
                     <span className="inline-flex items-center gap-1">
-                      <Gauge size={13} /> {formatKm(listing.mileageKm)}
+                      <Gauge size={13} /> {formatKm(listing.mileageKm, locale)}
                     </span>
                     <span className="inline-flex items-center gap-1">
-                      <Fuel size={13} /> {FUEL_LABELS[listing.fuelType]}
+                      <Fuel size={13} /> {t(`fuel.${listing.fuelType}`)}
                     </span>
                     <span className="inline-flex items-center gap-1">
                       <MapPin size={13} /> {listing.city}

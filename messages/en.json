@@ -1,0 +1,154 @@
+{
+  "nav": {
+    "voitures": "Cars",
+    "publish": "Post an ad",
+    "publishShort": "Post",
+    "login": "Log in",
+    "register": "Create account",
+    "logout": "Log out"
+  },
+  "footer": {
+    "tagline": "listings between France and Algeria.",
+    "voitures": "Cars",
+    "publish": "Post an ad"
+  },
+  "home": {
+    "badge": "New — Cars listings in early access",
+    "titleLine1": "Everything in one place,",
+    "titleFrance": "between France",
+    "titleEt": "and",
+    "titleAlgerie": "Algeria.",
+    "subtitle": "The listings platform built for the diaspora — cars, real estate, jobs and more, all coming together in one place.",
+    "ctaBrowse": "Browse Cars listings",
+    "ctaPublish": "Post an ad",
+    "trust1Title": "France & Algeria",
+    "trust1Body": "Listings from both sides of the Mediterranean.",
+    "trust2Title": "100% free to post",
+    "trust2Body": "No commission on your listings.",
+    "trust3Title": "Simple and fast",
+    "trust3Body": "Post a listing in just a few minutes.",
+    "categoriesTitle": "Categories",
+    "categoriesSubtitle": "Starting with Cars — the rest are coming soon.",
+    "catVoituresName": "Cars",
+    "catVoituresNote": "Buy, sell, all makes",
+    "catAvailable": "Available",
+    "catComingSoon": "Coming soon",
+    "catImmobilierName": "Real estate",
+    "catImmobilierNote": "Sale, rental",
+    "catTravailName": "Jobs",
+    "catTravailNote": "Find or offer work"
+  },
+  "voitures": {
+    "category": "Cars",
+    "resultsFound": "{count, plural, =0 {No listings found} one {# listing found} other {# listings found}}",
+    "resultsAvailable": "{count, plural, =0 {No listings available} one {# listing available} other {# listings available}}",
+    "filters": {
+      "villeLabel": "City",
+      "villePlaceholder": "e.g. Lyon, Algiers…",
+      "paysLabel": "Country",
+      "paysAll": "All countries",
+      "france": "France",
+      "algerie": "Algeria",
+      "prixMinLabel": "Min price",
+      "prixMaxLabel": "Max price",
+      "search": "Search"
+    },
+    "empty": {
+      "title": "No listings match your search.",
+      "body": "Try widening your filters, or be the first to post one.",
+      "cta": "Post an ad"
+    },
+    "card": {
+      "noPhoto": "No photo"
+    },
+    "detail": {
+      "specsTitle": "Specifications",
+      "make": "Make",
+      "model": "Model",
+      "year": "Year",
+      "mileage": "Mileage",
+      "fuel": "Fuel",
+      "location": "Location",
+      "descriptionTitle": "Description",
+      "sellerDefault": "Private seller",
+      "verified": "Verified",
+      "contactSeller": "Contact seller",
+      "messagingSoon": "Built-in messaging is coming soon"
+    },
+    "create": {
+      "title": "Post an ad",
+      "subtitle": "Cars category",
+      "titleLabel": "Listing title",
+      "titlePlaceholder": "e.g. Peugeot 208 2020, great condition",
+      "makeLabel": "Make",
+      "modelLabel": "Model",
+      "yearLabel": "Year",
+      "mileageLabel": "Mileage",
+      "fuelLabel": "Fuel",
+      "priceLabel": "Price",
+      "paysLabel": "Country",
+      "villeLabel": "City",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Condition, maintenance history, options, reason for selling…",
+      "photosLabel": "Photos",
+      "photosCta": "Click to add photos",
+      "photosOr": "or drag and drop",
+      "photosHint": "JPG, PNG, WebP — 8MB max",
+      "photoMain": "Main",
+      "submit": "Post listing",
+      "submitting": "Posting...",
+      "loginRequiredTitle": "Log in to post a listing",
+      "loginRequiredBody": "You need a DZ APP account to post a listing.",
+      "loginCta": "Log in",
+      "uploadError": "Failed to upload an image"
+    },
+    "fuel": {
+      "ESSENCE": "Petrol",
+      "DIESEL": "Diesel",
+      "ELECTRIQUE": "Electric",
+      "HYBRIDE": "Hybrid",
+      "GPL": "LPG"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algeria"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Log in",
+      "subtitle": "Welcome back to DZ APP.",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "submit": "Log in",
+      "submitting": "Logging in...",
+      "noAccount": "No account yet?",
+      "createAccount": "Create account",
+      "invalidCredentials": "Incorrect email or password"
+    },
+    "register": {
+      "title": "Create account",
+      "subtitle": "Join the DZ APP community in seconds.",
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "passwordHint": "At least 8 characters.",
+      "submit": "Create my account",
+      "submitting": "Creating...",
+      "hasAccount": "Already have an account?",
+      "login": "Log in"
+    }
+  },
+  "errors": {
+    "MISSING_FIELDS": "Missing fields",
+    "PASSWORD_TOO_SHORT": "Password must be at least 8 characters",
+    "EMAIL_TAKEN": "This email is already in use",
+    "INVALID_COUNTRY": "Invalid country",
+    "INVALID_FUEL_TYPE": "Invalid fuel type",
+    "UNAUTHORIZED": "Unauthorized",
+    "FILE_MISSING": "Missing file",
+    "INVALID_FILE_TYPE": "Unsupported file type",
+    "FILE_TOO_LARGE": "File too large (max 8MB)",
+    "GENERIC": "Something went wrong"
+  }
+}

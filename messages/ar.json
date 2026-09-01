@@ -1,0 +1,154 @@
+{
+  "nav": {
+    "voitures": "سيارات",
+    "publish": "أضف إعلانًا",
+    "publishShort": "أضف",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج"
+  },
+  "footer": {
+    "tagline": "إعلانات بين فرنسا والجزائر.",
+    "voitures": "سيارات",
+    "publish": "أضف إعلانًا"
+  },
+  "home": {
+    "badge": "جديد — إعلانات السيارات في نسخة تجريبية مبكرة",
+    "titleLine1": "كل شيء في مكان واحد،",
+    "titleFrance": "بين فرنسا",
+    "titleEt": "و",
+    "titleAlgerie": "الجزائر.",
+    "subtitle": "منصة الإعلانات المصممة للجالية — سيارات، عقارات، عمل والمزيد، قريبًا في مكان واحد.",
+    "ctaBrowse": "تصفح إعلانات السيارات",
+    "ctaPublish": "أضف إعلانًا",
+    "trust1Title": "فرنسا والجزائر",
+    "trust1Body": "إعلانات من ضفتي البحر الأبيض المتوسط.",
+    "trust2Title": "مجاني بنسبة 100% للنشر",
+    "trust2Body": "بدون أي عمولة على إعلاناتك.",
+    "trust3Title": "بسيط وسريع",
+    "trust3Body": "انشر إعلانك في دقائق معدودة.",
+    "categoriesTitle": "الفئات",
+    "categoriesSubtitle": "نبدأ بفئة السيارات — البقية قريبًا.",
+    "catVoituresName": "سيارات",
+    "catVoituresNote": "شراء، بيع، جميع الماركات",
+    "catAvailable": "متاح",
+    "catComingSoon": "قريبًا",
+    "catImmobilierName": "عقارات",
+    "catImmobilierNote": "بيع، كراء",
+    "catTravailName": "عمل",
+    "catTravailNote": "ابحث عن عمل أو اعرضه"
+  },
+  "voitures": {
+    "category": "سيارات",
+    "resultsFound": "{count, plural, =0 {لا توجد إعلانات مطابقة} one {تم العثور على إعلان واحد} two {تم العثور على إعلانين} few {تم العثور على # إعلانات} many {تم العثور على # إعلانًا} other {تم العثور على # إعلان}}",
+    "resultsAvailable": "{count, plural, =0 {لا توجد إعلانات متاحة} one {إعلان واحد متاح} two {إعلانان متاحان} few {# إعلانات متاحة} many {# إعلانًا متاحًا} other {# إعلان متاح}}",
+    "filters": {
+      "villeLabel": "المدينة",
+      "villePlaceholder": "مثال: ليون، الجزائر…",
+      "paysLabel": "البلد",
+      "paysAll": "كل البلدان",
+      "france": "فرنسا",
+      "algerie": "الجزائر",
+      "prixMinLabel": "السعر الأدنى",
+      "prixMaxLabel": "السعر الأقصى",
+      "search": "بحث"
+    },
+    "empty": {
+      "title": "لا يوجد إعلان يطابق بحثك.",
+      "body": "حاول توسيع معايير البحث، أو كن أول من ينشر إعلانًا.",
+      "cta": "أضف إعلانًا"
+    },
+    "card": {
+      "noPhoto": "بدون صورة"
+    },
+    "detail": {
+      "specsTitle": "المواصفات",
+      "make": "الماركة",
+      "model": "الطراز",
+      "year": "سنة الصنع",
+      "mileage": "المسافة المقطوعة",
+      "fuel": "نوع الوقود",
+      "location": "الموقع",
+      "descriptionTitle": "الوصف",
+      "sellerDefault": "بائع خاص",
+      "verified": "موثّق",
+      "contactSeller": "تواصل مع البائع",
+      "messagingSoon": "المراسلة المدمجة ستتوفر قريبًا"
+    },
+    "create": {
+      "title": "أضف إعلانًا",
+      "subtitle": "فئة السيارات",
+      "titleLabel": "عنوان الإعلان",
+      "titlePlaceholder": "مثال: بيجو 208 موديل 2020، حالة ممتازة",
+      "makeLabel": "الماركة",
+      "modelLabel": "الطراز",
+      "yearLabel": "سنة الصنع",
+      "mileageLabel": "المسافة المقطوعة",
+      "fuelLabel": "نوع الوقود",
+      "priceLabel": "السعر",
+      "paysLabel": "البلد",
+      "villeLabel": "المدينة",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "حالة السيارة، الصيانة، الخيارات، سبب البيع…",
+      "photosLabel": "الصور",
+      "photosCta": "انقر لإضافة صور",
+      "photosOr": "أو اسحب وأفلت",
+      "photosHint": "JPG، PNG، WebP — 8 ميغابايت كحد أقصى",
+      "photoMain": "الصورة الرئيسية",
+      "submit": "نشر الإعلان",
+      "submitting": "جارٍ النشر...",
+      "loginRequiredTitle": "سجّل الدخول لنشر إعلان",
+      "loginRequiredBody": "تحتاج إلى حساب DZ APP لنشر إعلان.",
+      "loginCta": "تسجيل الدخول",
+      "uploadError": "فشل رفع إحدى الصور"
+    },
+    "fuel": {
+      "ESSENCE": "بنزين",
+      "DIESEL": "ديزل",
+      "ELECTRIQUE": "كهربائي",
+      "HYBRIDE": "هجين",
+      "GPL": "غاز البترول المسال"
+    },
+    "country": {
+      "FRANCE": "فرنسا",
+      "ALGERIE": "الجزائر"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "subtitle": "سعداء بعودتك إلى DZ APP.",
+      "emailLabel": "البريد الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "submitting": "جارٍ تسجيل الدخول...",
+      "noAccount": "ليس لديك حساب بعد؟",
+      "createAccount": "إنشاء حساب",
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "subtitle": "انضم إلى مجتمع DZ APP في ثوانٍ.",
+      "nameLabel": "الاسم",
+      "emailLabel": "البريد الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "passwordHint": "8 أحرف على الأقل.",
+      "submit": "إنشاء حسابي",
+      "submitting": "جارٍ الإنشاء...",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "login": "تسجيل الدخول"
+    }
+  },
+  "errors": {
+    "MISSING_FIELDS": "حقول ناقصة",
+    "PASSWORD_TOO_SHORT": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل",
+    "EMAIL_TAKEN": "هذا البريد الإلكتروني مستخدم بالفعل",
+    "INVALID_COUNTRY": "بلد غير صالح",
+    "INVALID_FUEL_TYPE": "نوع وقود غير صالح",
+    "UNAUTHORIZED": "غير مصرح",
+    "FILE_MISSING": "الملف مفقود",
+    "INVALID_FILE_TYPE": "نوع الملف غير مدعوم",
+    "FILE_TOO_LARGE": "الملف كبير جدًا (8 ميغابايت كحد أقصى)",
+    "GENERIC": "حدث خطأ ما"
+  }
+}

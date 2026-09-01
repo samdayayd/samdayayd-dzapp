@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { AlertCircle, Loader2, Mail, Lock, User, UserPlus } from "lucide-react";
+import { Link, useRouter } from "@/i18n/navigation";
+import { readErrorCode } from "@/lib/apiError";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const t = useTranslations("auth.register");
+  const tErrors = useTranslations("errors");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,8 +29,8 @@ export default function RegisterPage() {
     });
 
     if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      setError(body.error ?? "Une erreur est survenue");
+      const code = await readErrorCode(res);
+      setError(tErrors(code));
       setLoading(false);
       return;
     }
@@ -54,53 +57,49 @@ export default function RegisterPage() {
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700">
           <UserPlus size={22} />
         </div>
-        <h1 className="mt-3 text-2xl font-bold text-neutral-900">
-          Créer un compte
-        </h1>
-        <p className="mt-1 text-sm text-neutral-500">
-          Rejoignez la communauté DZ APP en quelques secondes.
-        </p>
+        <h1 className="mt-3 text-2xl font-bold text-neutral-900">{t("title")}</h1>
+        <p className="mt-1 text-sm text-neutral-500">{t("subtitle")}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="card space-y-4 p-6">
         <div>
           <label className="field-label" htmlFor="name">
-            Nom
+            {t("nameLabel")}
           </label>
           <div className="relative">
-            <User size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+            <User size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
             <input
               id="name"
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="field-input pl-9"
+              className="field-input ps-9"
             />
           </div>
         </div>
         <div>
           <label className="field-label" htmlFor="email">
-            Email
+            {t("emailLabel")}
           </label>
           <div className="relative">
-            <Mail size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+            <Mail size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
             <input
               id="email"
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="field-input pl-9"
+              className="field-input ps-9"
             />
           </div>
         </div>
         <div>
           <label className="field-label" htmlFor="password">
-            Mot de passe
+            {t("passwordLabel")}
           </label>
           <div className="relative">
-            <Lock size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+            <Lock size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
             <input
               id="password"
               type="password"
@@ -108,10 +107,10 @@ export default function RegisterPage() {
               minLength={8}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="field-input pl-9"
+              className="field-input ps-9"
             />
           </div>
-          <p className="mt-1.5 text-xs text-neutral-400">Au moins 8 caractères.</p>
+          <p className="mt-1.5 text-xs text-neutral-400">{t("passwordHint")}</p>
         </div>
 
         {error && (
@@ -125,18 +124,18 @@ export default function RegisterPage() {
           {loading ? (
             <>
               <Loader2 size={16} className="animate-spin" />
-              Création...
+              {t("submitting")}
             </>
           ) : (
-            "Créer mon compte"
+            t("submit")
           )}
         </button>
       </form>
 
       <p className="mt-5 text-center text-sm text-neutral-500">
-        Déjà un compte ?{" "}
+        {t("hasAccount")}{" "}
         <Link href="/login" className="font-medium text-brand-700 hover:underline">
-          Se connecter
+          {t("login")}
         </Link>
       </p>
     </div>

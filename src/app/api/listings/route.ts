@@ -8,7 +8,7 @@ const COUNTRIES = new Set(["FRANCE", "ALGERIE"]);
 export async function POST(req: Request) {
   const session = await auth();
   if (!session?.user) {
-    return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    return NextResponse.json({ code: "UNAUTHORIZED" }, { status: 401 });
   }
 
   const body = await req.json();
@@ -39,13 +39,13 @@ export async function POST(req: Request) {
     mileageKm === undefined ||
     !fuelType
   ) {
-    return NextResponse.json({ error: "Champs manquants" }, { status: 400 });
+    return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
   }
   if (!COUNTRIES.has(country)) {
-    return NextResponse.json({ error: "Pays invalide" }, { status: 400 });
+    return NextResponse.json({ code: "INVALID_COUNTRY" }, { status: 400 });
   }
   if (!FUEL_TYPES.has(fuelType)) {
-    return NextResponse.json({ error: "Type de carburant invalide" }, { status: 400 });
+    return NextResponse.json({ code: "INVALID_FUEL_TYPE" }, { status: 400 });
   }
 
   const listing = await prisma.listing.create({
