@@ -1,14 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import {
-  BadgePercent,
-  Car,
-  MapPin,
-  MessageCircle,
-  ShieldCheck,
-  Sparkles,
-  Zap,
-} from "lucide-react";
+import { Car, MessageCircle, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { HeroContent } from "@/components/HeroContent";
 
@@ -17,8 +9,9 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero — desktop/tablet: photo with text in its built-in blank column */}
-      <section className="relative hidden overflow-hidden bg-white sm:block">
+      {/* Hero — desktop/tablet: the photo's wide open sky/sea between the
+          two skylines holds a glass text card. Full image, no crop. */}
+      <section className="relative hidden overflow-hidden bg-neutral-900 sm:block">
         <div className="relative w-full" style={{ aspectRatio: "1672 / 941" }}>
           <Image
             src="/hero-photo.png"
@@ -29,22 +22,23 @@ export default function Home() {
             sizes="100vw"
           />
           <div
-            className="absolute inset-y-0 flex items-start"
-            style={{ left: "34%", width: "32%", paddingTop: "13%" }}
+            className="absolute rounded-2xl border border-white/15 p-7"
+            style={{
+              left: "39%",
+              width: "35%",
+              top: "16%",
+              background: "rgba(8,14,22,0.52)",
+              backdropFilter: "blur(6px)",
+            }}
           >
-            <HeroContent dark={false} />
+            <HeroContent dark />
           </div>
-          <HeroPhotoBand t={t} />
         </div>
       </section>
 
-      {/* Hero — mobile: no separate text block above the photo anymore — the
-          whole hero text sits directly on top of it, like the desktop
-          version, with a dark scrim behind it for legibility (the photo's
-          own blank column is too narrow to hold the full text at this
-          width). The text overlay is absolutely positioned so it can't
-          push the photo taller and collide with the icon band below. */}
-      <section className="relative overflow-hidden bg-brand-900 sm:hidden">
+      {/* Hero — mobile: same idea, smaller card, over a taller crop of the
+          photo (shifted left so the couple stays in frame). */}
+      <section className="relative overflow-hidden bg-neutral-900 sm:hidden">
         <div className="relative w-full" style={{ aspectRatio: "6 / 5" }}>
           <Image
             src="/hero-photo.png"
@@ -52,20 +46,19 @@ export default function Home() {
             fill
             priority
             className="object-cover"
+            style={{ objectPosition: "15% center" }}
             sizes="100vw"
           />
           <div
-            className="absolute inset-x-0 top-0"
+            className="absolute inset-x-4 rounded-2xl border border-white/15 p-4"
             style={{
-              height: "82%",
-              background:
-                "linear-gradient(to bottom, rgba(10,61,41,0.88) 0%, rgba(10,61,41,0.74) 55%, rgba(10,61,41,0.6) 85%, rgba(10,61,41,0) 100%)",
+              top: "10%",
+              background: "rgba(8,14,22,0.6)",
+              backdropFilter: "blur(6px)",
             }}
-          />
-          <div className="absolute inset-x-0 top-0 px-4 pt-4">
-            <HeroContent dark />
+          >
+            <HeroContent dark compact />
           </div>
-          <HeroPhotoBand t={t} />
         </div>
       </section>
 
@@ -146,35 +139,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-    </div>
-  );
-}
-
-/** Icon + short text row, placed over the photo's solid navy footer band
-    (below the two people, above the flags). Shared by the desktop and
-    mobile hero variants, which both show that band at the same height. */
-function HeroPhotoBand({ t }: { t: ReturnType<typeof useTranslations<"home">> }) {
-  const items = [
-    { icon: MapPin, text: t("trust1Title") },
-    { icon: BadgePercent, text: t("trust2Title") },
-    { icon: Zap, text: t("trust3Title") },
-  ];
-
-  return (
-    <div
-      className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 overflow-x-auto px-1.5 [scrollbar-width:none] sm:gap-10 sm:px-6 [&::-webkit-scrollbar]:hidden"
-      style={{ top: "81%" }}
-    >
-      {items.map(({ icon: Icon, text }) => (
-        <div
-          key={text}
-          className="flex shrink-0 items-center gap-1 whitespace-nowrap text-white sm:gap-2"
-        >
-          <Icon size={11} strokeWidth={2.5} className="shrink-0 sm:hidden" />
-          <Icon size={16} strokeWidth={2.5} className="hidden shrink-0 sm:block" />
-          <span className="text-[9px] font-semibold sm:text-sm">{text}</span>
-        </div>
-      ))}
     </div>
   );
 }

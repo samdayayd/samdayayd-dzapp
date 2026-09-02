@@ -4,19 +4,27 @@ import { useTranslations } from "next-intl";
 import { Car, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
-/** `dark` is used to overlay this on top of the hero photo (mobile — the
-    photo has no room for the desktop-sized version, so that variant is
-    also more compact: smaller type, buttons side by side). */
-export function HeroContent({ dark }: { dark: boolean }) {
+/** The hero text, meant to sit on top of the hero photo in a dark glass
+    card — `dark` picks white-on-dark colors (the only scheme used now,
+    kept as a prop in case a light card is ever needed again). `compact`
+    shrinks it for the mobile card (smaller type, buttons side by side). */
+export function HeroContent({
+  dark,
+  compact = false,
+}: {
+  dark: boolean;
+  compact?: boolean;
+}) {
   const t = useTranslations("home");
 
   return (
     <div>
       <span
         className={
-          dark
-            ? "badge !px-2 !py-0.5 !text-[10px] bg-white/15 text-brand-50 ring-1 ring-inset ring-white/25 backdrop-blur-sm"
-            : "badge bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-100"
+          (dark
+            ? "badge bg-white/15 text-brand-50 ring-1 ring-inset ring-white/25"
+            : "badge bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-100") +
+          (compact ? " !px-2 !py-0.5 !text-[10px]" : "")
         }
       >
         <Sparkles size={13} />
@@ -26,8 +34,10 @@ export function HeroContent({ dark }: { dark: boolean }) {
       <h1
         className={
           dark
-            ? "mt-2.5 text-lg font-extrabold leading-tight tracking-tight text-white"
-            : "mt-4 text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-3xl"
+            ? `font-extrabold tracking-tight text-white ${
+                compact ? "mt-2.5 text-lg leading-tight" : "mt-4 text-3xl leading-tight sm:text-4xl"
+              }`
+            : `mt-4 text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-3xl`
         }
       >
         {t("titleLine1")}{" "}
@@ -42,30 +52,38 @@ export function HeroContent({ dark }: { dark: boolean }) {
       <p
         className={
           dark
-            ? "mt-1.5 line-clamp-2 text-xs text-brand-100/90"
+            ? `text-brand-100/90 ${compact ? "mt-1.5 line-clamp-2 text-xs" : "mt-3 text-base"}`
             : "mt-3 text-sm text-neutral-600"
         }
       >
         {t("subtitle")}
       </p>
 
-      <div className={dark ? "mt-3 flex gap-2" : "mt-6 flex flex-col gap-2.5"}>
+      <div
+        className={
+          compact ? "mt-3 flex gap-2" : "mt-6 flex flex-col gap-2.5 sm:flex-row"
+        }
+      >
         <Link
           href="/voitures"
           className={
             dark
-              ? "btn-primary !flex-1 !bg-white !px-2 !py-2 !text-xs !text-brand-800 hover:!bg-brand-50"
+              ? `btn-primary !bg-white !text-brand-800 hover:!bg-brand-50 ${
+                  compact ? "!flex-1 !px-2 !py-2 !text-xs" : ""
+                }`
               : "btn-primary"
           }
         >
-          <Car size={dark ? 14 : 16} strokeWidth={2.5} />
+          <Car size={compact ? 14 : 16} strokeWidth={2.5} />
           {t("ctaBrowse")}
         </Link>
         <Link
           href="/voitures/nouvelle"
           className={
             dark
-              ? "btn !flex-1 !border !border-white/40 !bg-white/15 !px-2 !py-2 !text-xs !text-white backdrop-blur-sm hover:!bg-white/25"
+              ? `btn !border !border-white/40 !bg-white/15 !text-white hover:!bg-white/25 ${
+                  compact ? "!flex-1 !px-2 !py-2 !text-xs" : ""
+                }`
               : "btn-secondary"
           }
         >
