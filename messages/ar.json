@@ -50,6 +50,8 @@
       "paysAll": "كل البلدان",
       "france": "فرنسا",
       "algerie": "الجزائر",
+      "saleTypeLabel": "النوع",
+      "saleTypeAll": "بيع وكراء",
       "prixMinLabel": "السعر الأدنى",
       "prixMaxLabel": "السعر الأقصى",
       "search": "بحث"
@@ -74,19 +76,23 @@
       "sellerDefault": "بائع خاص",
       "verified": "موثّق",
       "contactSeller": "تواصل مع البائع",
-      "messagingSoon": "المراسلة المدمجة ستتوفر قريبًا"
+      "messagingSoon": "المراسلة المدمجة ستتوفر قريبًا",
+      "call": "اتصال",
+      "email": "إرسال بريد إلكتروني"
     },
     "create": {
       "title": "أضف إعلانًا",
       "subtitle": "فئة السيارات",
       "titleLabel": "عنوان الإعلان",
       "titlePlaceholder": "مثال: بيجو 208 موديل 2020، حالة ممتازة",
+      "saleTypeLabel": "نوع الإعلان",
       "makeLabel": "الماركة",
       "modelLabel": "الطراز",
       "yearLabel": "سنة الصنع",
       "mileageLabel": "المسافة المقطوعة",
       "fuelLabel": "نوع الوقود",
       "priceLabel": "السعر",
+      "priceLabelRent": "السعر لليوم الواحد",
       "paysLabel": "البلد",
       "villeLabel": "المدينة",
       "descriptionLabel": "الوصف",
@@ -96,6 +102,10 @@
       "photosOr": "أو اسحب وأفلت",
       "photosHint": "JPG، PNG، WebP — 8 ميغابايت كحد أقصى",
       "photoMain": "الصورة الرئيسية",
+      "contactTitle": "معلومات التواصل",
+      "contactNameLabel": "اسم جهة الاتصال",
+      "contactEmailLabel": "البريد الإلكتروني للتواصل",
+      "contactPhoneLabel": "رقم الهاتف",
       "submit": "نشر الإعلان",
       "submitting": "جارٍ النشر...",
       "loginRequiredTitle": "سجّل الدخول لنشر إعلان",
@@ -103,6 +113,11 @@
       "loginCta": "تسجيل الدخول",
       "uploadError": "فشل رفع إحدى الصور"
     },
+    "saleType": {
+      "VENTE": "للبيع",
+      "LOCATION": "للكراء"
+    },
+    "perDay": "/يوم",
     "fuel": {
       "ESSENCE": "بنزين",
       "DIESEL": "ديزل",
@@ -116,6 +131,8 @@
     }
   },
   "auth": {
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
     "login": {
       "title": "تسجيل الدخول",
       "subtitle": "سعداء بعودتك إلى DZ APP.",
@@ -125,7 +142,8 @@
       "submitting": "جارٍ تسجيل الدخول...",
       "noAccount": "ليس لديك حساب بعد؟",
       "createAccount": "إنشاء حساب",
-      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      "forgotPassword": "نسيت كلمة المرور؟"
     },
     "register": {
       "title": "إنشاء حساب",
@@ -138,6 +156,29 @@
       "submitting": "جارٍ الإنشاء...",
       "hasAccount": "لديك حساب بالفعل؟",
       "login": "تسجيل الدخول"
+    },
+    "forgotPassword": {
+      "title": "نسيت كلمة المرور",
+      "subtitle": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.",
+      "emailLabel": "البريد الإلكتروني",
+      "submit": "إرسال الرابط",
+      "submitting": "جارٍ الإرسال...",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "successTitle": "تم إرسال البريد الإلكتروني",
+      "successBody": "إذا كان هناك حساب مرتبط بهذا البريد، فقد تم للتو إرسال رابط إعادة التعيين. تحقق من بريدك الوارد."
+    },
+    "resetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "اختر كلمة مرور جديدة.",
+      "passwordLabel": "كلمة المرور الجديدة",
+      "passwordHint": "8 أحرف على الأقل.",
+      "submit": "إعادة تعيين كلمة المرور",
+      "submitting": "جارٍ إعادة التعيين...",
+      "invalidToken": "رابط إعادة التعيين هذا غير صالح أو منتهي الصلاحية.",
+      "requestNew": "طلب رابط جديد",
+      "successTitle": "تمت إعادة تعيين كلمة المرور",
+      "successBody": "تم تحديث كلمة مرورك. يمكنك الآن تسجيل الدخول.",
+      "loginCta": "تسجيل الدخول"
     }
   },
   "errors": {
@@ -150,6 +191,7 @@
     "FILE_MISSING": "الملف مفقود",
     "INVALID_FILE_TYPE": "نوع الملف غير مدعوم",
     "FILE_TOO_LARGE": "الملف كبير جدًا (8 ميغابايت كحد أقصى)",
+    "TOKEN_INVALID": "هذا الرابط غير صالح أو منتهي الصلاحية",
     "GENERIC": "حدث خطأ ما"
   }
 }

@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
-import { AlertCircle, Loader2, LogIn, Mail, Lock } from "lucide-react";
+import { AlertCircle, Loader2, LogIn, Mail } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
+import { PasswordField } from "@/components/PasswordField";
 
 export default function LoginPage() {
   const router = useRouter();
   const t = useTranslations("auth.login");
+  const tAuth = useTranslations("auth");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -63,20 +65,26 @@ export default function LoginPage() {
           </div>
         </div>
         <div>
-          <label className="field-label" htmlFor="password">
-            {t("passwordLabel")}
-          </label>
-          <div className="relative">
-            <Lock size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-            <input
-              id="password"
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="field-input ps-9"
-            />
+          <div className="flex items-center justify-between">
+            <label className="field-label" htmlFor="password">
+              {t("passwordLabel")}
+            </label>
+            <Link
+              href="/forgot-password"
+              className="mb-1.5 text-xs font-medium text-brand-700 hover:underline"
+            >
+              {t("forgotPassword")}
+            </Link>
           </div>
+          <PasswordField
+            id="password"
+            value={password}
+            onChange={setPassword}
+            required
+            autoComplete="current-password"
+            showLabel={tAuth("showPassword")}
+            hideLabel={tAuth("hidePassword")}
+          />
         </div>
 
         {error && (

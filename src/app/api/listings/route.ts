@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 
 const FUEL_TYPES = new Set(["ESSENCE", "DIESEL", "ELECTRIQUE", "HYBRIDE", "GPL"]);
 const COUNTRIES = new Set(["FRANCE", "ALGERIE"]);
+const SALE_TYPES = new Set(["VENTE", "LOCATION"]);
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: Request) {
   const session = await auth();
@@ -19,11 +21,15 @@ export async function POST(req: Request) {
     currency,
     country,
     city,
+    saleType,
     make,
     model,
     year,
     mileageKm,
     fuelType,
+    contactName,
+    contactEmail,
+    contactPhone,
     imageUrls,
   } = body ?? {};
 
@@ -37,7 +43,10 @@ export async function POST(req: Request) {
     !model ||
     !year ||
     mileageKm === undefined ||
-    !fuelType
+    !fuelType ||
+    !contactName ||
+    !contactEmail ||
+    !contactPhone
   ) {
     return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
   }
@@ -46,6 +55,10 @@ export async function POST(req: Request) {
   }
   if (!FUEL_TYPES.has(fuelType)) {
     return NextResponse.json({ code: "INVALID_FUEL_TYPE" }, { status: 400 });
+  }
+  const resolvedSaleType = SALE_TYPES.has(saleType) ? saleType : "VENTE";
+  if (typeof contactEmail !== "string" || !EMAIL_RE.test(contactEmail)) {
+    return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
   }
 
   const listing = await prisma.listing.create({
@@ -56,11 +69,15 @@ export async function POST(req: Request) {
       currency: currency ?? (country === "ALGERIE" ? "DZD" : "EUR"),
       country,
       city,
+      saleType: resolvedSaleType,
       make,
       model,
       year: Number(year),
       mileageKm: Number(mileageKm),
       fuelType,
+      contactName,
+      contactEmail,
+      contactPhone,
       sellerId: session.user.id,
       images: {
         create: ((imageUrls as string[]) ?? []).map((url, position) => ({

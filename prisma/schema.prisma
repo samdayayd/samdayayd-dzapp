@@ -12,6 +12,7 @@ datasource db {
 // Valid values: FuelType = ESSENCE | DIESEL | ELECTRIQUE | HYBRIDE | GPL
 //               Country  = FRANCE | ALGERIE
 //               ListingStatus = ACTIVE | SOLD | HIDDEN
+//               SaleType = VENTE | LOCATION
 
 model User {
   id            String    @id @default(cuid())
@@ -27,6 +28,20 @@ model User {
   sentMessages  Message[]      @relation("MessagesSent")
   conversationsAsBuyer  Conversation[] @relation("Buyer")
   conversationsAsSeller Conversation[] @relation("Seller")
+  resetTokens   PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  @@index([userId])
 }
 
 model Listing {
@@ -37,6 +52,7 @@ model Listing {
   currency      String        @default("EUR")
   country       String
   city          String
+  saleType      String        @default("VENTE")
 
   // Voitures-specific fields (MVP category)
   make          String
@@ -44,6 +60,13 @@ model Listing {
   year          Int
   mileageKm     Int
   fuelType      String
+
+  // How to actually reach the seller — the messaging feature below
+  // (Conversation/Message) isn't wired up to any UI yet, so this is
+  // the only way a buyer can contact them today.
+  contactName   String
+  contactEmail  String
+  contactPhone  String
 
   status        String        @default("ACTIVE")
   createdAt     DateTime      @default(now())
@@ -59,6 +82,7 @@ model Listing {
   @@index([country, city])
   @@index([make, model])
   @@index([price])
+  @@index([saleType])
 }
 
 model ListingImage {

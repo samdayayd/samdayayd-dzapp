@@ -50,6 +50,8 @@
       "paysAll": "All countries",
       "france": "France",
       "algerie": "Algeria",
+      "saleTypeLabel": "Type",
+      "saleTypeAll": "For sale & rent",
       "prixMinLabel": "Min price",
       "prixMaxLabel": "Max price",
       "search": "Search"
@@ -74,19 +76,23 @@
       "sellerDefault": "Private seller",
       "verified": "Verified",
       "contactSeller": "Contact seller",
-      "messagingSoon": "Built-in messaging is coming soon"
+      "messagingSoon": "Built-in messaging is coming soon",
+      "call": "Call",
+      "email": "Send an email"
     },
     "create": {
       "title": "Post an ad",
       "subtitle": "Cars category",
       "titleLabel": "Listing title",
       "titlePlaceholder": "e.g. Peugeot 208 2020, great condition",
+      "saleTypeLabel": "Listing type",
       "makeLabel": "Make",
       "modelLabel": "Model",
       "yearLabel": "Year",
       "mileageLabel": "Mileage",
       "fuelLabel": "Fuel",
       "priceLabel": "Price",
+      "priceLabelRent": "Price per day",
       "paysLabel": "Country",
       "villeLabel": "City",
       "descriptionLabel": "Description",
@@ -96,6 +102,10 @@
       "photosOr": "or drag and drop",
       "photosHint": "JPG, PNG, WebP — 8MB max",
       "photoMain": "Main",
+      "contactTitle": "Contact details",
+      "contactNameLabel": "Contact name",
+      "contactEmailLabel": "Contact email",
+      "contactPhoneLabel": "Phone number",
       "submit": "Post listing",
       "submitting": "Posting...",
       "loginRequiredTitle": "Log in to post a listing",
@@ -103,6 +113,11 @@
       "loginCta": "Log in",
       "uploadError": "Failed to upload an image"
     },
+    "saleType": {
+      "VENTE": "For sale",
+      "LOCATION": "For rent"
+    },
+    "perDay": "/day",
     "fuel": {
       "ESSENCE": "Petrol",
       "DIESEL": "Diesel",
@@ -116,6 +131,8 @@
     }
   },
   "auth": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
     "login": {
       "title": "Log in",
       "subtitle": "Welcome back to DZ APP.",
@@ -125,7 +142,8 @@
       "submitting": "Logging in...",
       "noAccount": "No account yet?",
       "createAccount": "Create account",
-      "invalidCredentials": "Incorrect email or password"
+      "invalidCredentials": "Incorrect email or password",
+      "forgotPassword": "Forgot password?"
     },
     "register": {
       "title": "Create account",
@@ -138,6 +156,29 @@
       "submitting": "Creating...",
       "hasAccount": "Already have an account?",
       "login": "Log in"
+    },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "emailLabel": "Email",
+      "submit": "Send reset link",
+      "submitting": "Sending...",
+      "backToLogin": "Back to login",
+      "successTitle": "Email sent",
+      "successBody": "If an account exists for that email, a reset link was just sent. Check your inbox."
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "subtitle": "Choose a new password.",
+      "passwordLabel": "New password",
+      "passwordHint": "At least 8 characters.",
+      "submit": "Reset password",
+      "submitting": "Resetting...",
+      "invalidToken": "This reset link is invalid or has expired.",
+      "requestNew": "Request a new link",
+      "successTitle": "Password reset",
+      "successBody": "Your password has been updated. You can now log in.",
+      "loginCta": "Log in"
     }
   },
   "errors": {
@@ -150,6 +191,7 @@
     "FILE_MISSING": "Missing file",
     "INVALID_FILE_TYPE": "Unsupported file type",
     "FILE_TOO_LARGE": "File too large (max 8MB)",
+    "TOKEN_INVALID": "This link is invalid or has expired",
     "GENERIC": "Something went wrong"
   }
 }

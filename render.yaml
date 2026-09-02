@@ -24,10 +24,17 @@ services:
         sync: false
       - key: NODE_VERSION
         value: 22.22.2
+      # Password reset emails (Resend — https://resend.com, free tier).
+      # Create an account, grab an API key, and set it here. Without
+      # it, reset links just get logged server-side instead of emailed.
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        value: "DZ APP <onboarding@resend.dev>"
 
 # Notes:
 # - Free plan has no persistent disk, so both the SQLite database and
-#   uploaded listing photos (public/uploads) reset on every redeploy or
+#   uploaded listing photos (./uploads) reset on every redeploy or
 #   restart. Fine for a first look/demo; before real usage:
 #     1. Switch prisma/schema.prisma's datasource back to `postgresql`
 #        (see git history — this repo started on Postgres) and uncomment

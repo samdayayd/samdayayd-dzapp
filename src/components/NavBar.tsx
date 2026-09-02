@@ -1,10 +1,11 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { Car, LogIn, LogOut, Plus, User } from "lucide-react";
+import { Car, LogIn, Plus } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { UserMenu } from "./UserMenu";
 
 export function NavBar() {
   const { data: session, status } = useSession();
@@ -33,22 +34,18 @@ export function NavBar() {
 
           {status === "authenticated" ? (
             <>
-              <Link href="/voitures/nouvelle" className="btn-primary">
+              <Link
+                href="/voitures/nouvelle"
+                title={t("publish")}
+                className="btn-primary !px-2.5 sm:!px-4"
+              >
                 <Plus size={16} strokeWidth={2.5} />
                 <span className="hidden sm:inline">{t("publish")}</span>
-                <span className="sm:hidden">{t("publishShort")}</span>
               </Link>
-              <div className="ms-1 hidden items-center gap-1.5 ps-2 text-sm text-neutral-500 md:flex">
-                <User size={15} />
-                {session.user?.name}
-              </div>
-              <button
-                onClick={() => signOut()}
-                title={t("logout")}
-                className="btn-ghost !px-2.5"
-              >
-                <LogOut size={17} />
-              </button>
+              <UserMenu
+                name={session.user?.name ?? ""}
+                email={session.user?.email}
+              />
             </>
           ) : status === "loading" ? (
             <div className="h-9 w-24" />

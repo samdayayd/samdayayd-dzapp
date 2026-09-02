@@ -8,6 +8,7 @@ const KNOWN_CODES = new Set([
   "FILE_MISSING",
   "INVALID_FILE_TYPE",
   "FILE_TOO_LARGE",
+  "TOKEN_INVALID",
 ]);
 
 export async function readErrorCode(res: Response): Promise<string> {

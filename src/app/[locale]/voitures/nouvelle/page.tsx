@@ -23,10 +23,12 @@ export default function NewListingPage() {
   const t = useTranslations("voitures.create");
   const tFuel = useTranslations("voitures.fuel");
   const tCountry = useTranslations("voitures.country");
+  const tSaleType = useTranslations("voitures.saleType");
   const tErrors = useTranslations("errors");
 
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
+  const [saleType, setSaleType] = useState<"VENTE" | "LOCATION">("VENTE");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -92,11 +94,15 @@ export default function NewListingPage() {
         price: Number(fd.get("price")),
         country: fd.get("country"),
         city: fd.get("city"),
+        saleType,
         make: fd.get("make"),
         model: fd.get("model"),
         year: Number(fd.get("year")),
         mileageKm: Number(fd.get("mileageKm")),
         fuelType: fd.get("fuelType"),
+        contactName: fd.get("contactName"),
+        contactEmail: fd.get("contactEmail"),
+        contactPhone: fd.get("contactPhone"),
         imageUrls,
       };
 
@@ -133,6 +139,26 @@ export default function NewListingPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="card space-y-6 p-6">
+        <div>
+          <label className="field-label">{t("saleTypeLabel")}</label>
+          <div className="inline-flex rounded-lg border border-neutral-300 p-1">
+            {(["VENTE", "LOCATION"] as const).map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setSaleType(option)}
+                className={`rounded-md px-4 py-1.5 text-sm font-medium transition ${
+                  saleType === option
+                    ? "bg-brand-600 text-white"
+                    : "text-neutral-600 hover:bg-neutral-100"
+                }`}
+              >
+                {tSaleType(option)}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div>
           <label className="field-label" htmlFor="title">
             {t("titleLabel")}
@@ -206,7 +232,7 @@ export default function NewListingPage() {
         <div className="grid grid-cols-3 gap-4">
           <div>
             <label className="field-label" htmlFor="price">
-              {t("priceLabel")}
+              {saleType === "LOCATION" ? t("priceLabelRent") : t("priceLabel")}
             </label>
             <input
               id="price"
@@ -246,6 +272,42 @@ export default function NewListingPage() {
             placeholder={t("descriptionPlaceholder")}
             className="field-input resize-none"
           />
+        </div>
+
+        <div>
+          <p className="field-label mb-2">{t("contactTitle")}</p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div>
+              <label className="field-label" htmlFor="contactName">
+                {t("contactNameLabel")}
+              </label>
+              <input id="contactName" name="contactName" required className="field-input" />
+            </div>
+            <div>
+              <label className="field-label" htmlFor="contactEmail">
+                {t("contactEmailLabel")}
+              </label>
+              <input
+                id="contactEmail"
+                name="contactEmail"
+                type="email"
+                required
+                className="field-input"
+              />
+            </div>
+            <div>
+              <label className="field-label" htmlFor="contactPhone">
+                {t("contactPhoneLabel")}
+              </label>
+              <input
+                id="contactPhone"
+                name="contactPhone"
+                type="tel"
+                required
+                className="field-input"
+              />
+            </div>
+          </div>
         </div>
 
         <div>

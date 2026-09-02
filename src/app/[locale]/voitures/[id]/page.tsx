@@ -7,8 +7,9 @@ import {
   ChevronRight,
   Fuel,
   Gauge,
+  Mail,
   MapPin,
-  MessageCircle,
+  Phone,
   ShieldCheck,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -115,20 +116,36 @@ export default async function ListingDetailPage({
         <div className="md:col-span-2">
           <div className="sticky top-20 space-y-4">
             <div className="card p-5">
-              <p className="text-sm text-neutral-500">{listing.title}</p>
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-sm text-neutral-500">{listing.title}</p>
+                <span
+                  className={`badge shrink-0 ${
+                    listing.saleType === "LOCATION"
+                      ? "bg-accent-500 text-white"
+                      : "bg-brand-600 text-white"
+                  }`}
+                >
+                  {t(`saleType.${listing.saleType}`)}
+                </span>
+              </div>
               <p className="mt-1 text-3xl font-extrabold text-brand-700">
                 {formatPrice(listing.price, listing.currency, locale)}
+                {listing.saleType === "LOCATION" && (
+                  <span className="text-base font-medium text-neutral-500">
+                    {t("perDay")}
+                  </span>
+                )}
               </p>
             </div>
 
             <div className="card p-5">
               <div className="flex items-center gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-100 text-sm font-bold text-brand-800">
-                  {listing.seller.name.charAt(0).toUpperCase()}
+                  {listing.contactName.charAt(0).toUpperCase()}
                 </div>
                 <div>
                   <p className="flex items-center gap-1.5 font-medium text-neutral-900">
-                    {listing.seller.name}
+                    {listing.contactName}
                     {listing.seller.verified && (
                       <span className="badge-brand !py-0.5">
                         <ShieldCheck size={12} />
@@ -140,17 +157,16 @@ export default async function ListingDetailPage({
                 </div>
               </div>
 
-              <button
-                className="btn-primary mt-4 w-full"
-                disabled
-                title={t("detail.messagingSoon")}
-              >
-                <MessageCircle size={16} />
-                {t("detail.contactSeller")}
-              </button>
-              <p className="mt-2 text-center text-xs text-neutral-400">
-                {t("detail.messagingSoon")}
-              </p>
+              <div className="mt-4 space-y-2">
+                <a href={`tel:${listing.contactPhone}`} className="btn-primary w-full">
+                  <Phone size={16} />
+                  {t("detail.call")}
+                </a>
+                <a href={`mailto:${listing.contactEmail}`} className="btn-secondary w-full">
+                  <Mail size={16} />
+                  {t("detail.email")}
+                </a>
+              </div>
             </div>
           </div>
         </div>

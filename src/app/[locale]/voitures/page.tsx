@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 type SearchParams = {
   ville?: string;
   pays?: string;
+  type?: string;
   prixMin?: string;
   prixMax?: string;
 };
@@ -28,6 +29,7 @@ export default async function VoituresPage({
       status: "ACTIVE",
       ...(params.ville ? { city: { contains: params.ville } } : {}),
       ...(params.pays ? { country: params.pays } : {}),
+      ...(params.type ? { saleType: params.type } : {}),
       ...(params.prixMin || params.prixMax
         ? {
             price: {
@@ -41,7 +43,8 @@ export default async function VoituresPage({
     orderBy: { createdAt: "desc" },
   });
 
-  const hasFilters = params.ville || params.pays || params.prixMin || params.prixMax;
+  const hasFilters =
+    params.ville || params.pays || params.type || params.prixMin || params.prixMax;
 
   return (
     <div>
@@ -93,6 +96,22 @@ export default async function VoituresPage({
                 <option value="">{t("filters.paysAll")}</option>
                 <option value="FRANCE">{t("filters.france")}</option>
                 <option value="ALGERIE">{t("filters.algerie")}</option>
+              </select>
+            </div>
+
+            <div className="w-40">
+              <label className="field-label" htmlFor="type">
+                {t("filters.saleTypeLabel")}
+              </label>
+              <select
+                id="type"
+                name="type"
+                defaultValue={params.type ?? ""}
+                className="field-select"
+              >
+                <option value="">{t("filters.saleTypeAll")}</option>
+                <option value="VENTE">{t("saleType.VENTE")}</option>
+                <option value="LOCATION">{t("saleType.LOCATION")}</option>
               </select>
             </div>
 
@@ -168,6 +187,15 @@ export default async function VoituresPage({
                   <span className="badge-neutral absolute start-3 top-3 bg-white/90 shadow-sm">
                     {t(`country.${listing.country}`)}
                   </span>
+                  <span
+                    className={`badge absolute end-3 top-3 shadow-sm ${
+                      listing.saleType === "LOCATION"
+                        ? "bg-accent-500 text-white"
+                        : "bg-brand-600 text-white"
+                    }`}
+                  >
+                    {t(`saleType.${listing.saleType}`)}
+                  </span>
                 </div>
 
                 <div className="p-4">
@@ -176,6 +204,11 @@ export default async function VoituresPage({
                   </p>
                   <p className="mt-0.5 text-xl font-extrabold text-brand-700">
                     {formatPrice(listing.price, listing.currency, locale)}
+                    {listing.saleType === "LOCATION" && (
+                      <span className="text-sm font-medium text-neutral-500">
+                        {t("perDay")}
+                      </span>
+                    )}
                   </p>
 
                   <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-500">

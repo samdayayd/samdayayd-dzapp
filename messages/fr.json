@@ -50,6 +50,8 @@
       "paysAll": "Tous les pays",
       "france": "France",
       "algerie": "Algérie",
+      "saleTypeLabel": "Type",
+      "saleTypeAll": "Vente et location",
       "prixMinLabel": "Prix min",
       "prixMaxLabel": "Prix max",
       "search": "Rechercher"
@@ -74,19 +76,23 @@
       "sellerDefault": "Vendeur particulier",
       "verified": "Vérifié",
       "contactSeller": "Contacter le vendeur",
-      "messagingSoon": "La messagerie intégrée arrive bientôt"
+      "messagingSoon": "La messagerie intégrée arrive bientôt",
+      "call": "Appeler",
+      "email": "Envoyer un email"
     },
     "create": {
       "title": "Publier une annonce",
       "subtitle": "Catégorie Voitures",
       "titleLabel": "Titre de l'annonce",
       "titlePlaceholder": "ex: Peugeot 208 2020, très bon état",
+      "saleTypeLabel": "Type d'annonce",
       "makeLabel": "Marque",
       "modelLabel": "Modèle",
       "yearLabel": "Année",
       "mileageLabel": "Kilométrage",
       "fuelLabel": "Carburant",
       "priceLabel": "Prix",
+      "priceLabelRent": "Prix par jour",
       "paysLabel": "Pays",
       "villeLabel": "Ville",
       "descriptionLabel": "Description",
@@ -96,6 +102,10 @@
       "photosOr": "ou glissez-déposez",
       "photosHint": "JPG, PNG, WebP — 8MB max",
       "photoMain": "Principale",
+      "contactTitle": "Coordonnées de contact",
+      "contactNameLabel": "Nom du contact",
+      "contactEmailLabel": "Email de contact",
+      "contactPhoneLabel": "Téléphone",
       "submit": "Publier l'annonce",
       "submitting": "Publication...",
       "loginRequiredTitle": "Connectez-vous pour publier",
@@ -103,6 +113,11 @@
       "loginCta": "Se connecter",
       "uploadError": "Échec de l'envoi d'une image"
     },
+    "saleType": {
+      "VENTE": "À vendre",
+      "LOCATION": "À louer"
+    },
+    "perDay": "/jour",
     "fuel": {
       "ESSENCE": "Essence",
       "DIESEL": "Diesel",
@@ -116,6 +131,8 @@
     }
   },
   "auth": {
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
     "login": {
       "title": "Connexion",
       "subtitle": "Content de vous revoir sur DZ APP.",
@@ -125,7 +142,8 @@
       "submitting": "Connexion...",
       "noAccount": "Pas encore de compte ?",
       "createAccount": "Créer un compte",
-      "invalidCredentials": "Email ou mot de passe incorrect"
+      "invalidCredentials": "Email ou mot de passe incorrect",
+      "forgotPassword": "Mot de passe oublié ?"
     },
     "register": {
       "title": "Créer un compte",
@@ -138,6 +156,29 @@
       "submitting": "Création...",
       "hasAccount": "Déjà un compte ?",
       "login": "Se connecter"
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "subtitle": "Entrez votre email, nous vous enverrons un lien de réinitialisation.",
+      "emailLabel": "Email",
+      "submit": "Envoyer le lien",
+      "submitting": "Envoi...",
+      "backToLogin": "Retour à la connexion",
+      "successTitle": "Email envoyé",
+      "successBody": "Si un compte existe avec cet email, un lien de réinitialisation vient d'être envoyé. Vérifiez votre boîte de réception."
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Choisissez un nouveau mot de passe.",
+      "passwordLabel": "Nouveau mot de passe",
+      "passwordHint": "Au moins 8 caractères.",
+      "submit": "Réinitialiser le mot de passe",
+      "submitting": "Réinitialisation...",
+      "invalidToken": "Ce lien de réinitialisation est invalide ou a expiré.",
+      "requestNew": "Demander un nouveau lien",
+      "successTitle": "Mot de passe réinitialisé",
+      "successBody": "Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter.",
+      "loginCta": "Se connecter"
     }
   },
   "errors": {
@@ -150,6 +191,7 @@
     "FILE_MISSING": "Fichier manquant",
     "INVALID_FILE_TYPE": "Type de fichier non supporté",
     "FILE_TOO_LARGE": "Fichier trop volumineux (max 8MB)",
+    "TOKEN_INVALID": "Ce lien est invalide ou a expiré",
     "GENERIC": "Une erreur est survenue"
   }
 }

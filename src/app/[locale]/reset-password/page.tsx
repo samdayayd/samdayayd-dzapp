@@ -1,101 +1,94 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { signIn } from "next-auth/react";
-import { AlertCircle, Loader2, Mail, User, UserPlus } from "lucide-react";
-import { Link, useRouter } from "@/i18n/navigation";
-import { readErrorCode } from "@/lib/apiError";
+import { AlertCircle, CheckCircle2, KeyRound, Loader2 } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { PasswordField } from "@/components/PasswordField";
+import { readErrorCode } from "@/lib/apiError";
 
-export default function RegisterPage() {
-  const router = useRouter();
-  const t = useTranslations("auth.register");
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={null}>
+      <ResetPasswordForm />
+    </Suspense>
+  );
+}
+
+function ResetPasswordForm() {
+  const t = useTranslations("auth.resetPassword");
   const tAuth = useTranslations("auth");
   const tErrors = useTranslations("errors");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
+  if (!token) {
+    return (
+      <div className="mx-auto flex min-h-[80vh] max-w-sm flex-col justify-center px-4 py-16 text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent-500/10 text-accent-700">
+          <AlertCircle size={22} />
+        </div>
+        <p className="mt-4 text-sm text-neutral-600">{t("invalidToken")}</p>
+        <Link href="/forgot-password" className="mt-6 font-medium text-brand-700 hover:underline">
+          {t("requestNew")}
+        </Link>
+      </div>
+    );
+  }
+
+  if (success) {
+    return (
+      <div className="mx-auto flex min-h-[80vh] max-w-sm flex-col justify-center px-4 py-16 text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700">
+          <CheckCircle2 size={22} />
+        </div>
+        <h1 className="mt-3 text-2xl font-bold text-neutral-900">{t("successTitle")}</h1>
+        <p className="mt-2 text-sm text-neutral-500">{t("successBody")}</p>
+        <Link href="/login" className="btn-primary mt-6">
+          {t("loginCta")}
+        </Link>
+      </div>
+    );
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setLoading(true);
 
-    const res = await fetch("/api/register", {
+    const res = await fetch("/api/reset-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
-    });
-
-    if (!res.ok) {
-      const code = await readErrorCode(res);
-      setError(tErrors(code));
-      setLoading(false);
-      return;
-    }
-
-    const signInRes = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
+      body: JSON.stringify({ token, password }),
     });
 
     setLoading(false);
 
-    if (signInRes?.error) {
-      router.push("/login");
+    if (!res.ok) {
+      const code = await readErrorCode(res);
+      setError(tErrors(code));
       return;
     }
-    router.push("/");
-    router.refresh();
+    setSuccess(true);
   }
 
   return (
     <div className="mx-auto flex min-h-[80vh] max-w-sm flex-col justify-center px-4 py-16">
       <div className="mb-6 flex flex-col items-center text-center">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700">
-          <UserPlus size={22} />
+          <KeyRound size={22} />
         </div>
         <h1 className="mt-3 text-2xl font-bold text-neutral-900">{t("title")}</h1>
         <p className="mt-1 text-sm text-neutral-500">{t("subtitle")}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="card space-y-4 p-6">
-        <div>
-          <label className="field-label" htmlFor="name">
-            {t("nameLabel")}
-          </label>
-          <div className="relative">
-            <User size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-            <input
-              id="name"
-              type="text"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="field-input ps-9"
-            />
-          </div>
-        </div>
-        <div>
-          <label className="field-label" htmlFor="email">
-            {t("emailLabel")}
-          </label>
-          <div className="relative">
-            <Mail size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-            <input
-              id="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="field-input ps-9"
-            />
-          </div>
-        </div>
         <div>
           <label className="field-label" htmlFor="password">
             {t("passwordLabel")}
@@ -131,13 +124,6 @@ export default function RegisterPage() {
           )}
         </button>
       </form>
-
-      <p className="mt-5 text-center text-sm text-neutral-500">
-        {t("hasAccount")}{" "}
-        <Link href="/login" className="font-medium text-brand-700 hover:underline">
-          {t("login")}
-        </Link>
-      </p>
     </div>
   );
 }
