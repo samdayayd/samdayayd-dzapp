@@ -40,8 +40,9 @@ yarn-error.log*
 /prisma/dev.db
 /prisma/dev.db-journal
 
-# user-uploaded content (local dev only — use object storage in production)
-/public/uploads/
+# user-uploaded content — served via src/app/api/uploads, not Next's
+# public/ static pipeline (which ignores files written after build)
+/uploads/
 
 # typescript
 *.tsbuildinfo

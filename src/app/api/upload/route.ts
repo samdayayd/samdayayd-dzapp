@@ -3,6 +3,7 @@ import { randomUUID } from "crypto";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import { auth } from "@/auth";
+import { UPLOADS_ROOT } from "@/lib/uploads";
 
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 const MAX_SIZE = 8 * 1024 * 1024; // 8MB
@@ -28,11 +29,11 @@ export async function POST(req: Request) {
 
   const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
   const filename = `${randomUUID()}.${ext}`;
-  const uploadDir = path.join(process.cwd(), "public", "uploads", "listings");
+  const uploadDir = path.join(UPLOADS_ROOT, "listings");
   await mkdir(uploadDir, { recursive: true });
 
   const bytes = Buffer.from(await file.arrayBuffer());
   await writeFile(path.join(uploadDir, filename), bytes);
 
-  return NextResponse.json({ url: `/uploads/listings/${filename}` });
+  return NextResponse.json({ url: `/api/uploads/listings/${filename}` });
 }
