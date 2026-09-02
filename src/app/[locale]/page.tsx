@@ -38,34 +38,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hero — mobile: the photo's text column is too narrow below sm, so
-          stack real text (normal flow) above a cropped banner instead. */}
+      {/* Hero — mobile: no separate text block above the photo anymore — the
+          whole hero text sits directly on top of it, like the desktop
+          version, with a dark scrim behind it for legibility (the photo's
+          own blank column is too narrow to hold the full text at this
+          width). The text overlay is absolutely positioned so it can't
+          push the photo taller and collide with the icon band below. */}
       <section className="relative overflow-hidden bg-brand-900 sm:hidden">
-        <div className="relative px-4 py-10">
-          <HeroContent dark />
-        </div>
-        <div className="relative aspect-[16/10] w-full">
+        <div className="relative w-full" style={{ aspectRatio: "6 / 5" }}>
           <Image
             src="/hero-photo.png"
             alt=""
             fill
+            priority
             className="object-cover"
-            style={{ objectPosition: "center 15%" }}
             sizes="100vw"
           />
-          {/* The photo's blank column (between the two people) shows up here
-              too — put the same headline in it, just small, like the desktop
-              hero does with the full text block. */}
           <div
-            className="absolute flex items-center justify-center text-center"
-            style={{ left: "31%", width: "38%", top: 0, bottom: "19.5%" }}
-          >
-            <p className="text-[11px] font-extrabold leading-tight text-neutral-900">
-              {t("titleLine1")}{" "}
-              <span className="text-brand-700">{t("titleFrance")}</span>{" "}
-              {t("titleEt")}{" "}
-              <span className="text-accent-600">{t("titleAlgerie")}</span>
-            </p>
+            className="absolute inset-x-0 top-0"
+            style={{
+              height: "82%",
+              background:
+                "linear-gradient(to bottom, rgba(10,61,41,0.88) 0%, rgba(10,61,41,0.74) 55%, rgba(10,61,41,0.6) 85%, rgba(10,61,41,0) 100%)",
+            }}
+          />
+          <div className="absolute inset-x-0 top-0 px-4 pt-4">
+            <HeroContent dark />
           </div>
           <HeroPhotoBand t={t} />
         </div>
