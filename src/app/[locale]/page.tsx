@@ -53,6 +53,20 @@ export default function Home() {
             style={{ objectPosition: "center 15%" }}
             sizes="100vw"
           />
+          {/* The photo's blank column (between the two people) shows up here
+              too — put the same headline in it, just small, like the desktop
+              hero does with the full text block. */}
+          <div
+            className="absolute flex items-center justify-center text-center"
+            style={{ left: "31%", width: "38%", top: 0, bottom: "19.5%" }}
+          >
+            <p className="text-[11px] font-extrabold leading-tight text-neutral-900">
+              {t("titleLine1")}{" "}
+              <span className="text-brand-700">{t("titleFrance")}</span>{" "}
+              {t("titleEt")}{" "}
+              <span className="text-accent-600">{t("titleAlgerie")}</span>
+            </p>
+          </div>
           <HeroPhotoBand t={t} />
         </div>
       </section>
