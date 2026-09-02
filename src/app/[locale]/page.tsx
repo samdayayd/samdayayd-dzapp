@@ -14,7 +14,7 @@ export default function Home() {
       <section className="relative hidden overflow-hidden bg-neutral-900 sm:block">
         <div className="relative w-full" style={{ aspectRatio: "1672 / 941" }}>
           <Image
-            src="/hero-photo.png"
+            src="/hero-photo-v2.png"
             alt=""
             fill
             priority
@@ -41,7 +41,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-neutral-900 sm:hidden">
         <div className="relative w-full" style={{ aspectRatio: "6 / 5" }}>
           <Image
-            src="/hero-photo.png"
+            src="/hero-photo-v2.png"
             alt=""
             fill
             priority
