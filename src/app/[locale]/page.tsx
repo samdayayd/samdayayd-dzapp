@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Car, MapPin, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { PartnershipEmblem } from "@/components/PartnershipEmblem";
 
 export default function Home() {
   const t = useTranslations("home");
@@ -8,40 +9,46 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-brand-800">
+      <section className="relative overflow-hidden bg-brand-900">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 15% 20%, rgba(255,255,255,0.10), transparent 40%), radial-gradient(circle at 85% 75%, rgba(226,59,78,0.35), transparent 45%)",
+              "radial-gradient(circle at 78% 45%, rgba(201,162,75,0.16), transparent 55%)",
           }}
         />
-        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-          <span className="badge bg-white/10 text-brand-50 ring-1 ring-inset ring-white/20">
-            <Sparkles size={13} />
-            {t("badge")}
-          </span>
+        <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-6">
+          <div>
+            <span className="badge bg-white/10 text-brand-50 ring-1 ring-inset ring-white/20">
+              <Sparkles size={13} />
+              {t("badge")}
+            </span>
 
-          <h1 className="mt-5 max-w-2xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            {t("titleLine1")}{" "}
-            <span className="text-brand-200">{t("titleFrance")}</span>{" "}
-            {t("titleEt")}{" "}
-            <span className="text-accent-400">{t("titleAlgerie")}</span>
-          </h1>
-          <p className="mt-4 max-w-xl text-lg text-brand-100/90">{t("subtitle")}</p>
+            <h1 className="mt-5 max-w-2xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+              {t("titleLine1")}{" "}
+              <span className="text-brand-200">{t("titleFrance")}</span>{" "}
+              {t("titleEt")}{" "}
+              <span className="text-accent-400">{t("titleAlgerie")}</span>
+            </h1>
+            <p className="mt-4 max-w-xl text-lg text-brand-100/90">{t("subtitle")}</p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/voitures" className="btn-primary !bg-white !text-brand-800 hover:!bg-brand-50">
-              <Car size={17} strokeWidth={2.5} />
-              {t("ctaBrowse")}
-            </Link>
-            <Link
-              href="/voitures/nouvelle"
-              className="btn !border !border-white/30 !bg-transparent !text-white hover:!bg-white/10"
-            >
-              {t("ctaPublish")}
-            </Link>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/voitures" className="btn-primary !bg-white !text-brand-800 hover:!bg-brand-50">
+                <Car size={17} strokeWidth={2.5} />
+                {t("ctaBrowse")}
+              </Link>
+              <Link
+                href="/voitures/nouvelle"
+                className="btn !border !border-white/30 !bg-transparent !text-white hover:!bg-white/10"
+              >
+                {t("ctaPublish")}
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex justify-center lg:justify-end">
+            <PartnershipEmblem className="w-full max-w-sm sm:max-w-md" />
           </div>
         </div>
       </section>
