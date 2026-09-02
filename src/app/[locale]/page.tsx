@@ -1,6 +1,14 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Car, MapPin, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  BadgePercent,
+  Car,
+  MapPin,
+  MessageCircle,
+  ShieldCheck,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { HeroContent } from "@/components/HeroContent";
 
@@ -21,11 +29,12 @@ export default function Home() {
             sizes="100vw"
           />
           <div
-            className="absolute inset-y-0 flex items-center"
-            style={{ left: "34%", width: "32%" }}
+            className="absolute inset-y-0 flex items-start"
+            style={{ left: "34%", width: "32%", paddingTop: "13%" }}
           >
             <HeroContent dark={false} />
           </div>
+          <HeroPhotoBand t={t} />
         </div>
       </section>
 
@@ -44,6 +53,7 @@ export default function Home() {
             style={{ objectPosition: "center 15%" }}
             sizes="100vw"
           />
+          <HeroPhotoBand t={t} />
         </div>
       </section>
 
@@ -124,6 +134,35 @@ export default function Home() {
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+/** Icon + short text row, placed over the photo's solid navy footer band
+    (below the two people, above the flags). Shared by the desktop and
+    mobile hero variants, which both show that band at the same height. */
+function HeroPhotoBand({ t }: { t: ReturnType<typeof useTranslations<"home">> }) {
+  const items = [
+    { icon: MapPin, text: t("trust1Title") },
+    { icon: BadgePercent, text: t("trust2Title") },
+    { icon: Zap, text: t("trust3Title") },
+  ];
+
+  return (
+    <div
+      className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 overflow-x-auto px-1.5 [scrollbar-width:none] sm:gap-10 sm:px-6 [&::-webkit-scrollbar]:hidden"
+      style={{ top: "81%" }}
+    >
+      {items.map(({ icon: Icon, text }) => (
+        <div
+          key={text}
+          className="flex shrink-0 items-center gap-1 whitespace-nowrap text-white sm:gap-2"
+        >
+          <Icon size={11} strokeWidth={2.5} className="shrink-0 sm:hidden" />
+          <Icon size={16} strokeWidth={2.5} className="hidden shrink-0 sm:block" />
+          <span className="text-[9px] font-semibold sm:text-sm">{text}</span>
+        </div>
+      ))}
     </div>
   );
 }
