@@ -9,8 +9,9 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero — desktop/tablet: the photo's wide open sky/sea between the
-          two skylines holds a glass text card. Full image, no crop. */}
+      {/* Hero — desktop/tablet: text sits directly on the photo, centered
+          in the open sky/sea between the two skylines, no card — just a
+          soft radial scrim behind it for legibility. Full image, no crop. */}
       <section className="relative hidden overflow-hidden bg-neutral-900 sm:block">
         <div className="relative w-full" style={{ aspectRatio: "1672 / 941" }}>
           <Image
@@ -22,22 +23,21 @@ export default function Home() {
             sizes="100vw"
           />
           <div
-            className="absolute rounded-2xl border border-white/15 p-7"
+            className="pointer-events-none absolute inset-0"
             style={{
-              left: "39%",
-              width: "35%",
-              top: "16%",
-              background: "rgba(8,14,22,0.52)",
-              backdropFilter: "blur(6px)",
+              background:
+                "radial-gradient(ellipse 32% 58% at 50% 46%, rgba(5,10,18,0.55) 0%, rgba(5,10,18,0.28) 55%, rgba(5,10,18,0) 78%)",
             }}
-          >
-            <HeroContent dark />
+          />
+          <div className="absolute inset-0 flex items-center justify-center px-[30%]">
+            <HeroContent />
           </div>
         </div>
       </section>
 
-      {/* Hero — mobile: same idea, smaller card, over a taller crop of the
-          photo (shifted left so the couple stays in frame). */}
+      {/* Hero — mobile: same idea, over a taller crop of the photo shifted
+          left so the couple stays in frame; text centered in the open
+          space to the right of them. */}
       <section className="relative overflow-hidden bg-neutral-900 sm:hidden">
         <div className="relative w-full" style={{ aspectRatio: "6 / 5" }}>
           <Image
@@ -50,14 +50,14 @@ export default function Home() {
             sizes="100vw"
           />
           <div
-            className="absolute inset-x-4 rounded-2xl border border-white/15 p-4"
+            className="pointer-events-none absolute inset-0"
             style={{
-              top: "10%",
-              background: "rgba(8,14,22,0.6)",
-              backdropFilter: "blur(6px)",
+              background:
+                "radial-gradient(ellipse 48% 60% at 66% 42%, rgba(5,10,18,0.6) 0%, rgba(5,10,18,0.32) 55%, rgba(5,10,18,0) 80%)",
             }}
-          >
-            <HeroContent dark compact />
+          />
+          <div className="absolute inset-y-0 flex items-center justify-center" style={{ left: "33%", right: "4%" }}>
+            <HeroContent compact />
           </div>
         </div>
       </section>
