@@ -12,7 +12,7 @@ export default function Home() {
       {/* Hero — desktop/tablet: text sits directly on the photo, centered
           in the open sky/sea between the two skylines, no card — just a
           soft radial scrim behind it for legibility. Full image, no crop. */}
-      <section className="relative hidden overflow-hidden bg-neutral-900 sm:block">
+      <section className="relative hidden bg-neutral-900 sm:block">
         <div className="relative w-full" style={{ aspectRatio: "1672 / 941" }}>
           <Image
             src="/hero-photo-v2.png"
@@ -38,7 +38,7 @@ export default function Home() {
       {/* Hero — mobile: same idea, over a taller crop of the photo shifted
           left so the couple stays in frame; text centered in the open
           space to the right of them. */}
-      <section className="relative overflow-hidden bg-neutral-900 sm:hidden">
+      <section className="relative bg-neutral-900 sm:hidden">
         <div className="relative w-full" style={{ aspectRatio: "6 / 5" }}>
           <Image
             src="/hero-photo-v2.png"

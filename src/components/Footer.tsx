@@ -2,13 +2,16 @@
 
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import { CategoryDropdown } from "./CategoryDropdown";
 
 export function Footer() {
   const t = useTranslations("footer");
   const pathname = usePathname();
-  const publishHref = pathname.startsWith("/immobilier")
-    ? "/immobilier/nouvelle"
-    : "/voitures/nouvelle";
+  const publishHref = pathname.startsWith("/voitures")
+    ? "/voitures/nouvelle"
+    : pathname.startsWith("/immobilier")
+      ? "/immobilier/nouvelle"
+      : null;
 
   return (
     <footer className="border-t border-neutral-200/70 bg-white">
@@ -24,9 +27,20 @@ export function Footer() {
           <Link href="/immobilier" className="hover:text-neutral-800">
             {t("immobilier")}
           </Link>
-          <Link href={publishHref} className="hover:text-neutral-800">
-            {t("publish")}
-          </Link>
+          {publishHref ? (
+            <Link href={publishHref} className="hover:text-neutral-800">
+              {t("publish")}
+            </Link>
+          ) : (
+            <CategoryDropdown
+              mode="post"
+              chevronSize={12}
+              panelAlign="end"
+              triggerClassName="inline-flex items-center gap-1 hover:text-neutral-800"
+            >
+              {t("publish")}
+            </CategoryDropdown>
+          )}
         </div>
       </div>
     </footer>

@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Car, Sparkles } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Search, Sparkles } from "lucide-react";
+import { CategoryDropdown } from "./CategoryDropdown";
 
 const textShadow = "0 1px 3px rgba(255,255,255,0.65), 0 1px 12px rgba(255,255,255,0.5)";
 
@@ -53,23 +53,26 @@ export function HeroContent({ compact = false }: { compact?: boolean }) {
             : "mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center"
         }
       >
-        <Link
-          href="/voitures"
-          className={`btn-primary shadow-lg ${
+        <CategoryDropdown
+          mode="browse"
+          chevronSize={compact ? 12 : 15}
+          triggerClassName={`btn-primary shadow-lg ${
             compact ? "!px-3 !py-1.5 !text-[11px]" : "!px-6 !py-3 !text-base"
           }`}
         >
-          <Car size={compact ? 12 : 18} strokeWidth={2.5} />
+          <Search size={compact ? 12 : 18} strokeWidth={2.5} />
           {t("ctaBrowse")}
-        </Link>
-        <Link
-          href="/voitures/nouvelle"
-          className={`btn !border !border-neutral-900/20 !bg-white/70 !text-neutral-900 backdrop-blur-sm hover:!bg-white/90 ${
+        </CategoryDropdown>
+        <CategoryDropdown
+          mode="post"
+          chevronSize={compact ? 12 : 15}
+          panelAlign={compact ? "end" : "start"}
+          triggerClassName={`btn !border !border-neutral-900/20 !bg-white/70 !text-neutral-900 backdrop-blur-sm hover:!bg-white/90 ${
             compact ? "!px-3 !py-1.5 !text-[11px]" : "!px-6 !py-3 !text-base"
           }`}
         >
           {t("ctaPublish")}
-        </Link>
+        </CategoryDropdown>
       </div>
     </div>
   );

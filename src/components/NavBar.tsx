@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { Building2, Car, LogIn, Plus } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
+import { CategoryDropdown } from "./CategoryDropdown";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { UserMenu } from "./UserMenu";
 
@@ -13,10 +14,13 @@ export function NavBar() {
   const pathname = usePathname();
   // Land on the create form for whichever category the user is currently
   // browsing, so "Post an ad" from Immobilier doesn't drop them into the
-  // Voitures form. Defaults to Voitures everywhere else (e.g. the home page).
-  const publishHref = pathname.startsWith("/immobilier")
-    ? "/immobilier/nouvelle"
-    : "/voitures/nouvelle";
+  // Voitures form. Outside either category (e.g. the home page) there's no
+  // page context to infer from, so let the visitor pick instead of guessing.
+  const publishHref = pathname.startsWith("/voitures")
+    ? "/voitures/nouvelle"
+    : pathname.startsWith("/immobilier")
+      ? "/immobilier/nouvelle"
+      : null;
 
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-200/70 bg-white/85 backdrop-blur-md">
@@ -48,14 +52,25 @@ export function NavBar() {
 
           {status === "authenticated" ? (
             <>
-              <Link
-                href={publishHref}
-                title={t("publish")}
-                className="btn-primary !px-2.5 sm:!px-4"
-              >
-                <Plus size={16} strokeWidth={2.5} />
-                <span className="hidden sm:inline">{t("publish")}</span>
-              </Link>
+              {publishHref ? (
+                <Link
+                  href={publishHref}
+                  title={t("publish")}
+                  className="btn-primary !px-2.5 sm:!px-4"
+                >
+                  <Plus size={16} strokeWidth={2.5} />
+                  <span className="hidden sm:inline">{t("publish")}</span>
+                </Link>
+              ) : (
+                <CategoryDropdown
+                  mode="post"
+                  panelAlign="end"
+                  triggerClassName="btn-primary !px-2.5 sm:!px-4"
+                >
+                  <Plus size={16} strokeWidth={2.5} />
+                  <span className="hidden sm:inline">{t("publish")}</span>
+                </CategoryDropdown>
+              )}
               <UserMenu
                 name={session.user?.name ?? ""}
                 email={session.user?.email}
