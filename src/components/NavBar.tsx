@@ -3,13 +3,20 @@
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { Building2, Car, LogIn, Plus } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { UserMenu } from "./UserMenu";
 
 export function NavBar() {
   const { data: session, status } = useSession();
   const t = useTranslations("nav");
+  const pathname = usePathname();
+  // Land on the create form for whichever category the user is currently
+  // browsing, so "Post an ad" from Immobilier doesn't drop them into the
+  // Voitures form. Defaults to Voitures everywhere else (e.g. the home page).
+  const publishHref = pathname.startsWith("/immobilier")
+    ? "/immobilier/nouvelle"
+    : "/voitures/nouvelle";
 
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-200/70 bg-white/85 backdrop-blur-md">
@@ -42,7 +49,7 @@ export function NavBar() {
           {status === "authenticated" ? (
             <>
               <Link
-                href="/voitures/nouvelle"
+                href={publishHref}
                 title={t("publish")}
                 className="btn-primary !px-2.5 sm:!px-4"
               >

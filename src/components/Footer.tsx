@@ -1,8 +1,14 @@
+"use client";
+
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 export function Footer() {
   const t = useTranslations("footer");
+  const pathname = usePathname();
+  const publishHref = pathname.startsWith("/immobilier")
+    ? "/immobilier/nouvelle"
+    : "/voitures/nouvelle";
 
   return (
     <footer className="border-t border-neutral-200/70 bg-white">
@@ -18,7 +24,7 @@ export function Footer() {
           <Link href="/immobilier" className="hover:text-neutral-800">
             {t("immobilier")}
           </Link>
-          <Link href="/voitures/nouvelle" className="hover:text-neutral-800">
+          <Link href={publishHref} className="hover:text-neutral-800">
             {t("publish")}
           </Link>
         </div>
