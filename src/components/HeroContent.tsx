@@ -49,23 +49,23 @@ export function HeroContent({ compact = false }: { compact?: boolean }) {
       <div
         className={
           compact
-            ? "mt-4 flex w-full gap-2"
+            ? "mt-3 flex items-center justify-center gap-2"
             : "mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center"
         }
       >
         <Link
           href="/voitures"
           className={`btn-primary shadow-lg ${
-            compact ? "!flex-1 !px-2 !py-2 !text-xs" : "!px-6 !py-3 !text-base"
+            compact ? "!px-3 !py-1.5 !text-[11px]" : "!px-6 !py-3 !text-base"
           }`}
         >
-          <Car size={compact ? 14 : 18} strokeWidth={2.5} />
+          <Car size={compact ? 12 : 18} strokeWidth={2.5} />
           {t("ctaBrowse")}
         </Link>
         <Link
           href="/voitures/nouvelle"
           className={`btn !border !border-neutral-900/20 !bg-white/70 !text-neutral-900 backdrop-blur-sm hover:!bg-white/90 ${
-            compact ? "!flex-1 !px-2 !py-2 !text-xs" : "!px-6 !py-3 !text-base"
+            compact ? "!px-3 !py-1.5 !text-[11px]" : "!px-6 !py-3 !text-base"
           }`}
         >
           {t("ctaPublish")}
