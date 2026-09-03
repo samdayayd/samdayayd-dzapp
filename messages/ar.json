@@ -6,12 +6,14 @@
     "login": "تسجيل الدخول",
     "register": "إنشاء حساب",
     "registerShort": "سجّل",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "immobilier": "عقارات"
   },
   "footer": {
     "tagline": "إعلانات بين فرنسا والجزائر.",
     "voitures": "سيارات",
-    "publish": "أضف إعلانًا"
+    "publish": "أضف إعلانًا",
+    "immobilier": "عقارات"
   },
   "home": {
     "badge": "جديد — إعلانات السيارات في نسخة تجريبية مبكرة",
@@ -29,7 +31,7 @@
     "trust3Title": "بسيط وسريع",
     "trust3Body": "انشر إعلانك في دقائق معدودة.",
     "categoriesTitle": "الفئات",
-    "categoriesSubtitle": "نبدأ بفئة السيارات — البقية قريبًا.",
+    "categoriesSubtitle": "سيارات وعقارات متاحتان الآن — البقية قريبًا.",
     "catVoituresName": "سيارات",
     "catVoituresNote": "شراء، بيع، جميع الماركات",
     "catAvailable": "متاح",
@@ -192,6 +194,93 @@
     "INVALID_FILE_TYPE": "نوع الملف غير مدعوم",
     "FILE_TOO_LARGE": "الملف كبير جدًا (8 ميغابايت كحد أقصى)",
     "TOKEN_INVALID": "هذا الرابط غير صالح أو منتهي الصلاحية",
-    "GENERIC": "حدث خطأ ما"
+    "GENERIC": "حدث خطأ ما",
+    "INVALID_PROPERTY_TYPE": "نوع عقار غير صالح"
+  },
+  "immobilier": {
+    "category": "عقارات",
+    "resultsFound": "{count, plural, =0 {لم يتم العثور على عقارات} one {تم العثور على عقار واحد} other {تم العثور على # عقار}}",
+    "resultsAvailable": "{count, plural, =0 {لا توجد عقارات متاحة} one {عقار واحد متاح} other {# عقار متاح}}",
+    "filters": {
+      "villeLabel": "المدينة",
+      "villePlaceholder": "مثال: ليون، الجزائر العاصمة…",
+      "paysLabel": "البلد",
+      "paysAll": "كل الدول",
+      "france": "فرنسا",
+      "algerie": "الجزائر",
+      "saleTypeLabel": "نوع الإعلان",
+      "saleTypeAll": "بيع وكراء",
+      "propertyTypeLabel": "نوع العقار",
+      "propertyTypeAll": "كل الأنواع",
+      "prixMinLabel": "السعر الأدنى",
+      "prixMaxLabel": "السعر الأقصى",
+      "search": "بحث"
+    },
+    "empty": {
+      "title": "لا يوجد عقار يطابق بحثك.",
+      "body": "حاول توسيع عوامل التصفية، أو كن أول من ينشر.",
+      "cta": "انشر إعلانًا"
+    },
+    "card": {
+      "noPhoto": "بدون صورة"
+    },
+    "detail": {
+      "specsTitle": "المواصفات",
+      "propertyType": "نوع العقار",
+      "rooms": "عدد الغرف",
+      "surface": "المساحة",
+      "location": "الموقع",
+      "descriptionTitle": "الوصف",
+      "sellerDefault": "بائع خاص",
+      "verified": "موثّق",
+      "call": "اتصال",
+      "email": "إرسال بريد إلكتروني"
+    },
+    "create": {
+      "title": "انشر إعلانًا",
+      "subtitle": "فئة العقارات",
+      "titleLabel": "عنوان الإعلان",
+      "titlePlaceholder": "مثال: شقة 3 غرف مع شرفة",
+      "saleTypeLabel": "نوع الإعلان",
+      "propertyTypeLabel": "نوع العقار",
+      "roomsLabel": "عدد الغرف",
+      "surfaceLabel": "المساحة (م²)",
+      "priceLabel": "السعر",
+      "priceLabelRent": "الإيجار الشهري",
+      "paysLabel": "البلد",
+      "villeLabel": "المدينة",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "حالة العقار، الطابق، التجهيزات، الحي…",
+      "photosLabel": "الصور",
+      "photosCta": "انقر لإضافة صور",
+      "photosOr": "أو اسحب وأفلت",
+      "photosHint": "JPG, PNG, WebP — 8 ميغابايت كحد أقصى",
+      "photoMain": "الرئيسية",
+      "contactTitle": "معلومات الاتصال",
+      "contactNameLabel": "اسم جهة الاتصال",
+      "contactEmailLabel": "البريد الإلكتروني للتواصل",
+      "contactPhoneLabel": "الهاتف",
+      "submit": "نشر الإعلان",
+      "submitting": "جارٍ النشر...",
+      "loginRequiredTitle": "سجّل الدخول للنشر",
+      "loginRequiredBody": "تحتاج إلى حساب DZ APP لنشر إعلان.",
+      "loginCta": "تسجيل الدخول",
+      "uploadError": "فشل رفع إحدى الصور"
+    },
+    "saleType": {
+      "VENTE": "للبيع",
+      "LOCATION": "للكراء"
+    },
+    "perMonth": "/شهر",
+    "propertyType": {
+      "APPARTEMENT": "شقة",
+      "MAISON": "منزل",
+      "TERRAIN": "أرض",
+      "LOCAL": "محل تجاري"
+    },
+    "country": {
+      "FRANCE": "فرنسا",
+      "ALGERIE": "الجزائر"
+    }
   }
 }

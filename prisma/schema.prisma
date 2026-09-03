@@ -8,11 +8,13 @@ datasource db {
 }
 
 // SQLite has no native enum type — these are validated at the application
-// layer instead (see the allow-lists in src/app/api/listings/route.ts).
+// layer instead (see the allow-lists in src/app/api/listings/route.ts and
+// src/app/api/properties/route.ts).
 // Valid values: FuelType = ESSENCE | DIESEL | ELECTRIQUE | HYBRIDE | GPL
 //               Country  = FRANCE | ALGERIE
 //               ListingStatus = ACTIVE | SOLD | HIDDEN
 //               SaleType = VENTE | LOCATION
+//               PropertyType = APPARTEMENT | MAISON | TERRAIN | LOCAL
 
 model User {
   id            String    @id @default(cuid())
@@ -24,6 +26,7 @@ model User {
   createdAt     DateTime  @default(now())
 
   listings      Listing[]
+  properties    Property[]
   favorites     Favorite[]
   sentMessages  Message[]      @relation("MessagesSent")
   conversationsAsBuyer  Conversation[] @relation("Buyer")
@@ -92,6 +95,49 @@ model ListingImage {
 
   listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
   listingId String
+}
+
+model Property {
+  id            String        @id @default(cuid())
+  title         String
+  description   String
+  price         Int
+  currency      String        @default("EUR")
+  country       String
+  city          String
+  saleType      String        @default("VENTE")
+
+  // Immobilier-specific fields
+  propertyType  String
+  rooms         Int
+  surfaceM2     Int
+
+  contactName   String
+  contactEmail  String
+  contactPhone  String
+
+  status        String        @default("ACTIVE")
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  seller        User          @relation(fields: [sellerId], references: [id])
+  sellerId      String
+
+  images        PropertyImage[]
+
+  @@index([country, city])
+  @@index([propertyType])
+  @@index([price])
+  @@index([saleType])
+}
+
+model PropertyImage {
+  id         String   @id @default(cuid())
+  url        String
+  position   Int      @default(0)
+
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
 }
 
 model Favorite {

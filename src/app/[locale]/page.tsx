@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Car, MessageCircle, MapPin, ShieldCheck, Sparkles } from "lucide-react";
+import { Building2, Car, MessageCircle, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { HeroContent } from "@/components/HeroContent";
 
@@ -119,24 +119,30 @@ export default function Home() {
             <span className="badge-brand absolute end-5 top-5">{t("catAvailable")}</span>
           </Link>
 
-          {[
-            { name: t("catImmobilierName"), note: t("catImmobilierNote") },
-            { name: t("catTravailName"), note: t("catTravailNote") },
-          ].map((cat) => (
-            <div
-              key={cat.name}
-              className="card flex flex-col justify-between p-6 opacity-60"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-neutral-400">
-                <Sparkles size={20} />
-              </div>
-              <div className="mt-8">
-                <p className="text-lg font-semibold text-neutral-700">{cat.name}</p>
-                <p className="mt-1 text-sm text-neutral-400">{cat.note}</p>
-              </div>
-              <span className="mt-4 badge-neutral w-fit">{t("catComingSoon")}</span>
+          <Link
+            href="/immobilier"
+            className="card group relative flex flex-col justify-between overflow-hidden p-6 transition hover:shadow-md"
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-600 text-white shadow-sm">
+              <Building2 size={22} />
             </div>
-          ))}
+            <div className="mt-8">
+              <p className="text-lg font-semibold text-neutral-900">{t("catImmobilierName")}</p>
+              <p className="mt-1 text-sm text-neutral-500">{t("catImmobilierNote")}</p>
+            </div>
+            <span className="badge-brand absolute end-5 top-5">{t("catAvailable")}</span>
+          </Link>
+
+          <div className="card flex flex-col justify-between p-6 opacity-60">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-neutral-400">
+              <Sparkles size={20} />
+            </div>
+            <div className="mt-8">
+              <p className="text-lg font-semibold text-neutral-700">{t("catTravailName")}</p>
+              <p className="mt-1 text-sm text-neutral-400">{t("catTravailNote")}</p>
+            </div>
+            <span className="mt-4 badge-neutral w-fit">{t("catComingSoon")}</span>
+          </div>
         </div>
       </section>
     </div>

@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { Car, LogIn, Plus } from "lucide-react";
+import { Building2, Car, LogIn, Plus } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { UserMenu } from "./UserMenu";
@@ -30,6 +30,13 @@ export function NavBar() {
           >
             <Car size={16} strokeWidth={2.25} />
             {t("voitures")}
+          </Link>
+          <Link
+            href="/immobilier"
+            className="hidden items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-900 sm:flex"
+          >
+            <Building2 size={16} strokeWidth={2.25} />
+            {t("immobilier")}
           </Link>
 
           {status === "authenticated" ? (

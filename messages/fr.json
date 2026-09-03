@@ -6,12 +6,14 @@
     "login": "Connexion",
     "register": "Créer un compte",
     "registerShort": "S'inscrire",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "immobilier": "Immobilier"
   },
   "footer": {
     "tagline": "annonces entre la France et l'Algérie.",
     "voitures": "Voitures",
-    "publish": "Publier une annonce"
+    "publish": "Publier une annonce",
+    "immobilier": "Immobilier"
   },
   "home": {
     "badge": "Nouveau — annonces Voitures en avant-première",
@@ -29,7 +31,7 @@
     "trust3Title": "Simple et rapide",
     "trust3Body": "Publiez une annonce en quelques minutes.",
     "categoriesTitle": "Catégories",
-    "categoriesSubtitle": "On commence par Voitures — les autres arrivent bientôt.",
+    "categoriesSubtitle": "Voitures et Immobilier sont disponibles — les autres catégories arrivent bientôt.",
     "catVoituresName": "Voitures",
     "catVoituresNote": "Achat, vente, toutes marques",
     "catAvailable": "Disponible",
@@ -192,6 +194,93 @@
     "INVALID_FILE_TYPE": "Type de fichier non supporté",
     "FILE_TOO_LARGE": "Fichier trop volumineux (max 8MB)",
     "TOKEN_INVALID": "Ce lien est invalide ou a expiré",
-    "GENERIC": "Une erreur est survenue"
+    "GENERIC": "Une erreur est survenue",
+    "INVALID_PROPERTY_TYPE": "Type de bien invalide"
+  },
+  "immobilier": {
+    "category": "Immobilier",
+    "resultsFound": "{count, plural, =0 {Aucun bien trouvé} one {# bien trouvé} other {# biens trouvés}}",
+    "resultsAvailable": "{count, plural, =0 {Aucun bien disponible} one {# bien disponible} other {# biens disponibles}}",
+    "filters": {
+      "villeLabel": "Ville",
+      "villePlaceholder": "ex: Lyon, Alger…",
+      "paysLabel": "Pays",
+      "paysAll": "Tous les pays",
+      "france": "France",
+      "algerie": "Algérie",
+      "saleTypeLabel": "Type d'annonce",
+      "saleTypeAll": "Vente et location",
+      "propertyTypeLabel": "Type de bien",
+      "propertyTypeAll": "Tous les types",
+      "prixMinLabel": "Prix min",
+      "prixMaxLabel": "Prix max",
+      "search": "Rechercher"
+    },
+    "empty": {
+      "title": "Aucun bien ne correspond à votre recherche.",
+      "body": "Essayez d'élargir vos filtres, ou soyez le premier à publier.",
+      "cta": "Publier une annonce"
+    },
+    "card": {
+      "noPhoto": "Pas de photo"
+    },
+    "detail": {
+      "specsTitle": "Caractéristiques",
+      "propertyType": "Type de bien",
+      "rooms": "Pièces",
+      "surface": "Surface",
+      "location": "Localisation",
+      "descriptionTitle": "Description",
+      "sellerDefault": "Vendeur particulier",
+      "verified": "Vérifié",
+      "call": "Appeler",
+      "email": "Envoyer un email"
+    },
+    "create": {
+      "title": "Publier une annonce",
+      "subtitle": "Catégorie Immobilier",
+      "titleLabel": "Titre de l'annonce",
+      "titlePlaceholder": "ex: Appartement 3 pièces avec balcon",
+      "saleTypeLabel": "Type d'annonce",
+      "propertyTypeLabel": "Type de bien",
+      "roomsLabel": "Nombre de pièces",
+      "surfaceLabel": "Surface (m²)",
+      "priceLabel": "Prix",
+      "priceLabelRent": "Loyer par mois",
+      "paysLabel": "Pays",
+      "villeLabel": "Ville",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "État du bien, étage, équipements, quartier…",
+      "photosLabel": "Photos",
+      "photosCta": "Cliquez pour ajouter des photos",
+      "photosOr": "ou glissez-déposez",
+      "photosHint": "JPG, PNG, WebP — 8MB max",
+      "photoMain": "Principale",
+      "contactTitle": "Coordonnées de contact",
+      "contactNameLabel": "Nom du contact",
+      "contactEmailLabel": "Email de contact",
+      "contactPhoneLabel": "Téléphone",
+      "submit": "Publier l'annonce",
+      "submitting": "Publication...",
+      "loginRequiredTitle": "Connectez-vous pour publier",
+      "loginRequiredBody": "Vous devez avoir un compte DZ APP pour publier une annonce.",
+      "loginCta": "Se connecter",
+      "uploadError": "Échec de l'envoi d'une image"
+    },
+    "saleType": {
+      "VENTE": "À vendre",
+      "LOCATION": "À louer"
+    },
+    "perMonth": "/mois",
+    "propertyType": {
+      "APPARTEMENT": "Appartement",
+      "MAISON": "Maison",
+      "TERRAIN": "Terrain",
+      "LOCAL": "Local commercial"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algérie"
+    }
   }
 }

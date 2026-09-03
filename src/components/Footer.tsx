@@ -15,6 +15,9 @@ export function Footer() {
           <Link href="/voitures" className="hover:text-neutral-800">
             {t("voitures")}
           </Link>
+          <Link href="/immobilier" className="hover:text-neutral-800">
+            {t("immobilier")}
+          </Link>
           <Link href="/voitures/nouvelle" className="hover:text-neutral-800">
             {t("publish")}
           </Link>

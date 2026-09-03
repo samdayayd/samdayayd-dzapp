@@ -6,12 +6,14 @@
     "login": "Log in",
     "register": "Create account",
     "registerShort": "Sign up",
-    "logout": "Log out"
+    "logout": "Log out",
+    "immobilier": "Real estate"
   },
   "footer": {
     "tagline": "listings between France and Algeria.",
     "voitures": "Cars",
-    "publish": "Post an ad"
+    "publish": "Post an ad",
+    "immobilier": "Real estate"
   },
   "home": {
     "badge": "New — Cars listings in early access",
@@ -29,7 +31,7 @@
     "trust3Title": "Simple and fast",
     "trust3Body": "Post a listing in just a few minutes.",
     "categoriesTitle": "Categories",
-    "categoriesSubtitle": "Starting with Cars — the rest are coming soon.",
+    "categoriesSubtitle": "Cars and Real estate are live — the rest are coming soon.",
     "catVoituresName": "Cars",
     "catVoituresNote": "Buy, sell, all makes",
     "catAvailable": "Available",
@@ -192,6 +194,93 @@
     "INVALID_FILE_TYPE": "Unsupported file type",
     "FILE_TOO_LARGE": "File too large (max 8MB)",
     "TOKEN_INVALID": "This link is invalid or has expired",
-    "GENERIC": "Something went wrong"
+    "GENERIC": "Something went wrong",
+    "INVALID_PROPERTY_TYPE": "Invalid property type"
+  },
+  "immobilier": {
+    "category": "Real estate",
+    "resultsFound": "{count, plural, =0 {No properties found} one {# property found} other {# properties found}}",
+    "resultsAvailable": "{count, plural, =0 {No properties available} one {# property available} other {# properties available}}",
+    "filters": {
+      "villeLabel": "City",
+      "villePlaceholder": "e.g. Lyon, Algiers…",
+      "paysLabel": "Country",
+      "paysAll": "All countries",
+      "france": "France",
+      "algerie": "Algeria",
+      "saleTypeLabel": "Listing type",
+      "saleTypeAll": "Sale and rental",
+      "propertyTypeLabel": "Property type",
+      "propertyTypeAll": "All types",
+      "prixMinLabel": "Min price",
+      "prixMaxLabel": "Max price",
+      "search": "Search"
+    },
+    "empty": {
+      "title": "No properties match your search.",
+      "body": "Try widening your filters, or be the first to post.",
+      "cta": "Post a listing"
+    },
+    "card": {
+      "noPhoto": "No photo"
+    },
+    "detail": {
+      "specsTitle": "Details",
+      "propertyType": "Property type",
+      "rooms": "Rooms",
+      "surface": "Surface",
+      "location": "Location",
+      "descriptionTitle": "Description",
+      "sellerDefault": "Private seller",
+      "verified": "Verified",
+      "call": "Call",
+      "email": "Send an email"
+    },
+    "create": {
+      "title": "Post a listing",
+      "subtitle": "Real estate category",
+      "titleLabel": "Listing title",
+      "titlePlaceholder": "e.g. 3-room apartment with balcony",
+      "saleTypeLabel": "Listing type",
+      "propertyTypeLabel": "Property type",
+      "roomsLabel": "Number of rooms",
+      "surfaceLabel": "Surface (m²)",
+      "priceLabel": "Price",
+      "priceLabelRent": "Rent per month",
+      "paysLabel": "Country",
+      "villeLabel": "City",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Condition, floor, amenities, neighborhood…",
+      "photosLabel": "Photos",
+      "photosCta": "Click to add photos",
+      "photosOr": "or drag and drop",
+      "photosHint": "JPG, PNG, WebP — 8MB max",
+      "photoMain": "Main",
+      "contactTitle": "Contact details",
+      "contactNameLabel": "Contact name",
+      "contactEmailLabel": "Contact email",
+      "contactPhoneLabel": "Phone",
+      "submit": "Post listing",
+      "submitting": "Posting...",
+      "loginRequiredTitle": "Log in to post a listing",
+      "loginRequiredBody": "You need a DZ APP account to post a listing.",
+      "loginCta": "Log in",
+      "uploadError": "Failed to upload an image"
+    },
+    "saleType": {
+      "VENTE": "For sale",
+      "LOCATION": "For rent"
+    },
+    "perMonth": "/mo",
+    "propertyType": {
+      "APPARTEMENT": "Apartment",
+      "MAISON": "House",
+      "TERRAIN": "Land",
+      "LOCAL": "Commercial space"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algeria"
+    }
   }
 }
