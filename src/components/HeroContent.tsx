@@ -27,7 +27,7 @@ export function HeroContent({ compact = false }: { compact?: boolean }) {
       </span>
 
       <h1
-        className={`font-extrabold tracking-tight text-neutral-900 ${
+        className={`font-bold tracking-tight text-neutral-900 ${
           compact ? "mt-3 text-2xl leading-tight" : "mt-5 text-4xl leading-tight sm:text-5xl"
         }`}
         style={{ textShadow }}
