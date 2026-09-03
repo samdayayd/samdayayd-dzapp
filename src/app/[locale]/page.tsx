@@ -26,7 +26,7 @@ export default function Home() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 32% 58% at 50% 46%, rgba(5,10,18,0.55) 0%, rgba(5,10,18,0.28) 55%, rgba(5,10,18,0) 78%)",
+                "radial-gradient(ellipse 34% 60% at 50% 46%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.4) 55%, rgba(255,255,255,0) 80%)",
             }}
           />
           <div className="absolute inset-0 flex items-center justify-center px-[30%]">
@@ -53,7 +53,7 @@ export default function Home() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 48% 60% at 66% 42%, rgba(5,10,18,0.6) 0%, rgba(5,10,18,0.32) 55%, rgba(5,10,18,0) 80%)",
+                "radial-gradient(ellipse 50% 62% at 66% 42%, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.42) 55%, rgba(255,255,255,0) 82%)",
             }}
           />
           <div className="absolute inset-y-0 flex items-center justify-center" style={{ left: "33%", right: "4%" }}>
