@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import {
   AlertCircle,
   Building2,
@@ -13,7 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
-import { readErrorCode } from "@/lib/apiError";
+import { ApiError, readErrorCode } from "@/lib/apiError";
 
 export default function NewPropertyPage() {
   const router = useRouter();
@@ -79,7 +79,7 @@ export default function NewPropertyPage() {
         const res = await fetch("/api/upload", { method: "POST", body: fd });
         if (!res.ok) {
           const code = await readErrorCode(res);
-          throw new Error(tErrors(code));
+          throw new ApiError(code, tErrors(code));
         }
         const data = await res.json();
         imageUrls.push(data.url);
@@ -110,12 +110,17 @@ export default function NewPropertyPage() {
 
       if (!res.ok) {
         const code = await readErrorCode(res);
-        throw new Error(tErrors(code));
+        throw new ApiError(code, tErrors(code));
       }
 
       const { id } = await res.json();
       router.push(`/immobilier/${id}`);
     } catch (err) {
+      if (err instanceof ApiError && err.code === "SESSION_STALE") {
+        await signOut({ redirect: false });
+        router.push("/login");
+        return;
+      }
       setError(err instanceof Error ? err.message : tErrors("GENERIC"));
     } finally {
       setSubmitting(false);

@@ -200,7 +200,8 @@
     "TOKEN_INVALID": "هذا الرابط غير صالح أو منتهي الصلاحية",
     "GENERIC": "حدث خطأ ما",
     "INVALID_PROPERTY_TYPE": "نوع عقار غير صالح",
-    "INVALID_ITEM_CATEGORY": "فئة غير صالحة"
+    "INVALID_ITEM_CATEGORY": "فئة غير صالحة",
+    "SESSION_STALE": "انتهت صلاحية جلستك، يرجى تسجيل الدخول مرة أخرى."
   },
   "immobilier": {
     "category": "عقارات",

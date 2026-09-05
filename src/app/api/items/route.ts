@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { requireSeller } from "@/lib/requireSeller";
 
 const ITEM_CATEGORIES = new Set([
   "ELECTRONIQUE",
@@ -15,10 +15,8 @@ const COUNTRIES = new Set(["FRANCE", "ALGERIE"]);
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: Request) {
-  const session = await auth();
-  if (!session?.user) {
-    return NextResponse.json({ code: "UNAUTHORIZED" }, { status: 401 });
-  }
+  const { sellerId, error } = await requireSeller();
+  if (error) return error;
 
   const body = await req.json();
   const {
@@ -73,7 +71,7 @@ export async function POST(req: Request) {
       contactName,
       contactEmail,
       contactPhone,
-      sellerId: session.user.id,
+      sellerId,
       images: {
         create: ((imageUrls as string[]) ?? []).map((url, position) => ({
           url,
