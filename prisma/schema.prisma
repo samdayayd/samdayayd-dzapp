@@ -15,6 +15,8 @@ datasource db {
 //               ListingStatus = ACTIVE | SOLD | HIDDEN
 //               SaleType = VENTE | LOCATION
 //               PropertyType = APPARTEMENT | MAISON | TERRAIN | LOCAL
+//               ItemCategory = ELECTRONIQUE | MEUBLE | VETEMENTS | LOISIRS | MAISON | AUTRE
+//               ItemCondition = NEUF | OCCASION
 
 model User {
   id            String    @id @default(cuid())
@@ -27,6 +29,7 @@ model User {
 
   listings      Listing[]
   properties    Property[]
+  items         Item[]
   favorites     Favorite[]
   sentMessages  Message[]      @relation("MessagesSent")
   conversationsAsBuyer  Conversation[] @relation("Buyer")
@@ -138,6 +141,47 @@ model PropertyImage {
 
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   propertyId String
+}
+
+model Item {
+  id            String        @id @default(cuid())
+  title         String
+  description   String
+  price         Int
+  currency      String        @default("EUR")
+  country       String
+  city          String
+
+  // Achat/Vente-specific fields — general goods, always a straight sale
+  // (no rent concept here), so there's no saleType like Listing/Property.
+  itemCategory  String
+  condition     String        @default("OCCASION")
+
+  contactName   String
+  contactEmail  String
+  contactPhone  String
+
+  status        String        @default("ACTIVE")
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  seller        User          @relation(fields: [sellerId], references: [id])
+  sellerId      String
+
+  images        ItemImage[]
+
+  @@index([country, city])
+  @@index([itemCategory])
+  @@index([price])
+}
+
+model ItemImage {
+  id       String @id @default(cuid())
+  url      String
+  position Int    @default(0)
+
+  item     Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  itemId   String
 }
 
 model Favorite {

@@ -7,16 +7,18 @@
     "register": "Créer un compte",
     "registerShort": "S'inscrire",
     "logout": "Déconnexion",
-    "immobilier": "Immobilier"
+    "immobilier": "Immobilier",
+    "achatVente": "Achat/Vente"
   },
   "footer": {
     "tagline": "annonces entre la France et l'Algérie.",
     "voitures": "Voitures",
     "publish": "Publier une annonce",
-    "immobilier": "Immobilier"
+    "immobilier": "Immobilier",
+    "achatVente": "Achat/Vente"
   },
   "home": {
-    "badge": "Nouveau — Voitures & Immobilier disponibles",
+    "badge": "Nouveau — plusieurs catégories disponibles",
     "titleLine1": "Écosystème d'affaires",
     "titleFrance": "franco-algérien.",
     "titleEt": "",
@@ -31,7 +33,7 @@
     "trust3Title": "Simple et rapide",
     "trust3Body": "Publiez une annonce en quelques minutes.",
     "categoriesTitle": "Catégories",
-    "categoriesSubtitle": "Voitures et Immobilier sont disponibles — les autres catégories arrivent bientôt.",
+    "categoriesSubtitle": "Voitures, Immobilier et Achat/Vente sont disponibles — les autres catégories arrivent bientôt.",
     "catVoituresName": "Voitures",
     "catVoituresNote": "Achat, vente, toutes marques",
     "catAvailable": "Disponible",
@@ -39,7 +41,9 @@
     "catImmobilierName": "Immobilier",
     "catImmobilierNote": "Vente, location",
     "catTravailName": "Travail",
-    "catTravailNote": "Chercher ou proposer"
+    "catTravailNote": "Chercher ou proposer",
+    "catAchatVenteName": "Achat/Vente",
+    "catAchatVenteNote": "Achetez tout, vendez tout"
   },
   "voitures": {
     "category": "Voitures",
@@ -195,7 +199,8 @@
     "FILE_TOO_LARGE": "Fichier trop volumineux (max 8MB)",
     "TOKEN_INVALID": "Ce lien est invalide ou a expiré",
     "GENERIC": "Une erreur est survenue",
-    "INVALID_PROPERTY_TYPE": "Type de bien invalide"
+    "INVALID_PROPERTY_TYPE": "Type de bien invalide",
+    "INVALID_ITEM_CATEGORY": "Catégorie invalide"
   },
   "immobilier": {
     "category": "Immobilier",
@@ -277,6 +282,89 @@
       "MAISON": "Maison",
       "TERRAIN": "Terrain",
       "LOCAL": "Local commercial"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algérie"
+    }
+  },
+  "achatVente": {
+    "category": "Achat/Vente",
+    "resultsFound": "{count, plural, =0 {Aucune annonce trouvée} one {# annonce trouvée} other {# annonces trouvées}}",
+    "resultsAvailable": "{count, plural, =0 {Aucune annonce disponible} one {# annonce disponible} other {# annonces disponibles}}",
+    "filters": {
+      "villeLabel": "Ville",
+      "villePlaceholder": "ex: Lyon, Alger…",
+      "paysLabel": "Pays",
+      "paysAll": "Tous les pays",
+      "france": "France",
+      "algerie": "Algérie",
+      "categoryLabel": "Catégorie",
+      "categoryAll": "Toutes les catégories",
+      "conditionLabel": "État",
+      "conditionAll": "Neuf et occasion",
+      "prixMinLabel": "Prix min",
+      "prixMaxLabel": "Prix max",
+      "search": "Rechercher"
+    },
+    "empty": {
+      "title": "Aucune annonce ne correspond à votre recherche.",
+      "body": "Essayez d'élargir vos filtres, ou soyez le premier à publier.",
+      "cta": "Publier une annonce"
+    },
+    "card": {
+      "noPhoto": "Pas de photo"
+    },
+    "detail": {
+      "specsTitle": "Caractéristiques",
+      "category": "Catégorie",
+      "condition": "État",
+      "location": "Localisation",
+      "descriptionTitle": "Description",
+      "sellerDefault": "Vendeur particulier",
+      "verified": "Vérifié",
+      "call": "Appeler",
+      "email": "Envoyer un email"
+    },
+    "create": {
+      "title": "Publier une annonce",
+      "subtitle": "Catégorie Achat/Vente",
+      "titleLabel": "Titre de l'annonce",
+      "titlePlaceholder": "ex: iPhone 13 Pro, très bon état",
+      "categoryLabel": "Catégorie",
+      "conditionLabel": "État",
+      "priceLabel": "Prix",
+      "paysLabel": "Pays",
+      "villeLabel": "Ville",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "État de l'article, raison de la vente, détails utiles…",
+      "photosLabel": "Photos",
+      "photosCta": "Cliquez pour ajouter des photos",
+      "photosOr": "ou glissez-déposez",
+      "photosHint": "JPG, PNG, WebP — 8MB max",
+      "photoMain": "Principale",
+      "contactTitle": "Coordonnées de contact",
+      "contactNameLabel": "Nom du contact",
+      "contactEmailLabel": "Email de contact",
+      "contactPhoneLabel": "Téléphone",
+      "submit": "Publier l'annonce",
+      "submitting": "Publication...",
+      "loginRequiredTitle": "Connectez-vous pour publier",
+      "loginRequiredBody": "Vous devez avoir un compte DZ APP pour publier une annonce.",
+      "loginCta": "Se connecter",
+      "uploadError": "Échec de l'envoi d'une image"
+    },
+    "itemCategory": {
+      "ELECTRONIQUE": "Électronique",
+      "MEUBLE": "Meuble",
+      "VETEMENTS": "Vêtements",
+      "LOISIRS": "Loisirs",
+      "MAISON": "Maison",
+      "AUTRE": "Autre"
+    },
+    "condition": {
+      "NEUF": "Neuf",
+      "OCCASION": "Occasion"
     },
     "country": {
       "FRANCE": "France",

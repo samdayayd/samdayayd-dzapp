@@ -2,11 +2,13 @@
 
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { Building2, Car, LogIn, Plus } from "lucide-react";
+import { Building2, Car, LogIn, Plus, ShoppingBag } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { CategoryDropdown } from "./CategoryDropdown";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { UserMenu } from "./UserMenu";
+
+const CATEGORY_PREFIXES = ["/voitures", "/immobilier", "/achat-vente"];
 
 export function NavBar() {
   const { data: session, status } = useSession();
@@ -14,13 +16,10 @@ export function NavBar() {
   const pathname = usePathname();
   // Land on the create form for whichever category the user is currently
   // browsing, so "Post an ad" from Immobilier doesn't drop them into the
-  // Voitures form. Outside either category (e.g. the home page) there's no
+  // Voitures form. Outside any category (e.g. the home page) there's no
   // page context to infer from, so let the visitor pick instead of guessing.
-  const publishHref = pathname.startsWith("/voitures")
-    ? "/voitures/nouvelle"
-    : pathname.startsWith("/immobilier")
-      ? "/immobilier/nouvelle"
-      : null;
+  const currentCategory = CATEGORY_PREFIXES.find((p) => pathname.startsWith(p));
+  const publishHref = currentCategory ? `${currentCategory}/nouvelle` : null;
 
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-200/70 bg-white/85 backdrop-blur-md">
@@ -48,6 +47,13 @@ export function NavBar() {
           >
             <Building2 size={16} strokeWidth={2.25} />
             {t("immobilier")}
+          </Link>
+          <Link
+            href="/achat-vente"
+            className="hidden items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-900 md:flex"
+          >
+            <ShoppingBag size={16} strokeWidth={2.25} />
+            {t("achatVente")}
           </Link>
 
           {status === "authenticated" ? (

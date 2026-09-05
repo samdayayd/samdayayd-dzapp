@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Building2, Car, MessageCircle, MapPin, ShieldCheck, Sparkles } from "lucide-react";
+import { Building2, Car, MessageCircle, MapPin, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { HeroContent } from "@/components/HeroContent";
 
@@ -104,7 +104,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Link
             href="/voitures"
             className="card group relative flex flex-col justify-between overflow-hidden p-6 transition hover:shadow-md"
@@ -129,6 +129,20 @@ export default function Home() {
             <div className="mt-8">
               <p className="text-lg font-semibold text-neutral-900">{t("catImmobilierName")}</p>
               <p className="mt-1 text-sm text-neutral-500">{t("catImmobilierNote")}</p>
+            </div>
+            <span className="badge-brand absolute end-5 top-5">{t("catAvailable")}</span>
+          </Link>
+
+          <Link
+            href="/achat-vente"
+            className="card group relative flex flex-col justify-between overflow-hidden p-6 transition hover:shadow-md"
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-600 text-white shadow-sm">
+              <ShoppingBag size={22} />
+            </div>
+            <div className="mt-8">
+              <p className="text-lg font-semibold text-neutral-900">{t("catAchatVenteName")}</p>
+              <p className="mt-1 text-sm text-neutral-500">{t("catAchatVenteNote")}</p>
             </div>
             <span className="badge-brand absolute end-5 top-5">{t("catAvailable")}</span>
           </Link>

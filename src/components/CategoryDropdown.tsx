@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { Building2, Car, ChevronDown } from "lucide-react";
+import { Building2, Car, ChevronDown, ShoppingBag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
-/** A button that reveals a small "Voitures / Immobilier" picker instead of
-    linking straight to one category — used wherever the current page
-    doesn't already imply which category the visitor means (the home page
-    hero, the nav bar's "Post an ad" button when not inside a category). */
+/** A button that reveals a small category picker (Voitures / Immobilier /
+    Achat-Vente) instead of linking straight to one — used wherever the
+    current page doesn't already imply which category the visitor means
+    (the home page hero, the nav bar's "Post an ad" button outside a
+    category). */
 export function CategoryDropdown({
   mode,
   triggerClassName,
@@ -49,6 +50,11 @@ export function CategoryDropdown({
       href: mode === "browse" ? "/immobilier" : "/immobilier/nouvelle",
       label: tNav("immobilier"),
       icon: Building2,
+    },
+    {
+      href: mode === "browse" ? "/achat-vente" : "/achat-vente/nouvelle",
+      label: tNav("achatVente"),
+      icon: ShoppingBag,
     },
   ] as const;
 

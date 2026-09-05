@@ -4,14 +4,13 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { CategoryDropdown } from "./CategoryDropdown";
 
+const CATEGORY_PREFIXES = ["/voitures", "/immobilier", "/achat-vente"];
+
 export function Footer() {
   const t = useTranslations("footer");
   const pathname = usePathname();
-  const publishHref = pathname.startsWith("/voitures")
-    ? "/voitures/nouvelle"
-    : pathname.startsWith("/immobilier")
-      ? "/immobilier/nouvelle"
-      : null;
+  const currentCategory = CATEGORY_PREFIXES.find((p) => pathname.startsWith(p));
+  const publishHref = currentCategory ? `${currentCategory}/nouvelle` : null;
 
   return (
     <footer className="border-t border-neutral-200/70 bg-white">
@@ -26,6 +25,9 @@ export function Footer() {
           </Link>
           <Link href="/immobilier" className="hover:text-neutral-800">
             {t("immobilier")}
+          </Link>
+          <Link href="/achat-vente" className="hover:text-neutral-800">
+            {t("achatVente")}
           </Link>
           {publishHref ? (
             <Link href={publishHref} className="hover:text-neutral-800">

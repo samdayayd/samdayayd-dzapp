@@ -7,16 +7,18 @@
     "register": "إنشاء حساب",
     "registerShort": "سجّل",
     "logout": "تسجيل الخروج",
-    "immobilier": "عقارات"
+    "immobilier": "عقارات",
+    "achatVente": "بيع وشراء"
   },
   "footer": {
     "tagline": "إعلانات بين فرنسا والجزائر.",
     "voitures": "سيارات",
     "publish": "أضف إعلانًا",
-    "immobilier": "عقارات"
+    "immobilier": "عقارات",
+    "achatVente": "بيع وشراء"
   },
   "home": {
-    "badge": "جديد — سيارات وعقارات متاحة الآن",
+    "badge": "جديد — عدة فئات متاحة الآن",
     "titleLine1": "منظومة أعمال",
     "titleFrance": "فرنسية-جزائرية.",
     "titleEt": "",
@@ -31,7 +33,7 @@
     "trust3Title": "بسيط وسريع",
     "trust3Body": "انشر إعلانك في دقائق معدودة.",
     "categoriesTitle": "الفئات",
-    "categoriesSubtitle": "سيارات وعقارات متاحتان الآن — البقية قريبًا.",
+    "categoriesSubtitle": "سيارات وعقارات وبيع وشراء متاحة الآن — البقية قريبًا.",
     "catVoituresName": "سيارات",
     "catVoituresNote": "شراء، بيع، جميع الماركات",
     "catAvailable": "متاح",
@@ -39,7 +41,9 @@
     "catImmobilierName": "عقارات",
     "catImmobilierNote": "بيع، كراء",
     "catTravailName": "عمل",
-    "catTravailNote": "ابحث عن عمل أو اعرضه"
+    "catTravailNote": "ابحث عن عمل أو اعرضه",
+    "catAchatVenteName": "بيع وشراء",
+    "catAchatVenteNote": "اشترِ كل شيء، بع كل شيء"
   },
   "voitures": {
     "category": "سيارات",
@@ -195,7 +199,8 @@
     "FILE_TOO_LARGE": "الملف كبير جدًا (8 ميغابايت كحد أقصى)",
     "TOKEN_INVALID": "هذا الرابط غير صالح أو منتهي الصلاحية",
     "GENERIC": "حدث خطأ ما",
-    "INVALID_PROPERTY_TYPE": "نوع عقار غير صالح"
+    "INVALID_PROPERTY_TYPE": "نوع عقار غير صالح",
+    "INVALID_ITEM_CATEGORY": "فئة غير صالحة"
   },
   "immobilier": {
     "category": "عقارات",
@@ -277,6 +282,89 @@
       "MAISON": "منزل",
       "TERRAIN": "أرض",
       "LOCAL": "محل تجاري"
+    },
+    "country": {
+      "FRANCE": "فرنسا",
+      "ALGERIE": "الجزائر"
+    }
+  },
+  "achatVente": {
+    "category": "بيع وشراء",
+    "resultsFound": "{count, plural, =0 {لم يتم العثور على إعلانات} one {تم العثور على إعلان واحد} other {تم العثور على # إعلان}}",
+    "resultsAvailable": "{count, plural, =0 {لا توجد إعلانات متاحة} one {إعلان واحد متاح} other {# إعلان متاح}}",
+    "filters": {
+      "villeLabel": "المدينة",
+      "villePlaceholder": "مثال: ليون، الجزائر العاصمة…",
+      "paysLabel": "البلد",
+      "paysAll": "كل الدول",
+      "france": "فرنسا",
+      "algerie": "الجزائر",
+      "categoryLabel": "الفئة",
+      "categoryAll": "كل الفئات",
+      "conditionLabel": "الحالة",
+      "conditionAll": "جديد ومستعمل",
+      "prixMinLabel": "السعر الأدنى",
+      "prixMaxLabel": "السعر الأقصى",
+      "search": "بحث"
+    },
+    "empty": {
+      "title": "لا يوجد إعلان يطابق بحثك.",
+      "body": "حاول توسيع عوامل التصفية، أو كن أول من ينشر.",
+      "cta": "انشر إعلانًا"
+    },
+    "card": {
+      "noPhoto": "بدون صورة"
+    },
+    "detail": {
+      "specsTitle": "المواصفات",
+      "category": "الفئة",
+      "condition": "الحالة",
+      "location": "الموقع",
+      "descriptionTitle": "الوصف",
+      "sellerDefault": "بائع خاص",
+      "verified": "موثّق",
+      "call": "اتصال",
+      "email": "إرسال بريد إلكتروني"
+    },
+    "create": {
+      "title": "انشر إعلانًا",
+      "subtitle": "فئة بيع وشراء",
+      "titleLabel": "عنوان الإعلان",
+      "titlePlaceholder": "مثال: آيفون 13 برو، حالة ممتازة",
+      "categoryLabel": "الفئة",
+      "conditionLabel": "الحالة",
+      "priceLabel": "السعر",
+      "paysLabel": "البلد",
+      "villeLabel": "المدينة",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "حالة المنتج، سبب البيع، تفاصيل مفيدة…",
+      "photosLabel": "الصور",
+      "photosCta": "انقر لإضافة صور",
+      "photosOr": "أو اسحب وأفلت",
+      "photosHint": "JPG, PNG, WebP — 8 ميغابايت كحد أقصى",
+      "photoMain": "الرئيسية",
+      "contactTitle": "معلومات الاتصال",
+      "contactNameLabel": "اسم جهة الاتصال",
+      "contactEmailLabel": "البريد الإلكتروني للتواصل",
+      "contactPhoneLabel": "الهاتف",
+      "submit": "نشر الإعلان",
+      "submitting": "جارٍ النشر...",
+      "loginRequiredTitle": "سجّل الدخول للنشر",
+      "loginRequiredBody": "تحتاج إلى حساب DZ APP لنشر إعلان.",
+      "loginCta": "تسجيل الدخول",
+      "uploadError": "فشل رفع إحدى الصور"
+    },
+    "itemCategory": {
+      "ELECTRONIQUE": "إلكترونيات",
+      "MEUBLE": "أثاث",
+      "VETEMENTS": "ملابس",
+      "LOISIRS": "هوايات",
+      "MAISON": "منزل",
+      "AUTRE": "أخرى"
+    },
+    "condition": {
+      "NEUF": "جديد",
+      "OCCASION": "مستعمل"
     },
     "country": {
       "FRANCE": "فرنسا",

@@ -2,9 +2,9 @@
 
 A classifieds marketplace connecting Algerians in France and Algeria —
 "Écosystème d'affaires franco-algérien." This repo is the **MVP**, scoped to
-two categories (**Voitures** / cars and **Immobilier** / real estate, both
-sale and rental) to prove out the product before expanding to Travail,
-Mariage, and the rest.
+three categories (**Voitures** / cars, **Immobilier** / real estate — both
+sale and rental — and **Achat/Vente** / general buy & sell) to prove out
+the product before expanding to Travail, Mariage, and the rest.
 
 ## Stack
 
@@ -24,13 +24,19 @@ Mariage, and the rest.
 ## What's in the MVP
 
 - Register / login, with show/hide password and forgot/reset password
-- Browse Voitures (cars) or Immobilier (real estate) listings with filters
-  (ville, pays, type, prix, and for Immobilier also property type)
-- Listings can be tagged **à vendre** or **à louer** (rentals show price
-  per day for cars, per month for properties)
+- Browse Voitures (cars), Immobilier (real estate), or Achat/Vente (general
+  goods) listings with filters (ville, pays, prix, plus category-specific
+  ones — property type for Immobilier, item category/condition for
+  Achat/Vente)
+- Voitures and Immobilier listings can be tagged **à vendre** or **à
+  louer** (rentals show price per day for cars, per month for properties);
+  Achat/Vente is always a straight sale, tagged **neuf** or **occasion**
 - Listing detail page with image gallery and real contact info (call /
   email buttons using the seller-provided contact name, email, phone)
-- Post a new car or property listing (with photo upload)
+- Post a new car, property, or general-goods listing (with photo upload)
+- Ambiguous "Browse"/"Post an ad" buttons (home page, nav bar/footer
+  outside a category) open a small category picker instead of guessing
+  which of the three you mean
 - Data model already includes `Conversation` / `Message` / `Favorite` for
   the next iteration (in-app chat, saved listings) — not wired to any UI
   yet; contact info on each listing is the way to reach a seller today
@@ -75,7 +81,8 @@ Visit http://localhost:3000.
 
 ```
 prisma/schema.prisma          # User, Listing/ListingImage (cars), Property/PropertyImage (real estate),
-                               # Favorite, Conversation, Message, PasswordResetToken
+                               # Item/ItemImage (general goods), Favorite, Conversation, Message,
+                               # PasswordResetToken
 messages/{fr,en,ar}.json       # all UI translations
 src/i18n/                      # next-intl routing/config
 src/auth.ts                    # NextAuth config (Credentials provider)
@@ -84,11 +91,14 @@ src/app/api/forgot-password    # sends a reset link
 src/app/api/reset-password     # consumes the reset token
 src/app/api/listings           # create car listing endpoint
 src/app/api/properties         # create property listing endpoint
-src/app/api/upload             # image upload endpoint (shared by both categories)
+src/app/api/items              # create general-goods listing endpoint
+src/app/api/upload             # image upload endpoint (shared by all categories)
 src/app/api/uploads/[...path]  # serves uploaded images (see comments there)
 src/app/[locale]/voitures      # cars: feed, detail, create-listing pages
 src/app/[locale]/immobilier    # real estate: feed, detail, create-listing pages
+src/app/[locale]/achat-vente   # general goods: feed, detail, create-listing pages
 src/app/[locale]/login, /register, /forgot-password, /reset-password
+src/components/CategoryDropdown.tsx  # the "which category?" picker used on ambiguous CTAs
 ```
 
 ## Roadmap (post-MVP)

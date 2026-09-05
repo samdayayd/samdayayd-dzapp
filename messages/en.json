@@ -7,16 +7,18 @@
     "register": "Create account",
     "registerShort": "Sign up",
     "logout": "Log out",
-    "immobilier": "Real estate"
+    "immobilier": "Real estate",
+    "achatVente": "Buy & Sell"
   },
   "footer": {
     "tagline": "listings between France and Algeria.",
     "voitures": "Cars",
     "publish": "Post an ad",
-    "immobilier": "Real estate"
+    "immobilier": "Real estate",
+    "achatVente": "Buy & Sell"
   },
   "home": {
-    "badge": "New — Cars & Real estate now live",
+    "badge": "New — multiple categories now live",
     "titleLine1": "",
     "titleFrance": "Franco-Algerian",
     "titleEt": "business ecosystem.",
@@ -31,7 +33,7 @@
     "trust3Title": "Simple and fast",
     "trust3Body": "Post a listing in just a few minutes.",
     "categoriesTitle": "Categories",
-    "categoriesSubtitle": "Cars and Real estate are live — the rest are coming soon.",
+    "categoriesSubtitle": "Cars, Real estate, and Buy & Sell are live — the rest are coming soon.",
     "catVoituresName": "Cars",
     "catVoituresNote": "Buy, sell, all makes",
     "catAvailable": "Available",
@@ -39,7 +41,9 @@
     "catImmobilierName": "Real estate",
     "catImmobilierNote": "Sale, rental",
     "catTravailName": "Jobs",
-    "catTravailNote": "Find or offer work"
+    "catTravailNote": "Find or offer work",
+    "catAchatVenteName": "Buy & Sell",
+    "catAchatVenteNote": "Buy anything, sell anything"
   },
   "voitures": {
     "category": "Cars",
@@ -195,7 +199,8 @@
     "FILE_TOO_LARGE": "File too large (max 8MB)",
     "TOKEN_INVALID": "This link is invalid or has expired",
     "GENERIC": "Something went wrong",
-    "INVALID_PROPERTY_TYPE": "Invalid property type"
+    "INVALID_PROPERTY_TYPE": "Invalid property type",
+    "INVALID_ITEM_CATEGORY": "Invalid category"
   },
   "immobilier": {
     "category": "Real estate",
@@ -277,6 +282,89 @@
       "MAISON": "House",
       "TERRAIN": "Land",
       "LOCAL": "Commercial space"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algeria"
+    }
+  },
+  "achatVente": {
+    "category": "Buy & Sell",
+    "resultsFound": "{count, plural, =0 {No listings found} one {# listing found} other {# listings found}}",
+    "resultsAvailable": "{count, plural, =0 {No listings available} one {# listing available} other {# listings available}}",
+    "filters": {
+      "villeLabel": "City",
+      "villePlaceholder": "e.g. Lyon, Algiers…",
+      "paysLabel": "Country",
+      "paysAll": "All countries",
+      "france": "France",
+      "algerie": "Algeria",
+      "categoryLabel": "Category",
+      "categoryAll": "All categories",
+      "conditionLabel": "Condition",
+      "conditionAll": "New and used",
+      "prixMinLabel": "Min price",
+      "prixMaxLabel": "Max price",
+      "search": "Search"
+    },
+    "empty": {
+      "title": "No listings match your search.",
+      "body": "Try widening your filters, or be the first to post.",
+      "cta": "Post a listing"
+    },
+    "card": {
+      "noPhoto": "No photo"
+    },
+    "detail": {
+      "specsTitle": "Details",
+      "category": "Category",
+      "condition": "Condition",
+      "location": "Location",
+      "descriptionTitle": "Description",
+      "sellerDefault": "Private seller",
+      "verified": "Verified",
+      "call": "Call",
+      "email": "Send an email"
+    },
+    "create": {
+      "title": "Post a listing",
+      "subtitle": "Buy & Sell category",
+      "titleLabel": "Listing title",
+      "titlePlaceholder": "e.g. iPhone 13 Pro, great condition",
+      "categoryLabel": "Category",
+      "conditionLabel": "Condition",
+      "priceLabel": "Price",
+      "paysLabel": "Country",
+      "villeLabel": "City",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Item condition, reason for selling, useful details…",
+      "photosLabel": "Photos",
+      "photosCta": "Click to add photos",
+      "photosOr": "or drag and drop",
+      "photosHint": "JPG, PNG, WebP — 8MB max",
+      "photoMain": "Main",
+      "contactTitle": "Contact details",
+      "contactNameLabel": "Contact name",
+      "contactEmailLabel": "Contact email",
+      "contactPhoneLabel": "Phone",
+      "submit": "Post listing",
+      "submitting": "Posting...",
+      "loginRequiredTitle": "Log in to post a listing",
+      "loginRequiredBody": "You need a DZ APP account to post a listing.",
+      "loginCta": "Log in",
+      "uploadError": "Failed to upload an image"
+    },
+    "itemCategory": {
+      "ELECTRONIQUE": "Electronics",
+      "MEUBLE": "Furniture",
+      "VETEMENTS": "Clothing",
+      "LOISIRS": "Hobbies",
+      "MAISON": "Home",
+      "AUTRE": "Other"
+    },
+    "condition": {
+      "NEUF": "New",
+      "OCCASION": "Used"
     },
     "country": {
       "FRANCE": "France",
