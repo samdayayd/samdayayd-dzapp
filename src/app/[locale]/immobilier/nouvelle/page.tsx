@@ -223,7 +223,8 @@ export default function NewPropertyPage() {
               type="number"
               name="price"
               required
-              min={0}
+              min={1}
+              max={2_000_000_000}
               className="field-input"
             />
           </div>

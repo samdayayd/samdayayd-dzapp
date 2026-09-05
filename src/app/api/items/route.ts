@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireSeller } from "@/lib/requireSeller";
+import { isValidPositiveInt } from "@/lib/validateNumber";
 
 const ITEM_CATEGORIES = new Set([
   "ELECTRONIQUE",
@@ -46,6 +47,9 @@ export async function POST(req: Request) {
     !contactPhone
   ) {
     return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
+  }
+  if (!isValidPositiveInt(price)) {
+    return NextResponse.json({ code: "INVALID_PRICE" }, { status: 400 });
   }
   if (!COUNTRIES.has(country)) {
     return NextResponse.json({ code: "INVALID_COUNTRY" }, { status: 400 });

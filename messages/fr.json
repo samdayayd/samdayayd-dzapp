@@ -201,7 +201,8 @@
     "GENERIC": "Une erreur est survenue",
     "INVALID_PROPERTY_TYPE": "Type de bien invalide",
     "INVALID_ITEM_CATEGORY": "Catégorie invalide",
-    "SESSION_STALE": "Votre session a expiré, merci de vous reconnecter."
+    "SESSION_STALE": "Votre session a expiré, merci de vous reconnecter.",
+    "INVALID_PRICE": "Ce prix est trop élevé (max 2 000 000 000)."
   },
   "immobilier": {
     "category": "Immobilier",

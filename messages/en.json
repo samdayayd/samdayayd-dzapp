@@ -201,7 +201,8 @@
     "GENERIC": "Something went wrong",
     "INVALID_PROPERTY_TYPE": "Invalid property type",
     "INVALID_ITEM_CATEGORY": "Invalid category",
-    "SESSION_STALE": "Your session has expired — please log in again."
+    "SESSION_STALE": "Your session has expired — please log in again.",
+    "INVALID_PRICE": "This price is too high (max 2,000,000,000)."
   },
   "immobilier": {
     "category": "Real estate",

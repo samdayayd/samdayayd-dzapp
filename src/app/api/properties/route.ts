@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireSeller } from "@/lib/requireSeller";
+import { isValidNonNegativeInt, isValidPositiveInt } from "@/lib/validateNumber";
 
 const PROPERTY_TYPES = new Set(["APPARTEMENT", "MAISON", "TERRAIN", "LOCAL"]);
 const COUNTRIES = new Set(["FRANCE", "ALGERIE"]);
@@ -42,6 +43,12 @@ export async function POST(req: Request) {
     !contactEmail ||
     !contactPhone
   ) {
+    return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
+  }
+  if (!isValidPositiveInt(price)) {
+    return NextResponse.json({ code: "INVALID_PRICE" }, { status: 400 });
+  }
+  if (!isValidNonNegativeInt(rooms) || !isValidPositiveInt(surfaceM2)) {
     return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
   }
   if (!COUNTRIES.has(country)) {

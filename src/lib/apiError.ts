@@ -12,6 +12,7 @@ const KNOWN_CODES = new Set([
   "FILE_TOO_LARGE",
   "TOKEN_INVALID",
   "SESSION_STALE",
+  "INVALID_PRICE",
 ]);
 
 export async function readErrorCode(res: Response): Promise<string> {

@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireSeller } from "@/lib/requireSeller";
+import { isValidNonNegativeInt, isValidPositiveInt } from "@/lib/validateNumber";
 
 const FUEL_TYPES = new Set(["ESSENCE", "DIESEL", "ELECTRIQUE", "HYBRIDE", "GPL"]);
 const COUNTRIES = new Set(["FRANCE", "ALGERIE"]);
 const SALE_TYPES = new Set(["VENTE", "LOCATION"]);
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CURRENT_YEAR = new Date().getFullYear();
 
 export async function POST(req: Request) {
   const { sellerId, error } = await requireSeller();
@@ -45,6 +47,17 @@ export async function POST(req: Request) {
     !contactName ||
     !contactEmail ||
     !contactPhone
+  ) {
+    return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
+  }
+  if (!isValidPositiveInt(price)) {
+    return NextResponse.json({ code: "INVALID_PRICE" }, { status: 400 });
+  }
+  if (
+    !isValidNonNegativeInt(mileageKm) ||
+    !Number.isInteger(Number(year)) ||
+    Number(year) < 1900 ||
+    Number(year) > CURRENT_YEAR + 1
   ) {
     return NextResponse.json({ code: "MISSING_FIELDS" }, { status: 400 });
   }
