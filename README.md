@@ -57,6 +57,17 @@ This repo includes a [`render.yaml`](render.yaml) blueprint.
 5. (Optional but recommended) Create a free [Resend](https://resend.com)
    account, grab an API key, and set `RESEND_API_KEY` in the same
    Environment tab so forgot-password emails actually get delivered.
+   **Important:** the default sender (`EMAIL_FROM`, `onboarding@resend.dev`)
+   is Resend's shared testing address — it can only deliver to the email
+   address *your own Resend account* is registered with, not to real
+   users. Without `RESEND_API_KEY` set at all, or with it set but still
+   using that default sender for anyone else's address, the app's
+   forgot-password flow still responds "email sent" (deliberately, so the
+   endpoint can't be used to check which emails are registered) but no
+   email actually goes out — check the service's Render logs for a
+   `[mail]` line, which says which of the two happened. To send to real
+   users, [verify your own domain in Resend](https://resend.com/domains)
+   and set `EMAIL_FROM` to an address on it (e.g. `DZ APP <noreply@yourdomain.com>`).
 6. Visit the URL — register an account and post a listing.
 
 Note: the free plan has no persistent disk, so the SQLite database and

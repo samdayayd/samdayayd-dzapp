@@ -13,7 +13,15 @@ export async function sendPasswordResetEmail(to: string, resetUrl: string) {
     return;
   }
 
-  await resend.emails.send({
+  // The Resend SDK doesn't throw on an API-level failure (invalid key,
+  // unverified sending domain, the default onboarding@resend.dev sender
+  // being restricted to the account's own address, etc.) — it resolves
+  // normally with an `error` field instead. Previously that field was
+  // never checked, so a rejected send looked identical to a delivered
+  // one: this route always returned ok:true regardless (deliberately, to
+  // not leak which emails are registered), so the failure was completely
+  // invisible anywhere except here.
+  const { error } = await resend.emails.send({
     from: FROM,
     to,
     subject: "Réinitialisez votre mot de passe DZ APP",
@@ -30,4 +38,8 @@ export async function sendPasswordResetEmail(to: string, resetUrl: string) {
       </div>
     `,
   });
+
+  if (error) {
+    console.error("[mail] Resend rejected the password reset email:", error, "Reset URL:", resetUrl);
+  }
 }

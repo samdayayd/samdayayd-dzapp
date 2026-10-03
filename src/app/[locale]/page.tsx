@@ -35,28 +35,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hero — mobile: same idea, over a taller crop of the photo shifted
-          left so the couple stays in frame; text centered in the open
-          space to the right of them. */}
+      {/* Hero — mobile: the photo's whole point is the two skylines (Paris
+          left, Algiers right) either side of the couple — the old 6/5 crop
+          shifted hard left to make room for the text cropped the Algiers
+          side out of frame entirely. This crop is much closer to the
+          photo's own ratio (1672/941 ≈ 1.78) so both sides stay visible;
+          text overlays the full width, centered over the open sea gap
+          between them, same as the desktop version just narrower. */}
       <section className="relative bg-neutral-900 sm:hidden">
-        <div className="relative w-full" style={{ aspectRatio: "6 / 5" }}>
+        <div className="relative w-full" style={{ aspectRatio: "16 / 10" }}>
           <Image
             src="/hero-photo-v2.png"
             alt=""
             fill
             priority
             className="object-cover"
-            style={{ objectPosition: "15% center" }}
+            style={{ objectPosition: "40% center" }}
             sizes="100vw"
           />
           <div
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 50% 62% at 66% 42%, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.42) 55%, rgba(255,255,255,0) 82%)",
+                "radial-gradient(ellipse 60% 70% at 50% 46%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.45) 55%, rgba(255,255,255,0) 82%)",
             }}
           />
-          <div className="absolute inset-y-0 flex items-center justify-center" style={{ left: "33%", right: "4%" }}>
+          <div className="absolute inset-0 flex items-center justify-center px-4">
             <HeroContent compact />
           </div>
         </div>
