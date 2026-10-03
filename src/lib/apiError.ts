@@ -13,6 +13,10 @@ const KNOWN_CODES = new Set([
   "TOKEN_INVALID",
   "SESSION_STALE",
   "INVALID_PRICE",
+  "UPLOAD_NOT_CONFIGURED",
+  "UPLOAD_FAILED",
+  "INVALID_INVITE_CODE",
+  "INVITE_CODE_USED",
 ]);
 
 export async function readErrorCode(res: Response): Promise<string> {

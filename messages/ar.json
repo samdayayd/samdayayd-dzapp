@@ -8,7 +8,8 @@
     "registerShort": "سجّل",
     "logout": "تسجيل الخروج",
     "immobilier": "عقارات",
-    "achatVente": "بيع وشراء"
+    "achatVente": "بيع وشراء",
+    "invites": "الدعوات"
   },
   "footer": {
     "tagline": "إعلانات بين فرنسا والجزائر.",
@@ -154,6 +155,7 @@
     "register": {
       "title": "إنشاء حساب",
       "subtitle": "انضم إلى مجتمع DZ APP في ثوانٍ.",
+      "inviteCodeLabel": "رمز الدعوة",
       "nameLabel": "الاسم",
       "emailLabel": "البريد الإلكتروني",
       "passwordLabel": "كلمة المرور",
@@ -202,7 +204,25 @@
     "INVALID_PROPERTY_TYPE": "نوع عقار غير صالح",
     "INVALID_ITEM_CATEGORY": "فئة غير صالحة",
     "SESSION_STALE": "انتهت صلاحية جلستك، يرجى تسجيل الدخول مرة أخرى.",
-    "INVALID_PRICE": "هذا السعر مرتفع جدًا (الحد الأقصى 2,000,000,000)."
+    "INVALID_PRICE": "هذا السعر مرتفع جدًا (الحد الأقصى 2,000,000,000).",
+    "UPLOAD_NOT_CONFIGURED": "لم يتم إعداد رفع الصور على هذا الخادم بعد.",
+    "UPLOAD_FAILED": "فشل رفع الصورة، يرجى المحاولة مرة أخرى.",
+    "INVALID_INVITE_CODE": "رمز دعوة غير صالح.",
+    "INVITE_CODE_USED": "تم استخدام رمز الدعوة هذا بالفعل."
+  },
+  "invites": {
+    "title": "الدعوات",
+    "subtitle": "أنشئ رمزًا فريدًا لاستخدام واحد وأرسله للشخص الذي تريد دعوته.",
+    "createButton": "إنشاء رمز جديد",
+    "creating": "جارٍ الإنشاء...",
+    "loading": "جارٍ التحميل...",
+    "empty": "لا توجد رموز دعوة بعد.",
+    "copy": "نسخ",
+    "copied": "تم النسخ!",
+    "usedBy": "استخدمه {email}",
+    "loginRequiredTitle": "سجّل الدخول للدعوة",
+    "loginRequiredBody": "تحتاج إلى حساب DZ APP لإنشاء دعوات.",
+    "loginCta": "تسجيل الدخول"
   },
   "immobilier": {
     "category": "عقارات",

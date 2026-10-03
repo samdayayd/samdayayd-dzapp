@@ -16,6 +16,17 @@ services:
         value: file:./prod.db
       - key: AUTH_SECRET
         generateValue: true
+      # Signup is invite-only (existing users mint codes from the
+      # /invites page). This is the one code that's always valid and
+      # never consumed, no matter how empty the database is — including
+      # right after the very first deploy, or after any reset on this
+      # ephemeral-SQLite free plan, when there are zero users and so no
+      # way to mint a real invite at all. Use it to create the first
+      # account, then ignore it — see README's "Invite-only signup"
+      # section. Render generates a random value; find it in this
+      # service's Environment tab.
+      - key: BOOTSTRAP_INVITE_CODE
+        generateValue: true
       # Can't be known until the service exists and gets its
       # *.onrender.com URL — fill in from the Render dashboard right
       # after the first deploy (Environment tab), then it'll redeploy

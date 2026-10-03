@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
-import { AlertCircle, Loader2, Mail, User, UserPlus } from "lucide-react";
+import { AlertCircle, KeyRound, Loader2, Mail, User, UserPlus } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { readErrorCode } from "@/lib/apiError";
 import { PasswordField } from "@/components/PasswordField";
@@ -16,6 +16,7 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [inviteCode, setInviteCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +28,7 @@ export default function RegisterPage() {
     const res = await fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password, inviteCode }),
     });
 
     if (!res.ok) {
@@ -64,6 +65,23 @@ export default function RegisterPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="card space-y-4 p-6">
+        <div>
+          <label className="field-label" htmlFor="inviteCode">
+            {t("inviteCodeLabel")}
+          </label>
+          <div className="relative">
+            <KeyRound size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+            <input
+              id="inviteCode"
+              type="text"
+              required
+              autoCapitalize="characters"
+              value={inviteCode}
+              onChange={(e) => setInviteCode(e.target.value)}
+              className="field-input ps-9 uppercase tracking-widest"
+            />
+          </div>
+        </div>
         <div>
           <label className="field-label" htmlFor="name">
             {t("nameLabel")}

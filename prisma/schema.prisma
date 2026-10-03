@@ -35,6 +35,25 @@ model User {
   conversationsAsBuyer  Conversation[] @relation("Buyer")
   conversationsAsSeller Conversation[] @relation("Seller")
   resetTokens   PasswordResetToken[]
+  invitesCreated InviteCode[] @relation("InviteCreatedBy")
+  invitesUsed    InviteCode?  @relation("InviteUsedBy")
+}
+
+model InviteCode {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  createdAt   DateTime  @default(now())
+  usedAt      DateTime?
+
+  createdBy   User      @relation("InviteCreatedBy", fields: [createdById], references: [id])
+  createdById String
+
+  // Both null until redeemed; usedById is unique so a code can never end
+  // up claimed by two people even under a race (see /api/register, which
+  // claims it with an UPDATE ... WHERE usedAt IS NULL rather than trusting
+  // a prior read).
+  usedBy      User?     @relation("InviteUsedBy", fields: [usedById], references: [id])
+  usedById    String?   @unique
 }
 
 model PasswordResetToken {

@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { ChevronDown, LogOut } from "lucide-react";
+import { ChevronDown, KeyRound, LogOut } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 export function UserMenu({ name, email }: { name: string; email?: string | null }) {
   const t = useTranslations("nav");
@@ -41,6 +42,15 @@ export function UserMenu({ name, email }: { name: string; email?: string | null 
             <p className="truncate text-sm font-semibold text-neutral-900">{name}</p>
             {email && <p className="truncate text-xs text-neutral-500">{email}</p>}
           </div>
+          <div className="my-1 border-t border-neutral-100" />
+          <Link
+            href="/invites"
+            onClick={() => setOpen(false)}
+            className="flex w-full items-center gap-2 px-3.5 py-2 text-start text-sm text-neutral-700 transition hover:bg-neutral-50"
+          >
+            <KeyRound size={15} />
+            {t("invites")}
+          </Link>
           <div className="my-1 border-t border-neutral-100" />
           <button
             onClick={() => signOut()}

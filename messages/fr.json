@@ -8,7 +8,8 @@
     "registerShort": "S'inscrire",
     "logout": "Déconnexion",
     "immobilier": "Immobilier",
-    "achatVente": "Achat/Vente"
+    "achatVente": "Achat/Vente",
+    "invites": "Invitations"
   },
   "footer": {
     "tagline": "annonces entre la France et l'Algérie.",
@@ -154,6 +155,7 @@
     "register": {
       "title": "Créer un compte",
       "subtitle": "Rejoignez la communauté DZ APP en quelques secondes.",
+      "inviteCodeLabel": "Code d'invitation",
       "nameLabel": "Nom",
       "emailLabel": "Email",
       "passwordLabel": "Mot de passe",
@@ -202,7 +204,25 @@
     "INVALID_PROPERTY_TYPE": "Type de bien invalide",
     "INVALID_ITEM_CATEGORY": "Catégorie invalide",
     "SESSION_STALE": "Votre session a expiré, merci de vous reconnecter.",
-    "INVALID_PRICE": "Ce prix est trop élevé (max 2 000 000 000)."
+    "INVALID_PRICE": "Ce prix est trop élevé (max 2 000 000 000).",
+    "UPLOAD_NOT_CONFIGURED": "L'envoi de photos n'est pas encore configuré sur ce serveur.",
+    "UPLOAD_FAILED": "Échec de l'envoi de la photo, merci de réessayer.",
+    "INVALID_INVITE_CODE": "Code d'invitation invalide.",
+    "INVITE_CODE_USED": "Ce code d'invitation a déjà été utilisé."
+  },
+  "invites": {
+    "title": "Invitations",
+    "subtitle": "Créez un code unique à usage unique et envoyez-le à la personne que vous voulez inviter.",
+    "createButton": "Créer un nouveau code",
+    "creating": "Création...",
+    "loading": "Chargement...",
+    "empty": "Aucun code d'invitation pour l'instant.",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "usedBy": "Utilisé par {email}",
+    "loginRequiredTitle": "Connectez-vous pour inviter",
+    "loginRequiredBody": "Vous devez avoir un compte DZ APP pour créer des invitations.",
+    "loginCta": "Se connecter"
   },
   "immobilier": {
     "category": "Immobilier",
