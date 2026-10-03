@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { AlertCircle, Check, Copy, KeyRound, Loader2, LogIn } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { ApiError, readErrorCode } from "@/lib/apiError";
 
 interface Invite {
@@ -16,6 +16,7 @@ interface Invite {
 
 export default function InvitesPage() {
   const { status } = useSession();
+  const router = useRouter();
   const t = useTranslations("invites");
   const tErrors = useTranslations("errors");
 
@@ -23,6 +24,17 @@ export default function InvitesPage() {
   const [error, setError] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  // A stale session (the signed-in JWT points to a user that no longer
+  // exists — e.g. this app's SQLite reset on a redeploy while the
+  // browser's session cookie survived) needs a real sign-out and
+  // redirect, not just an error banner — otherwise the page is stuck
+  // forever showing both the error AND "loading" (invites never resolves
+  // out of null), since there's no account left to actually fetch for.
+  const handleSessionStale = useCallback(async () => {
+    await signOut({ redirect: false });
+    router.push("/login");
+  }, [router]);
 
   const load = useCallback(() => {
     setError(null);
@@ -32,8 +44,15 @@ export default function InvitesPage() {
         return res.json();
       })
       .then(setInvites)
-      .catch((e) => setError(e instanceof ApiError ? tErrors(e.code) : tErrors("GENERIC")));
-  }, [tErrors]);
+      .catch((e) => {
+        if (e instanceof ApiError && e.code === "SESSION_STALE") {
+          handleSessionStale();
+          return;
+        }
+        setError(e instanceof ApiError ? tErrors(e.code) : tErrors("GENERIC"));
+        setInvites((prev) => prev ?? []);
+      });
+  }, [tErrors, handleSessionStale]);
 
   useEffect(() => {
     if (status === "authenticated") load();
@@ -64,6 +83,10 @@ export default function InvitesPage() {
       if (!res.ok) throw new ApiError(await readErrorCode(res), "");
       load();
     } catch (e) {
+      if (e instanceof ApiError && e.code === "SESSION_STALE") {
+        await handleSessionStale();
+        return;
+      }
       setError(e instanceof ApiError ? tErrors(e.code) : tErrors("GENERIC"));
     } finally {
       setCreating(false);
