@@ -47,6 +47,8 @@
     "catTravailNote": "Chercher ou proposer",
     "catAchatVenteName": "Achat/Vente",
     "catAchatVenteNote": "Achetez tout, vendez tout",
+    "statementPlain": "Chercher une voiture à Lyon, un appartement à Alger, ou revendre son téléphone —",
+    "statementBold": "tout ça ne devrait pas demander cinq applications différentes.",
     "howItWorksTitle": "Comment ça marche",
     "howItWorksSubtitle": "Trois étapes, aucune complication.",
     "step1Title": "Choisissez une catégorie",

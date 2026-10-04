@@ -55,6 +55,8 @@ export default async function ItemDetailPage({
         <span className="truncate text-neutral-700">{item.title}</span>
       </nav>
 
+      <h1 className="mb-6 text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">{item.title}</h1>
+
       <div className="grid grid-cols-1 gap-10 md:grid-cols-5">
         <div className="md:col-span-3">
           {item.images.length > 0 ? (

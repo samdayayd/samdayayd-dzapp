@@ -57,6 +57,8 @@ export default async function PropertyDetailPage({
         <span className="truncate text-neutral-700">{property.title}</span>
       </nav>
 
+      <h1 className="mb-6 text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">{property.title}</h1>
+
       <div className="grid grid-cols-1 gap-10 md:grid-cols-5">
         <div className="md:col-span-3">
           {property.images.length > 0 ? (

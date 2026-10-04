@@ -146,3 +146,19 @@ body {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium;
   }
 }
+
+@layer utilities {
+  /* A barely-there film-grain texture — the one cheap trick that reliably
+     keeps a flat color block (the dark CTA/footer sections below) from
+     reading as a plain Bootstrap-style color fill. Pure CSS, no image
+     asset: an SVG feTurbulence filter inlined as a data URI. */
+  .bg-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+}

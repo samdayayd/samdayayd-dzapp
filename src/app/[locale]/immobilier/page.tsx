@@ -69,7 +69,7 @@ export default async function ImmobilierPage({
               {t("category")}
             </span>
           </div>
-          <h1 className="mt-1 text-2xl font-bold text-neutral-900 sm:text-3xl">
+          <h1 className="mt-1 text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
             {hasFilters
               ? t("resultsFound", { count: properties.length })
               : t("resultsAvailable", { count: properties.length })}

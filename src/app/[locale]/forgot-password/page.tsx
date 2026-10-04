@@ -31,7 +31,7 @@ export default function ForgotPasswordPage() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700">
           <MailCheck size={22} />
         </div>
-        <h1 className="mt-3 text-2xl font-bold text-neutral-900">{t("successTitle")}</h1>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-neutral-900">{t("successTitle")}</h1>
         <p className="mt-2 text-sm text-neutral-500">{t("successBody")}</p>
         <Link href="/login" className="mt-6 font-medium text-brand-700 hover:underline">
           {t("backToLogin")}
@@ -46,7 +46,7 @@ export default function ForgotPasswordPage() {
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700">
           <KeyRound size={22} />
         </div>
-        <h1 className="mt-3 text-2xl font-bold text-neutral-900">{t("title")}</h1>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-neutral-900">{t("title")}</h1>
         <p className="mt-1 text-sm text-neutral-500">{t("subtitle")}</p>
       </div>
 

@@ -132,7 +132,7 @@ export default function NewItemPage() {
           <ShoppingBag size={22} />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900">{t("title")}</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-neutral-900">{t("title")}</h1>
           <p className="text-sm text-neutral-500">{t("subtitle")}</p>
         </div>
       </div>

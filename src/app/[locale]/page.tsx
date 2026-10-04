@@ -1,177 +1,146 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
-import {
-  Building2,
-  Car,
-  MessageCircle,
-  MapPin,
-  MousePointerClick,
-  Phone,
-  SearchCheck,
-  ShieldCheck,
-  ShoppingBag,
-  Sparkles,
-} from "lucide-react";
+import { Building2, Car, ShoppingBag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { HeroContent } from "@/components/HeroContent";
 import { CategoryDropdown } from "@/components/CategoryDropdown";
+import { ProductPreview } from "@/components/ProductPreview";
+import { BrandSkyline } from "@/components/BrandSkyline";
 import { Reveal } from "@/components/Reveal";
 
 export default function Home() {
   const t = useTranslations("home");
 
   const steps = [
-    { icon: MousePointerClick, title: t("step1Title"), body: t("step1Body") },
-    { icon: SearchCheck, title: t("step2Title"), body: t("step2Body") },
-    { icon: Phone, title: t("step3Title"), body: t("step3Body") },
+    { n: "01", title: t("step1Title"), body: t("step1Body") },
+    { n: "02", title: t("step2Title"), body: t("step2Body") },
+    { n: "03", title: t("step3Title"), body: t("step3Body") },
+  ];
+
+  const categories = [
+    { href: "/voitures", icon: Car, name: t("catVoituresName"), note: t("catVoituresNote"), n: "01" },
+    { href: "/immobilier", icon: Building2, name: t("catImmobilierName"), note: t("catImmobilierNote"), n: "02" },
+    { href: "/achat-vente", icon: ShoppingBag, name: t("catAchatVenteName"), note: t("catAchatVenteNote"), n: "03" },
   ];
 
   return (
     <div>
-      {/* Hero — desktop/tablet: text sits directly on the photo, centered
-          in the open sky/sea between the two skylines, no card — just a
-          soft radial scrim behind it for legibility. Full image, no crop. */}
-      <section className="relative hidden bg-neutral-900 sm:block">
-        <div className="relative w-full" style={{ aspectRatio: "1672 / 941" }}>
-          <Image
-            src="/hero-photo-v2.png"
-            alt=""
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 34% 60% at 50% 46%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.4) 55%, rgba(255,255,255,0) 80%)",
-            }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center px-[30%]">
+      {/* Hero — asymmetric: text column + an actual preview of what a DZ
+          APP listing card looks like (not a stock photo, not an abstract
+          illustration — the real card UI, tilted and layered). The old
+          hero put a romantic stock-style photograph full-bleed behind the
+          headline; this shows the product instead. The France/Algeria
+          story the photo used to carry now lives in the BrandSkyline line
+          art along the bottom instead of a literal photograph. */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/50 to-white">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-8 lg:py-28">
+          <Reveal>
             <HeroContent />
-          </div>
+          </Reveal>
+          <Reveal delay={0.15} className="order-first lg:order-last">
+            <ProductPreview />
+          </Reveal>
+        </div>
+        <BrandSkyline className="pointer-events-none absolute inset-x-0 bottom-0 h-20 w-full text-brand-900/[0.07] sm:h-28" />
+      </section>
+
+      {/* Fact bar — real, true facts stated plainly, not a repeat of the
+          hero's claims as another card grid. */}
+      <section className="border-y border-neutral-200/70 bg-white">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-4 py-6 text-sm font-medium text-neutral-500 sm:px-6">
+          <span>{t("trust1Title")}</span>
+          <span className="hidden h-1 w-1 rounded-full bg-neutral-300 sm:block" />
+          <span>{t("trust2Title")}</span>
+          <span className="hidden h-1 w-1 rounded-full bg-neutral-300 sm:block" />
+          <span>{t("trust3Title")}</span>
         </div>
       </section>
 
-      {/* Hero — mobile: the photo's whole point is the two skylines (Paris
-          left, Algiers right) either side of the couple — the old 6/5 crop
-          shifted hard left to make room for the text cropped the Algiers
-          side out of frame entirely. This crop is much closer to the
-          photo's own ratio (1672/941 ≈ 1.78) so both sides stay visible;
-          text overlays the full width, centered over the open sea gap
-          between them, same as the desktop version just narrower. */}
-      <section className="relative bg-neutral-900 sm:hidden">
-        <div className="relative w-full" style={{ aspectRatio: "16 / 10" }}>
-          <Image
-            src="/hero-photo-v2.png"
-            alt=""
-            fill
-            priority
-            className="object-cover"
-            style={{ objectPosition: "40% center" }}
-            sizes="100vw"
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 70% at 50% 46%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.45) 55%, rgba(255,255,255,0) 82%)",
-            }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center px-4">
-            <HeroContent compact />
-          </div>
-        </div>
-      </section>
-
-      {/* Trust strip */}
-      <section className="border-b border-neutral-200/70 bg-white">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-8 sm:grid-cols-3 sm:px-6">
-          {[
-            { icon: MapPin, title: t("trust1Title"), body: t("trust1Body") },
-            { icon: ShieldCheck, title: t("trust2Title"), body: t("trust2Body") },
-            { icon: MessageCircle, title: t("trust3Title"), body: t("trust3Body") },
-          ].map(({ icon: Icon, title, body }, i) => (
-            <Reveal key={title} delay={i * 0.08} className="flex items-start gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
-                <Icon size={18} />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-neutral-900">{title}</p>
-                <p className="text-sm text-neutral-500">{body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      {/* Statement — the "why this exists" framing, as a plain bold
+          declarative sentence rather than a 3-card "problem/solution"
+          section. */}
+      <section className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 sm:py-28">
+        <Reveal>
+          <p className="text-3xl font-medium leading-snug text-neutral-500 sm:text-4xl">
+            {t("statementPlain")}{" "}
+            <span className="font-bold text-neutral-900">{t("statementBold")}</span>
+          </p>
+        </Reveal>
       </section>
 
       {/* How it works */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <Reveal className="mb-10 text-center">
-          <h2 className="text-2xl font-bold text-neutral-900">{t("howItWorksTitle")}</h2>
-          <p className="mt-1 text-neutral-500">{t("howItWorksSubtitle")}</p>
+      <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+        <Reveal className="mb-12 max-w-xl">
+          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+            {t("howItWorksTitle")}
+          </h2>
+          <p className="mt-3 text-lg text-neutral-500">{t("howItWorksSubtitle")}</p>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-          {steps.map(({ icon: Icon, title, body }, i) => (
-            <Reveal key={title} delay={i * 0.1} className="relative text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-sm">
-                <Icon size={22} />
-              </div>
-              <p className="mt-4 text-xs font-bold uppercase tracking-wide text-brand-600">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <p className="mt-1 text-lg font-semibold text-neutral-900">{title}</p>
-              <p className="mx-auto mt-1.5 max-w-xs text-sm text-neutral-500">{body}</p>
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 border-t border-neutral-200 sm:grid-cols-3">
+          {steps.map(({ n, title, body }, i) => (
+            <Reveal
+              key={n}
+              delay={i * 0.1}
+              className="border-neutral-200 pt-8 sm:border-s sm:first:border-s-0 sm:[&:not(:first-child)]:ps-8"
+            >
+              <p className="text-sm font-bold text-brand-600">{n}</p>
+              <p className="mt-2 text-lg font-semibold text-neutral-900">{title}</p>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-500">{body}</p>
             </Reveal>
           ))}
         </div>
       </section>
 
       {/* Category */}
-      <section className="bg-neutral-50/60 py-16">
+      <section className="border-t border-neutral-200/70 bg-neutral-50/70 py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal className="mb-6 flex items-end justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-neutral-900">{t("categoriesTitle")}</h2>
-              <p className="mt-1 text-neutral-500">{t("categoriesSubtitle")}</p>
-            </div>
+          <Reveal className="mb-12 max-w-xl">
+            <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+              {t("categoriesTitle")}
+            </h2>
+            <p className="mt-3 text-lg text-neutral-500">{t("categoriesSubtitle")}</p>
           </Reveal>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { href: "/voitures", icon: Car, name: t("catVoituresName"), note: t("catVoituresNote") },
-              { href: "/immobilier", icon: Building2, name: t("catImmobilierName"), note: t("catImmobilierNote") },
-              { href: "/achat-vente", icon: ShoppingBag, name: t("catAchatVenteName"), note: t("catAchatVenteNote") },
-            ].map(({ href, icon: Icon, name, note }, i) => (
-              <Reveal key={href} delay={i * 0.08}>
+          <div className="divide-y divide-neutral-200 border-y border-neutral-200">
+            {categories.map(({ href, icon: Icon, name, note, n }, i) => (
+              <Reveal key={href} delay={i * 0.06}>
                 <Link
                   href={href}
-                  className="card-interactive group relative flex h-full flex-col justify-between overflow-hidden p-6"
+                  className="group flex items-center gap-5 bg-white px-5 py-7 transition-colors hover:bg-brand-50/40 sm:gap-8 sm:px-8"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-600 text-white shadow-sm transition-transform group-hover:scale-105">
+                  <span className="hidden w-10 shrink-0 text-sm font-bold text-neutral-300 transition-colors group-hover:text-brand-400 sm:block">
+                    {n}
+                  </span>
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white shadow-sm transition-transform group-hover:scale-105">
                     <Icon size={22} />
-                  </div>
-                  <div className="mt-8">
-                    <p className="text-lg font-semibold text-neutral-900">{name}</p>
-                    <p className="mt-1 text-sm text-neutral-500">{note}</p>
-                  </div>
-                  <span className="badge-brand absolute end-5 top-5">{t("catAvailable")}</span>
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center gap-2.5">
+                      <span className="text-xl font-bold tracking-tight text-neutral-900 sm:text-2xl">{name}</span>
+                      <span className="badge-brand">{t("catAvailable")}</span>
+                    </span>
+                    <span className="mt-0.5 block text-sm text-neutral-500">{note}</span>
+                  </span>
+                  <span className="shrink-0 text-2xl text-neutral-300 transition-all group-hover:translate-x-1 group-hover:text-brand-600 rtl:rotate-180 rtl:group-hover:-translate-x-1">
+                    →
+                  </span>
                 </Link>
               </Reveal>
             ))}
 
-            <Reveal delay={0.24}>
-              <div className="card flex h-full flex-col justify-between p-6 opacity-60">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-neutral-400">
-                  <Sparkles size={20} />
-                </div>
-                <div className="mt-8">
-                  <p className="text-lg font-semibold text-neutral-700">{t("catTravailName")}</p>
-                  <p className="mt-1 text-sm text-neutral-400">{t("catTravailNote")}</p>
-                </div>
-                <span className="mt-4 badge-neutral w-fit">{t("catComingSoon")}</span>
+            <Reveal delay={categories.length * 0.06}>
+              <div className="flex items-center gap-5 bg-white px-5 py-7 opacity-50 sm:gap-8 sm:px-8">
+                <span className="hidden w-10 shrink-0 text-sm font-bold text-neutral-300 sm:block">04</span>
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100" />
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-2.5">
+                    <span className="text-xl font-bold tracking-tight text-neutral-700 sm:text-2xl">
+                      {t("catTravailName")}
+                    </span>
+                    <span className="badge-neutral">{t("catComingSoon")}</span>
+                  </span>
+                  <span className="mt-0.5 block text-sm text-neutral-400">{t("catTravailNote")}</span>
+                </span>
               </div>
             </Reveal>
           </div>
@@ -179,20 +148,22 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <Reveal className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 to-brand-900 px-6 py-14 text-center sm:px-16">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">{t("finalCtaTitle")}</h2>
-          <p className="mx-auto mt-2 max-w-md text-brand-100">{t("finalCtaBody")}</p>
-          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <section className="px-4 py-20 sm:px-6">
+        <Reveal className="bg-grain relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-gradient-to-br from-brand-800 via-brand-900 to-neutral-950 px-6 py-20 text-center sm:px-16">
+          <h2 className="relative text-4xl font-bold tracking-tight text-white sm:text-6xl">
+            {t("finalCtaTitle")}
+          </h2>
+          <p className="relative mx-auto mt-4 max-w-md text-lg text-brand-100/90">{t("finalCtaBody")}</p>
+          <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <CategoryDropdown
               mode="browse"
-              triggerClassName="btn-primary !bg-white !text-brand-800 hover:!bg-brand-50 !px-6 !py-3 !text-base shadow-lg"
+              triggerClassName="btn-primary !bg-white !text-brand-900 hover:!bg-brand-50 !px-7 !py-3.5 !text-base shadow-lg"
             >
               {t("finalCtaBrowse")}
             </CategoryDropdown>
             <CategoryDropdown
               mode="post"
-              triggerClassName="btn !border !border-white/30 !bg-white/10 !text-white hover:!bg-white/20 !px-6 !py-3 !text-base backdrop-blur-sm"
+              triggerClassName="btn !border !border-white/25 !bg-white/10 !text-white hover:!bg-white/20 !px-7 !py-3.5 !text-base backdrop-blur-sm"
             >
               {t("finalCtaPublish")}
             </CategoryDropdown>
