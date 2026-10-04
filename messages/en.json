@@ -22,6 +22,10 @@
   },
   "home": {
     "badge": "New — multiple categories now live",
+    "searchCategoryLabel": "Category",
+    "searchCityLabel": "City",
+    "searchCityPlaceholder": "e.g. Lyon, Algiers…",
+    "searchButton": "Search",
     "titleLine1": "",
     "titleFrance": "Franco-Algerian",
     "titleEt": "business ecosystem.",

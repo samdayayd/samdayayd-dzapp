@@ -22,6 +22,10 @@
   },
   "home": {
     "badge": "Nouveau — plusieurs catégories disponibles",
+    "searchCategoryLabel": "Catégorie",
+    "searchCityLabel": "Ville",
+    "searchCityPlaceholder": "ex: Lyon, Alger…",
+    "searchButton": "Rechercher",
     "titleLine1": "Écosystème d'affaires",
     "titleFrance": "franco-algérien.",
     "titleEt": "",

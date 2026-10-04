@@ -22,6 +22,10 @@
   },
   "home": {
     "badge": "جديد — عدة فئات متاحة الآن",
+    "searchCategoryLabel": "الفئة",
+    "searchCityLabel": "المدينة",
+    "searchCityPlaceholder": "مثال: ليون، الجزائر…",
+    "searchButton": "بحث",
     "titleLine1": "منظومة أعمال",
     "titleFrance": "فرنسية-جزائرية.",
     "titleEt": "",
