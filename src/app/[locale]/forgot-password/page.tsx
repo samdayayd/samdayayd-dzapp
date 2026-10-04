@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { KeyRound, Loader2, Mail, MailCheck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/Reveal";
 
 export default function ForgotPasswordPage() {
   const t = useTranslations("auth.forgotPassword");
@@ -48,6 +50,7 @@ export default function ForgotPasswordPage() {
         <p className="mt-1 text-sm text-neutral-500">{t("subtitle")}</p>
       </div>
 
+      <Reveal>
       <form onSubmit={handleSubmit} className="card space-y-4 p-6">
         <div>
           <label className="field-label" htmlFor="email">
@@ -66,7 +69,7 @@ export default function ForgotPasswordPage() {
           </div>
         </div>
 
-        <button type="submit" disabled={loading} className="btn-primary w-full">
+        <Button type="submit" disabled={loading} className="w-full">
           {loading ? (
             <>
               <Loader2 size={16} className="animate-spin" />
@@ -75,7 +78,7 @@ export default function ForgotPasswordPage() {
           ) : (
             t("submit")
           )}
-        </button>
+        </Button>
       </form>
 
       <p className="mt-5 text-center text-sm text-neutral-500">
@@ -83,6 +86,7 @@ export default function ForgotPasswordPage() {
           {t("backToLogin")}
         </Link>
       </p>
+      </Reveal>
     </div>
   );
 }

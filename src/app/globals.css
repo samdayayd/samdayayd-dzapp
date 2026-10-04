@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 :root {
   --background: #f7f8f7;
@@ -20,6 +21,18 @@
   --color-accent-500: #e23b4e;
   --color-accent-600: #d21f38;
   --color-accent-700: #ab1329;
+
+  /* Status tokens — distinct from brand-green so "success" (a state) never
+     gets confused with "brand" (an identity) even though both are green. */
+  --color-success-50: #ecfdf5;
+  --color-success-600: #059669;
+  --color-success-700: #047857;
+  --color-warning-50: #fffbeb;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-error-50: #fef2f2;
+  --color-error-600: var(--color-accent-600);
+  --color-error-700: var(--color-accent-700);
 }
 
 @theme inline {
@@ -42,6 +55,16 @@
   --color-accent-500: var(--color-accent-500);
   --color-accent-600: var(--color-accent-600);
   --color-accent-700: var(--color-accent-700);
+
+  --color-success-50: var(--color-success-50);
+  --color-success-600: var(--color-success-600);
+  --color-success-700: var(--color-success-700);
+  --color-warning-50: var(--color-warning-50);
+  --color-warning-600: var(--color-warning-600);
+  --color-warning-700: var(--color-warning-700);
+  --color-error-50: var(--color-error-50);
+  --color-error-600: var(--color-error-600);
+  --color-error-700: var(--color-error-700);
 }
 
 body {
@@ -99,11 +122,25 @@ body {
   .card {
     @apply rounded-2xl border border-neutral-200/80 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)];
   }
+  /* Same resting look as .card, but lifts slightly on hover — for cards
+     that are themselves a link/button (listing cards), not static
+     containers (form panels), so the affordance only appears where it's
+     true. */
+  .card-interactive {
+    @apply rounded-2xl border border-neutral-200/80 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)]
+      transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)];
+  }
   .badge-brand {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium bg-brand-100 text-brand-800;
   }
   .badge-neutral {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium bg-neutral-100 text-neutral-600;
+  }
+  .badge-success {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium bg-success-50 text-success-700;
+  }
+  .badge-warning {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium bg-warning-50 text-warning-700;
   }
   .badge {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium;

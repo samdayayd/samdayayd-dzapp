@@ -7,6 +7,7 @@ import { AlertCircle, CheckCircle2, KeyRound, Loader2 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { PasswordField } from "@/components/PasswordField";
 import { readErrorCode } from "@/lib/apiError";
+import { Button } from "@/components/ui/button";
 
 export default function ResetPasswordPage() {
   return (
@@ -113,7 +114,7 @@ function ResetPasswordForm() {
           </div>
         )}
 
-        <button type="submit" disabled={loading} className="btn-primary w-full">
+        <Button type="submit" disabled={loading} className="w-full">
           {loading ? (
             <>
               <Loader2 size={16} className="animate-spin" />
@@ -122,7 +123,7 @@ function ResetPasswordForm() {
           ) : (
             t("submit")
           )}
-        </button>
+        </Button>
       </form>
     </div>
   );

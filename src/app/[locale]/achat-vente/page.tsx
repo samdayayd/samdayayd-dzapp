@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { MapPin, Search, ShoppingBag, Tag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -6,6 +7,16 @@ import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "achatVente" });
+  return { title: t("category"), description: t("metaDescription") };
+}
 
 type SearchParams = {
   ville?: string;
@@ -191,7 +202,7 @@ export default async function AchatVentePage({
               <Link
                 key={item.id}
                 href={`/achat-vente/${item.id}`}
-                className="card group overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lg"
+                className="card-interactive group overflow-hidden"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
                   {item.images[0] ? (

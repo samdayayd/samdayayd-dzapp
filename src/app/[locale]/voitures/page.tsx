@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Car, Fuel, Gauge, MapPin, Search } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -6,6 +7,16 @@ import { prisma } from "@/lib/prisma";
 import { formatPrice, formatKm } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "voitures" });
+  return { title: t("category"), description: t("metaDescription") };
+}
 
 type SearchParams = {
   ville?: string;
@@ -169,7 +180,7 @@ export default async function VoituresPage({
               <Link
                 key={listing.id}
                 href={`/voitures/${listing.id}`}
-                className="card group overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lg"
+                className="card-interactive group overflow-hidden"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
                   {listing.images[0] ? (

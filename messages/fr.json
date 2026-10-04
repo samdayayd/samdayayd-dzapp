@@ -9,10 +9,12 @@
     "logout": "Déconnexion",
     "immobilier": "Immobilier",
     "achatVente": "Achat/Vente",
-    "invites": "Invitations"
+    "invites": "Invitations",
+    "menu": "Menu"
   },
   "footer": {
     "tagline": "annonces entre la France et l'Algérie.",
+    "categoriesHeading": "Catégories",
     "voitures": "Voitures",
     "publish": "Publier une annonce",
     "immobilier": "Immobilier",
@@ -44,10 +46,23 @@
     "catTravailName": "Travail",
     "catTravailNote": "Chercher ou proposer",
     "catAchatVenteName": "Achat/Vente",
-    "catAchatVenteNote": "Achetez tout, vendez tout"
+    "catAchatVenteNote": "Achetez tout, vendez tout",
+    "howItWorksTitle": "Comment ça marche",
+    "howItWorksSubtitle": "Trois étapes, aucune complication.",
+    "step1Title": "Choisissez une catégorie",
+    "step1Body": "Voitures, immobilier, ou achat/vente général — selon ce que vous cherchez ou voulez vendre.",
+    "step2Title": "Parcourez ou publiez",
+    "step2Body": "Filtrez par ville, pays et prix, ou publiez votre propre annonce en quelques minutes, gratuitement.",
+    "step3Title": "Contactez directement",
+    "step3Body": "Appelez ou écrivez directement au vendeur — aucun intermédiaire, aucune commission.",
+    "finalCtaTitle": "Prêt à commencer ?",
+    "finalCtaBody": "Rejoignez la marketplace de la diaspora franco-algérienne dès aujourd'hui.",
+    "finalCtaBrowse": "Voir les annonces",
+    "finalCtaPublish": "Publier une annonce"
   },
   "voitures": {
     "category": "Voitures",
+    "metaDescription": "Petites annonces de voitures entre la France et l'Algérie — achat, vente et location, toutes marques.",
     "resultsFound": "{count, plural, =0 {Aucune annonce trouvée} one {# annonce trouvée} other {# annonces trouvées}}",
     "resultsAvailable": "{count, plural, =0 {Aucune annonce disponible} one {# annonce disponible} other {# annonces disponibles}}",
     "filters": {
@@ -226,6 +241,7 @@
   },
   "immobilier": {
     "category": "Immobilier",
+    "metaDescription": "Petites annonces immobilières entre la France et l'Algérie — vente et location d'appartements, maisons et locaux.",
     "resultsFound": "{count, plural, =0 {Aucun bien trouvé} one {# bien trouvé} other {# biens trouvés}}",
     "resultsAvailable": "{count, plural, =0 {Aucun bien disponible} one {# bien disponible} other {# biens disponibles}}",
     "filters": {
@@ -312,6 +328,7 @@
   },
   "achatVente": {
     "category": "Achat/Vente",
+    "metaDescription": "Petites annonces achat/vente entre la France et l'Algérie — électronique, meubles, vêtements et plus, neuf ou occasion.",
     "resultsFound": "{count, plural, =0 {Aucune annonce trouvée} one {# annonce trouvée} other {# annonces trouvées}}",
     "resultsAvailable": "{count, plural, =0 {Aucune annonce disponible} one {# annonce disponible} other {# annonces disponibles}}",
     "filters": {

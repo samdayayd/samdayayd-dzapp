@@ -31,9 +31,30 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
+  const title = "DZ APP";
+  const description = t("subtitle");
+
   return {
-    title: "DZ APP",
-    description: t("subtitle"),
+    // NEXTAUTH_URL is already a required env var pointing at the real
+    // deployed URL (see render.yaml) — reused here instead of adding a
+    // second URL var that could drift out of sync with it.
+    metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
+    title: { default: title, template: `%s — ${title}` },
+    description,
+    openGraph: {
+      title,
+      description,
+      siteName: title,
+      locale,
+      type: "website",
+      images: [{ url: "/hero-photo-v2.png", width: 1672, height: 941 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/hero-photo-v2.png"],
+    },
   };
 }
 

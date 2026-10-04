@@ -1,9 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Building2, Car, ChevronDown, ShoppingBag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 /** A button that reveals a small category picker (Voitures / Immobilier /
     Achat-Vente) instead of linking straight to one — used wherever the
@@ -27,18 +33,6 @@ export function CategoryDropdown({
   children: ReactNode;
 }) {
   const tNav = useTranslations("nav");
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
-  }, []);
 
   const options = [
     {
@@ -59,34 +53,21 @@ export function CategoryDropdown({
   ] as const;
 
   return (
-    <div ref={ref} className="relative">
-      <button type="button" onClick={() => setOpen((o) => !o)} className={triggerClassName}>
+    <DropdownMenu>
+      <DropdownMenuTrigger className={`${triggerClassName} group`}>
         {children}
-        <ChevronDown
-          size={chevronSize}
-          className={`shrink-0 transition ${open ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      {open && (
-        <div
-          className={`absolute top-full z-50 mt-2 w-48 overflow-hidden rounded-xl border border-neutral-200 bg-white py-1.5 text-start shadow-lg ${
-            panelAlign === "end" ? "end-0" : "start-0"
-          }`}
-        >
-          {options.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 px-3.5 py-2 text-sm text-neutral-700 transition hover:bg-neutral-50"
-            >
+        <ChevronDown size={chevronSize} className="shrink-0 transition group-data-[state=open]:rotate-180" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align={panelAlign === "end" ? "end" : "start"} className="w-48">
+        {options.map(({ href, label, icon: Icon }) => (
+          <DropdownMenuItem key={href} asChild>
+            <Link href={href}>
               <Icon size={15} className="text-brand-600" />
               {label}
             </Link>
-          ))}
-        </div>
-      )}
-    </div>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

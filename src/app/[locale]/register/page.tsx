@@ -7,6 +7,8 @@ import { AlertCircle, KeyRound, Loader2, Mail, User, UserPlus } from "lucide-rea
 import { Link, useRouter } from "@/i18n/navigation";
 import { readErrorCode } from "@/lib/apiError";
 import { PasswordField } from "@/components/PasswordField";
+import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/Reveal";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -64,6 +66,7 @@ export default function RegisterPage() {
         <p className="mt-1 text-sm text-neutral-500">{t("subtitle")}</p>
       </div>
 
+      <Reveal>
       <form onSubmit={handleSubmit} className="card space-y-4 p-6">
         <div>
           <label className="field-label" htmlFor="inviteCode">
@@ -138,7 +141,7 @@ export default function RegisterPage() {
           </div>
         )}
 
-        <button type="submit" disabled={loading} className="btn-primary w-full">
+        <Button type="submit" disabled={loading} className="w-full">
           {loading ? (
             <>
               <Loader2 size={16} className="animate-spin" />
@@ -147,7 +150,7 @@ export default function RegisterPage() {
           ) : (
             t("submit")
           )}
-        </button>
+        </Button>
       </form>
 
       <p className="mt-5 text-center text-sm text-neutral-500">
@@ -156,6 +159,7 @@ export default function RegisterPage() {
           {t("login")}
         </Link>
       </p>
+      </Reveal>
     </div>
   );
 }

@@ -9,10 +9,12 @@
     "logout": "Log out",
     "immobilier": "Real estate",
     "achatVente": "Buy & Sell",
-    "invites": "Invites"
+    "invites": "Invites",
+    "menu": "Menu"
   },
   "footer": {
     "tagline": "listings between France and Algeria.",
+    "categoriesHeading": "Categories",
     "voitures": "Cars",
     "publish": "Post an ad",
     "immobilier": "Real estate",
@@ -44,10 +46,23 @@
     "catTravailName": "Jobs",
     "catTravailNote": "Find or offer work",
     "catAchatVenteName": "Buy & Sell",
-    "catAchatVenteNote": "Buy anything, sell anything"
+    "catAchatVenteNote": "Buy anything, sell anything",
+    "howItWorksTitle": "How it works",
+    "howItWorksSubtitle": "Three steps, no complications.",
+    "step1Title": "Choose a category",
+    "step1Body": "Cars, real estate, or general buy & sell — whatever you're looking for or want to sell.",
+    "step2Title": "Browse or post",
+    "step2Body": "Filter by city, country and price, or post your own listing in minutes, for free.",
+    "step3Title": "Contact directly",
+    "step3Body": "Call or email the seller directly — no middleman, no commission.",
+    "finalCtaTitle": "Ready to get started?",
+    "finalCtaBody": "Join the Franco-Algerian diaspora's marketplace today.",
+    "finalCtaBrowse": "Browse listings",
+    "finalCtaPublish": "Post an ad"
   },
   "voitures": {
     "category": "Cars",
+    "metaDescription": "Car listings between France and Algeria — buy, sell and rent, all makes.",
     "resultsFound": "{count, plural, =0 {No listings found} one {# listing found} other {# listings found}}",
     "resultsAvailable": "{count, plural, =0 {No listings available} one {# listing available} other {# listings available}}",
     "filters": {
@@ -226,6 +241,7 @@
   },
   "immobilier": {
     "category": "Real estate",
+    "metaDescription": "Real estate listings between France and Algeria — buy and rent apartments, houses and commercial space.",
     "resultsFound": "{count, plural, =0 {No properties found} one {# property found} other {# properties found}}",
     "resultsAvailable": "{count, plural, =0 {No properties available} one {# property available} other {# properties available}}",
     "filters": {
@@ -312,6 +328,7 @@
   },
   "achatVente": {
     "category": "Buy & Sell",
+    "metaDescription": "Buy & sell listings between France and Algeria — electronics, furniture, clothing and more, new or used.",
     "resultsFound": "{count, plural, =0 {No listings found} one {# listing found} other {# listings found}}",
     "resultsAvailable": "{count, plural, =0 {No listings available} one {# listing available} other {# listings available}}",
     "filters": {

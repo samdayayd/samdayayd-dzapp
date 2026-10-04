@@ -9,10 +9,12 @@
     "logout": "تسجيل الخروج",
     "immobilier": "عقارات",
     "achatVente": "بيع وشراء",
-    "invites": "الدعوات"
+    "invites": "الدعوات",
+    "menu": "القائمة"
   },
   "footer": {
     "tagline": "إعلانات بين فرنسا والجزائر.",
+    "categoriesHeading": "الفئات",
     "voitures": "سيارات",
     "publish": "أضف إعلانًا",
     "immobilier": "عقارات",
@@ -44,10 +46,23 @@
     "catTravailName": "عمل",
     "catTravailNote": "ابحث عن عمل أو اعرضه",
     "catAchatVenteName": "بيع وشراء",
-    "catAchatVenteNote": "اشترِ كل شيء، بع كل شيء"
+    "catAchatVenteNote": "اشترِ كل شيء، بع كل شيء",
+    "howItWorksTitle": "كيف يعمل",
+    "howItWorksSubtitle": "ثلاث خطوات، بدون تعقيد.",
+    "step1Title": "اختر فئة",
+    "step1Body": "سيارات، عقارات، أو بيع وشراء عام — حسب ما تبحث عنه أو تريد بيعه.",
+    "step2Title": "تصفح أو انشر",
+    "step2Body": "صفِّ حسب المدينة والبلد والسعر، أو انشر إعلانك الخاص في دقائق، مجانًا.",
+    "step3Title": "تواصل مباشرة",
+    "step3Body": "اتصل أو راسل البائع مباشرة — بدون وسيط، بدون عمولة.",
+    "finalCtaTitle": "هل أنت مستعد للبدء؟",
+    "finalCtaBody": "انضم إلى سوق الجالية الفرنسية-الجزائرية اليوم.",
+    "finalCtaBrowse": "تصفح الإعلانات",
+    "finalCtaPublish": "أضف إعلانًا"
   },
   "voitures": {
     "category": "سيارات",
+    "metaDescription": "إعلانات سيارات بين فرنسا والجزائر — شراء وبيع وكراء، جميع الماركات.",
     "resultsFound": "{count, plural, =0 {لا توجد إعلانات مطابقة} one {تم العثور على إعلان واحد} two {تم العثور على إعلانين} few {تم العثور على # إعلانات} many {تم العثور على # إعلانًا} other {تم العثور على # إعلان}}",
     "resultsAvailable": "{count, plural, =0 {لا توجد إعلانات متاحة} one {إعلان واحد متاح} two {إعلانان متاحان} few {# إعلانات متاحة} many {# إعلانًا متاحًا} other {# إعلان متاح}}",
     "filters": {
@@ -226,6 +241,7 @@
   },
   "immobilier": {
     "category": "عقارات",
+    "metaDescription": "إعلانات عقارية بين فرنسا والجزائر — بيع وكراء الشقق والمنازل والمحلات التجارية.",
     "resultsFound": "{count, plural, =0 {لم يتم العثور على عقارات} one {تم العثور على عقار واحد} other {تم العثور على # عقار}}",
     "resultsAvailable": "{count, plural, =0 {لا توجد عقارات متاحة} one {عقار واحد متاح} other {# عقار متاح}}",
     "filters": {
@@ -312,6 +328,7 @@
   },
   "achatVente": {
     "category": "بيع وشراء",
+    "metaDescription": "إعلانات بيع وشراء بين فرنسا والجزائر — إلكترونيات وأثاث وملابس والمزيد، جديد أو مستعمل.",
     "resultsFound": "{count, plural, =0 {لم يتم العثور على إعلانات} one {تم العثور على إعلان واحد} other {تم العثور على # إعلان}}",
     "resultsAvailable": "{count, plural, =0 {لا توجد إعلانات متاحة} one {إعلان واحد متاح} other {# إعلان متاح}}",
     "filters": {

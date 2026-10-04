@@ -6,6 +6,8 @@ import { signIn } from "next-auth/react";
 import { AlertCircle, Loader2, LogIn, Mail } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { PasswordField } from "@/components/PasswordField";
+import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/Reveal";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -47,71 +49,70 @@ export default function LoginPage() {
         <p className="mt-1 text-sm text-neutral-500">{t("subtitle")}</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="card space-y-4 p-6">
-        <div>
-          <label className="field-label" htmlFor="email">
-            {t("emailLabel")}
-          </label>
-          <div className="relative">
-            <Mail size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-            <input
-              id="email"
-              type="email"
+      <Reveal>
+        <form onSubmit={handleSubmit} className="card space-y-4 p-6">
+          <div>
+            <label className="field-label" htmlFor="email">
+              {t("emailLabel")}
+            </label>
+            <div className="relative">
+              <Mail size={16} className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+              <input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="field-input ps-9"
+              />
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <label className="field-label" htmlFor="password">
+                {t("passwordLabel")}
+              </label>
+              <Link href="/forgot-password" className="mb-1.5 text-xs font-medium text-brand-700 hover:underline">
+                {t("forgotPassword")}
+              </Link>
+            </div>
+            <PasswordField
+              id="password"
+              value={password}
+              onChange={setPassword}
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="field-input ps-9"
+              autoComplete="current-password"
+              showLabel={tAuth("showPassword")}
+              hideLabel={tAuth("hidePassword")}
             />
           </div>
-        </div>
-        <div>
-          <div className="flex items-center justify-between">
-            <label className="field-label" htmlFor="password">
-              {t("passwordLabel")}
-            </label>
-            <Link
-              href="/forgot-password"
-              className="mb-1.5 text-xs font-medium text-brand-700 hover:underline"
-            >
-              {t("forgotPassword")}
-            </Link>
-          </div>
-          <PasswordField
-            id="password"
-            value={password}
-            onChange={setPassword}
-            required
-            autoComplete="current-password"
-            showLabel={tAuth("showPassword")}
-            hideLabel={tAuth("hidePassword")}
-          />
-        </div>
 
-        {error && (
-          <div className="flex items-center gap-2 rounded-lg bg-accent-500/10 px-3.5 py-2.5 text-sm text-accent-700">
-            <AlertCircle size={16} className="shrink-0" />
-            {error}
-          </div>
-        )}
-
-        <button type="submit" disabled={loading} className="btn-primary w-full">
-          {loading ? (
-            <>
-              <Loader2 size={16} className="animate-spin" />
-              {t("submitting")}
-            </>
-          ) : (
-            t("submit")
+          {error && (
+            <div className="flex items-center gap-2 rounded-lg bg-accent-500/10 px-3.5 py-2.5 text-sm text-accent-700">
+              <AlertCircle size={16} className="shrink-0" />
+              {error}
+            </div>
           )}
-        </button>
-      </form>
 
-      <p className="mt-5 text-center text-sm text-neutral-500">
-        {t("noAccount")}{" "}
-        <Link href="/register" className="font-medium text-brand-700 hover:underline">
-          {t("createAccount")}
-        </Link>
-      </p>
+          <Button type="submit" disabled={loading} className="w-full">
+            {loading ? (
+              <>
+                <Loader2 size={16} className="animate-spin" />
+                {t("submitting")}
+              </>
+            ) : (
+              t("submit")
+            )}
+          </Button>
+        </form>
+
+        <p className="mt-5 text-center text-sm text-neutral-500">
+          {t("noAccount")}{" "}
+          <Link href="/register" className="font-medium text-brand-700 hover:underline">
+            {t("createAccount")}
+          </Link>
+        </p>
+      </Reveal>
     </div>
   );
 }

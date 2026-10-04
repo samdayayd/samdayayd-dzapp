@@ -6,6 +6,9 @@ import { useTranslations } from "next-intl";
 import { AlertCircle, Check, Copy, KeyRound, Loader2, LogIn } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { ApiError, readErrorCode } from "@/lib/apiError";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/Reveal";
 
 interface Invite {
   code: string;
@@ -37,13 +40,20 @@ export default function InvitesPage() {
   }, [router]);
 
   const load = useCallback(() => {
-    setError(null);
+    // No setState before the fetch kicks off — react-hooks/set-state-in-effect
+    // flags any setState that runs synchronously inside the effect that
+    // calls load(). Clearing the error here instead (only once the request
+    // actually resolves) avoids that extra render without losing the
+    // "retry clears the old error" behavior.
     fetch("/api/invites")
       .then(async (res) => {
         if (!res.ok) throw new ApiError(await readErrorCode(res), "");
         return res.json();
       })
-      .then(setInvites)
+      .then((data) => {
+        setInvites(data);
+        setError(null);
+      })
       .catch((e) => {
         if (e instanceof ApiError && e.code === "SESSION_STALE") {
           handleSessionStale();
@@ -102,24 +112,26 @@ export default function InvitesPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
-      <div className="mb-6 flex flex-col items-center text-center">
+      <Reveal className="mb-6 flex flex-col items-center text-center">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700">
           <KeyRound size={22} />
         </div>
         <h1 className="mt-3 text-2xl font-bold text-neutral-900">{t("title")}</h1>
         <p className="mt-1 text-sm text-neutral-500">{t("subtitle")}</p>
-      </div>
+      </Reveal>
 
-      <button onClick={handleCreate} disabled={creating} className="btn-primary mx-auto flex">
-        {creating ? (
-          <>
-            <Loader2 size={16} className="animate-spin" />
-            {t("creating")}
-          </>
-        ) : (
-          t("createButton")
-        )}
-      </button>
+      <div className="flex justify-center">
+        <Button onClick={handleCreate} disabled={creating}>
+          {creating ? (
+            <>
+              <Loader2 size={16} className="animate-spin" />
+              {t("creating")}
+            </>
+          ) : (
+            t("createButton")
+          )}
+        </Button>
+      </div>
 
       {error && (
         <div className="mt-4 flex items-center gap-2 rounded-lg bg-accent-500/10 px-3.5 py-2.5 text-sm text-accent-700">
@@ -146,9 +158,9 @@ export default function InvitesPage() {
                   </p>
                 </div>
                 {invite.usedAt ? (
-                  <span className="shrink-0 text-xs text-neutral-400">
+                  <Badge variant="neutral" className="shrink-0">
                     {t("usedBy", { email: invite.usedByEmail ?? "" })}
-                  </span>
+                  </Badge>
                 ) : (
                   <button
                     onClick={() => handleCopy(invite.code)}
