@@ -9,10 +9,10 @@ type Category = "voitures" | "immobilier" | "achat-vente";
 
 /** The hero's main act — classifieds marketplaces (Leboncoin, Idealista,
     Avito, Airbnb) lead with a working search bar, not "browse/post"
-    buttons alone; that's the pattern a SaaS-style hero was missing
-    entirely. Real functionality: routes straight into the chosen
-    category's feed with the city filter already applied — not a
-    decorative mockup. */
+    buttons alone. Category pills (not a hidden <select>) so the three
+    categories stay visible at a glance — real functionality: submitting
+    routes straight into the chosen category's feed with the city filter
+    already applied. */
 export function HeroSearch() {
   const t = useTranslations("home");
   const router = useRouter();
@@ -34,45 +34,47 @@ export function HeroSearch() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-full flex-col gap-2 rounded-2xl bg-white p-2 shadow-xl shadow-neutral-900/10 ring-1 ring-neutral-900/5 sm:flex-row sm:gap-0 sm:rounded-full sm:p-2"
+      className="w-full rounded-2xl bg-white p-3 shadow-xl shadow-neutral-900/15 ring-1 ring-neutral-900/5 sm:p-4"
     >
-      <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl px-3 py-2 sm:border-e sm:border-neutral-200">
-        <span className="text-brand-600">
-          {(() => {
-            const Icon = categories.find((c) => c.value === category)?.icon ?? Car;
-            return <Icon size={18} />;
-          })()}
-        </span>
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value as Category)}
-          aria-label={t("searchCategoryLabel")}
-          className="w-full cursor-pointer appearance-none bg-transparent text-sm font-medium text-neutral-900 outline-none"
-        >
-          {categories.map(({ value, label }) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
+      <p className="px-1 text-start text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+        {t("searchWhatLabel")}
+      </p>
+
+      <div className="mt-2 flex flex-wrap gap-2">
+        {categories.map(({ value, label, icon: Icon }) => (
+          <button
+            key={value}
+            type="button"
+            onClick={() => setCategory(value)}
+            className={`flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors ${
+              category === value
+                ? "bg-brand-600 text-white shadow-sm"
+                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+            }`}
+          >
+            <Icon size={15} />
+            {label}
+          </button>
+        ))}
       </div>
 
-      <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl px-3 py-2">
-        <MapPin size={18} className="shrink-0 text-neutral-400" />
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder={t("searchCityPlaceholder")}
-          aria-label={t("searchCityLabel")}
-          className="w-full bg-transparent text-sm text-neutral-900 outline-none placeholder:text-neutral-400"
-        />
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+        <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-neutral-200 px-3.5 py-2.5">
+          <MapPin size={17} className="shrink-0 text-neutral-400" />
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            placeholder={t("searchCityPlaceholder")}
+            aria-label={t("searchCityLabel")}
+            className="w-full bg-transparent text-sm text-neutral-900 outline-none placeholder:text-neutral-400"
+          />
+        </div>
+        <button type="submit" className="btn-primary shrink-0 !py-3">
+          <Search size={17} strokeWidth={2.5} />
+          {t("searchButton")}
+        </button>
       </div>
-
-      <button type="submit" className="btn-primary shrink-0 !rounded-xl sm:!rounded-full">
-        <Search size={17} strokeWidth={2.5} />
-        {t("searchButton")}
-      </button>
     </form>
   );
 }

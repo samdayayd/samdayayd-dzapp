@@ -1,8 +1,8 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { MapPin, Search, ShoppingBag, Tag } from "lucide-react";
+import { Search, ShoppingBag, Tag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { ListingCard } from "@/components/ListingCard";
 import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
 
@@ -199,56 +199,22 @@ export default async function AchatVentePage({
         ) : (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((item) => (
-              <Link
+              <ListingCard
                 key={item.id}
                 href={`/achat-vente/${item.id}`}
-                className="card-interactive group overflow-hidden"
-              >
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
-                  {item.images[0] ? (
-                    <Image
-                      src={item.images[0].url}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition duration-300 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center text-neutral-300">
-                      <ShoppingBag size={40} strokeWidth={1.5} />
-                    </div>
-                  )}
-                  <span className="badge-neutral absolute start-3 top-3 bg-white/90 shadow-sm">
-                    {t(`country.${item.country}`)}
-                  </span>
-                  <span
-                    className={`badge absolute end-3 top-3 shadow-sm ${
-                      item.condition === "NEUF"
-                        ? "bg-brand-600 text-white"
-                        : "bg-accent-500 text-white"
-                    }`}
-                  >
-                    {t(`condition.${item.condition}`)}
-                  </span>
-                </div>
-
-                <div className="p-4">
-                  <p className="truncate font-semibold text-neutral-900">
-                    {item.title}
-                  </p>
-                  <p className="mt-0.5 text-xl font-extrabold text-brand-700">
-                    {formatPrice(item.price, item.currency, locale)}
-                  </p>
-
-                  <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-500">
-                    <span className="inline-flex items-center gap-1">
-                      <Tag size={13} /> {t(`itemCategory.${item.itemCategory}`)}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <MapPin size={13} /> {item.city}
-                    </span>
-                  </div>
-                </div>
-              </Link>
+                imageUrl={item.images[0]?.url}
+                imageAlt={item.title}
+                fallbackIcon={ShoppingBag}
+                title={item.title}
+                price={formatPrice(item.price, item.currency, locale)}
+                country={t(`country.${item.country}` as "country.FRANCE")}
+                city={item.city}
+                saleBadge={{
+                  label: t(`condition.${item.condition}` as "condition.NEUF"),
+                  variant: item.condition === "NEUF" ? "brand" : "accent",
+                }}
+                meta={[{ icon: Tag, label: t(`itemCategory.${item.itemCategory}` as "itemCategory.ELECTRONIQUE") }]}
+              />
             ))}
           </div>
         )}

@@ -1,8 +1,8 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Building2, DoorOpen, MapPin, Ruler, Search } from "lucide-react";
+import { Building2, DoorOpen, Ruler, Search } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { ListingCard } from "@/components/ListingCard";
 import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
 
@@ -197,67 +197,27 @@ export default async function ImmobilierPage({
         ) : (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {properties.map((property) => (
-              <Link
+              <ListingCard
                 key={property.id}
                 href={`/immobilier/${property.id}`}
-                className="card-interactive group overflow-hidden"
-              >
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
-                  {property.images[0] ? (
-                    <Image
-                      src={property.images[0].url}
-                      alt={property.title}
-                      fill
-                      className="object-cover transition duration-300 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center text-neutral-300">
-                      <Building2 size={40} strokeWidth={1.5} />
-                    </div>
-                  )}
-                  <span className="badge-neutral absolute start-3 top-3 bg-white/90 shadow-sm">
-                    {t(`country.${property.country}`)}
-                  </span>
-                  <span
-                    className={`badge absolute end-3 top-3 shadow-sm ${
-                      property.saleType === "LOCATION"
-                        ? "bg-accent-500 text-white"
-                        : "bg-brand-600 text-white"
-                    }`}
-                  >
-                    {t(`saleType.${property.saleType}`)}
-                  </span>
-                </div>
-
-                <div className="p-4">
-                  <p className="truncate font-semibold text-neutral-900">
-                    {property.title}
-                  </p>
-                  <p className="mt-0.5 text-xl font-extrabold text-brand-700">
-                    {formatPrice(property.price, property.currency, locale)}
-                    {property.saleType === "LOCATION" && (
-                      <span className="text-sm font-medium text-neutral-500">
-                        {t("perMonth")}
-                      </span>
-                    )}
-                  </p>
-
-                  <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-500">
-                    <span className="inline-flex items-center gap-1">
-                      <Building2 size={13} /> {t(`propertyType.${property.propertyType}`)}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <DoorOpen size={13} /> {property.rooms}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <Ruler size={13} /> {property.surfaceM2} m²
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <MapPin size={13} /> {property.city}
-                    </span>
-                  </div>
-                </div>
-              </Link>
+                imageUrl={property.images[0]?.url}
+                imageAlt={property.title}
+                fallbackIcon={Building2}
+                title={property.title}
+                price={formatPrice(property.price, property.currency, locale)}
+                priceSuffix={property.saleType === "LOCATION" ? t("perMonth") : undefined}
+                country={t(`country.${property.country}` as "country.FRANCE")}
+                city={property.city}
+                saleBadge={{
+                  label: t(`saleType.${property.saleType}` as "saleType.VENTE"),
+                  variant: property.saleType === "LOCATION" ? "accent" : "brand",
+                }}
+                meta={[
+                  { icon: Building2, label: t(`propertyType.${property.propertyType}` as "propertyType.APPARTEMENT") },
+                  { icon: DoorOpen, label: String(property.rooms) },
+                  { icon: Ruler, label: `${property.surfaceM2} m²` },
+                ]}
+              />
             ))}
           </div>
         )}
