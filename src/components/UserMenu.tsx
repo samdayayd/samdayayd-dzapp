@@ -19,12 +19,12 @@ export function UserMenu({ name, email }: { name: string; email?: string | null 
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="group flex items-center gap-1.5 rounded-lg py-1.5 ps-1.5 pe-2 text-sm font-medium text-neutral-700 outline-none transition hover:bg-neutral-100 focus-visible:ring-2 focus-visible:ring-brand-400 data-[state=open]:bg-neutral-100">
-        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-800">
+      <DropdownMenuTrigger className="group flex items-center gap-1.5 rounded-lg py-1.5 ps-1.5 pe-2 text-sm font-medium text-white/90 outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-accent-400 data-[state=open]:bg-white/10">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-accent-400 text-xs font-bold text-white">
           {initial}
         </span>
         <span className="max-w-[84px] truncate sm:max-w-[140px]">{name}</span>
-        <ChevronDown size={14} className="shrink-0 text-neutral-400 transition group-data-[state=open]:rotate-180" />
+        <ChevronDown size={14} className="shrink-0 text-white/50 transition group-data-[state=open]:rotate-180" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>

@@ -13,7 +13,8 @@ export interface ListingCardMeta {
     rounded-shadow box. Deliberately restrained: thin border, shadow only
     on hover, modest radius — a marketplace page shows dozens of these at
     once, so each one has to stay light rather than compete for
-    attention. */
+    attention. `dark` switches the card body for the homepage's dark
+    sections — the feed pages stay on the light variant unchanged. */
 export function ListingCard({
   href,
   imageUrl,
@@ -27,6 +28,7 @@ export function ListingCard({
   categoryBadge,
   saleBadge,
   meta,
+  dark = false,
 }: {
   href: string;
   imageUrl?: string | null;
@@ -40,11 +42,16 @@ export function ListingCard({
   categoryBadge?: string;
   saleBadge?: { label: string; variant: "brand" | "accent" };
   meta: ListingCardMeta[];
+  dark?: boolean;
 }) {
   return (
     <Link
       href={href}
-      className="group block overflow-hidden rounded-xl border border-neutral-200 bg-white transition-shadow hover:shadow-[0_6px_20px_rgba(15,23,42,0.08)]"
+      className={
+        dark
+          ? "group block overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.07]"
+          : "group block overflow-hidden rounded-xl border border-neutral-200 bg-white transition-shadow hover:shadow-[0_6px_20px_rgba(15,23,42,0.08)]"
+      }
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-neutral-100 to-neutral-200">
         {imageUrl ? (
@@ -77,15 +84,29 @@ export function ListingCard({
 
       <div className="p-3.5">
         {categoryBadge && (
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-brand-600">{categoryBadge}</p>
+          <p
+            className={`text-[11px] font-semibold uppercase tracking-wide ${
+              dark ? "text-accent-400" : "text-brand-600"
+            }`}
+          >
+            {categoryBadge}
+          </p>
         )}
-        <p className="mt-0.5 truncate font-semibold text-neutral-900">{title}</p>
-        <p className="mt-0.5 text-lg font-extrabold text-brand-700">
+        <p className={`mt-0.5 truncate font-semibold ${dark ? "text-white" : "text-neutral-900"}`}>{title}</p>
+        <p className={`mt-0.5 text-lg font-extrabold ${dark ? "text-accent-400" : "text-brand-700"}`}>
           {price}
-          {priceSuffix && <span className="text-sm font-medium text-neutral-500">{priceSuffix}</span>}
+          {priceSuffix && (
+            <span className={`text-sm font-medium ${dark ? "text-white/40" : "text-neutral-500"}`}>
+              {priceSuffix}
+            </span>
+          )}
         </p>
 
-        <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-500">
+        <div
+          className={`mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs ${
+            dark ? "text-white/50" : "text-neutral-500"
+          }`}
+        >
           {meta.map(({ icon: Icon, label }) => (
             <span key={label} className="inline-flex items-center gap-1">
               <Icon size={13} /> {label}

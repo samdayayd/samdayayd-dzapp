@@ -134,7 +134,7 @@ export default function InvitesPage() {
       </div>
 
       {error && (
-        <div className="mt-4 flex items-center gap-2 rounded-lg bg-accent-500/10 px-3.5 py-2.5 text-sm text-accent-700">
+        <div className="mt-4 flex items-center gap-2 rounded-lg bg-error-50 px-3.5 py-2.5 text-sm text-error-700">
           <AlertCircle size={16} className="shrink-0" />
           {error}
         </div>

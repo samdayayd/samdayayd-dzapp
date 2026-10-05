@@ -12,7 +12,7 @@ const LABELS: Record<Locale, string> = {
   ar: "AR",
 };
 
-export function LanguageSwitcher() {
+export function LanguageSwitcher({ dark = false }: { dark?: boolean }) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -30,16 +30,20 @@ export function LanguageSwitcher() {
     <div className="relative flex items-center">
       <Globe
         size={14}
-        className="pointer-events-none absolute start-2 text-neutral-400"
+        className={`pointer-events-none absolute start-2 ${dark ? "text-white/50" : "text-neutral-400"}`}
       />
       <select
         aria-label="Language"
         value={locale}
         onChange={(e) => handleChange(e.target.value as Locale)}
-        className="cursor-pointer appearance-none rounded-lg border border-neutral-200 bg-white py-1.5 ps-7 pe-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+        className={`cursor-pointer appearance-none rounded-lg border py-1.5 ps-7 pe-2 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-brand-500/20 ${
+          dark
+            ? "border-white/15 bg-white/10 text-white hover:bg-white/15"
+            : "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50"
+        }`}
       >
         {locales.map((l) => (
-          <option key={l} value={l}>
+          <option key={l} value={l} className="text-neutral-900">
             {LABELS[l]}
           </option>
         ))}

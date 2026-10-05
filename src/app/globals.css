@@ -2,28 +2,35 @@
 @import "tw-animate-css";
 
 :root {
-  --background: #f7f8f7;
-  --foreground: #18211c;
+  --background: #f7f8fa;
+  --foreground: #0f1720;
 
-  /* Brand green — from the DZ APP mark */
-  --color-brand-50: #eefaf2;
-  --color-brand-100: #d6f2e0;
-  --color-brand-200: #ade4c3;
-  --color-brand-300: #7bd0a2;
-  --color-brand-400: #43b57c;
-  --color-brand-500: #219a61;
-  --color-brand-600: #147a4c;
-  --color-brand-700: #0f5f3c;
-  --color-brand-800: #0d4c32;
-  --color-brand-900: #0a3d29;
+  /* Brand blue — the primary interactive color (buttons, links, focus
+     rings). Replaces the earlier flag-green: a marketplace spanning two
+     flags doesn't need to pick one as its UI color, and blue→cyan reads
+     as a modern product rather than a nationalistic one. */
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
 
-  /* Accent red — Algeria/France flag red, used sparingly */
-  --color-accent-500: #e23b4e;
-  --color-accent-600: #d21f38;
-  --color-accent-700: #ab1329;
+  /* Accent cyan — pairs with brand-blue for the gradient used on the
+     headline highlight, the primary CTA and the route-arc glow. */
+  --color-accent-50: #ecfeff;
+  --color-accent-100: #cffafe;
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+  --color-accent-600: #0891b2;
+  --color-accent-700: #0e7490;
 
-  /* Status tokens — distinct from brand-green so "success" (a state) never
-     gets confused with "brand" (an identity) even though both are green. */
+  /* Status tokens — independent of brand/accent, so a state color never
+     drifts when the brand palette changes. */
   --color-success-50: #ecfdf5;
   --color-success-600: #059669;
   --color-success-700: #047857;
@@ -31,8 +38,8 @@
   --color-warning-600: #d97706;
   --color-warning-700: #b45309;
   --color-error-50: #fef2f2;
-  --color-error-600: var(--color-accent-600);
-  --color-error-700: var(--color-accent-700);
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
 }
 
 @theme inline {
@@ -52,6 +59,9 @@
   --color-brand-800: var(--color-brand-800);
   --color-brand-900: var(--color-brand-900);
 
+  --color-accent-50: var(--color-accent-50);
+  --color-accent-100: var(--color-accent-100);
+  --color-accent-400: var(--color-accent-400);
   --color-accent-500: var(--color-accent-500);
   --color-accent-600: var(--color-accent-600);
   --color-accent-700: var(--color-accent-700);
@@ -81,6 +91,14 @@ body {
       transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50
       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
       bg-brand-600 text-white shadow-sm hover:bg-brand-700 focus-visible:ring-brand-500;
+  }
+  /* The one gradient button — the primary action on a dark surface (hero
+     search, "post an ad"), not sprinkled everywhere a solid fill would do. */
+  .btn-gradient {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-white
+      transition-opacity duration-150 disabled:cursor-not-allowed disabled:opacity-50
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+      bg-gradient-to-r from-brand-600 to-accent-500 shadow-sm hover:opacity-90 focus-visible:ring-brand-400;
   }
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold
@@ -115,7 +133,7 @@ body {
       focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20;
   }
   .field-error {
-    @apply mt-1.5 text-sm text-accent-700;
+    @apply mt-1.5 text-sm text-error-700;
   }
 
   /* Surfaces */
@@ -145,9 +163,28 @@ body {
   .badge {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium;
   }
+
+  /* Dark-surface form controls — the hero search bar and anything else
+     sitting on the dark home-page sections, as a counterpart to
+     .field-input/.field-select which assume a light surface. */
+  .field-input-dark {
+    @apply block w-full rounded-lg border border-white/15 bg-white/10 px-3.5 py-2.5 text-sm text-white
+      shadow-sm backdrop-blur-sm transition placeholder:text-white/45
+      focus:border-accent-400/60 focus:outline-none focus:ring-2 focus:ring-accent-400/30;
+  }
+  .field-select-dark {
+    @apply block w-full cursor-pointer appearance-none rounded-lg border border-white/15 bg-white/10 px-3.5 py-2.5 pr-9 text-sm text-white
+      shadow-sm backdrop-blur-sm transition
+      focus:border-accent-400/60 focus:outline-none focus:ring-2 focus:ring-accent-400/30;
+  }
 }
 
 @layer utilities {
+  /* The blue→cyan headline highlight and gradient-button text share this. */
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-brand-400 to-accent-400 bg-clip-text text-transparent;
+  }
+
   /* A barely-there film-grain texture — the one cheap trick that reliably
      keeps a flat color block (the dark CTA/footer sections below) from
      reading as a plain Bootstrap-style color fill. Pure CSS, no image

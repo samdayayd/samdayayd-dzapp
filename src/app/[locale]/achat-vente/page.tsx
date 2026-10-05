@@ -19,6 +19,7 @@ export async function generateMetadata({
 }
 
 type SearchParams = {
+  q?: string;
   ville?: string;
   pays?: string;
   categorie?: string;
@@ -39,6 +40,7 @@ export default async function AchatVentePage({
   const items = await prisma.item.findMany({
     where: {
       status: "ACTIVE",
+      ...(params.q ? { title: { contains: params.q } } : {}),
       ...(params.ville ? { city: { contains: params.ville } } : {}),
       ...(params.pays ? { country: params.pays } : {}),
       ...(params.categorie ? { itemCategory: params.categorie } : {}),
@@ -57,7 +59,7 @@ export default async function AchatVentePage({
   });
 
   const hasFilters =
-    params.ville || params.pays || params.categorie || params.etat || params.prixMin || params.prixMax;
+    params.q || params.ville || params.pays || params.categorie || params.etat || params.prixMin || params.prixMax;
 
   return (
     <div>
@@ -76,6 +78,26 @@ export default async function AchatVentePage({
           </h1>
 
           <form className="mt-6 flex flex-wrap items-end gap-3">
+            <div className="min-w-[200px] flex-1">
+              <label className="field-label" htmlFor="q">
+                {t("filters.queryLabel")}
+              </label>
+              <div className="relative">
+                <Search
+                  size={16}
+                  className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-neutral-400"
+                />
+                <input
+                  id="q"
+                  type="text"
+                  name="q"
+                  placeholder={t("filters.queryPlaceholder")}
+                  defaultValue={params.q}
+                  className="field-input ps-9"
+                />
+              </div>
+            </div>
+
             <div className="min-w-[160px] flex-1">
               <label className="field-label" htmlFor="ville">
                 {t("filters.villeLabel")}

@@ -348,7 +348,7 @@ export default function NewPropertyPage() {
         </div>
 
         {error && (
-          <div className="flex items-start gap-2 rounded-lg bg-accent-500/10 px-3.5 py-3 text-sm text-accent-700">
+          <div className="flex items-start gap-2 rounded-lg bg-error-50 px-3.5 py-3 text-sm text-error-700">
             <AlertCircle size={16} className="mt-0.5 shrink-0" />
             {error}
           </div>
