@@ -46,7 +46,7 @@ export function ListingCard({
       href={href}
       className="group block overflow-hidden rounded-xl border border-neutral-200 bg-white transition-shadow hover:shadow-[0_6px_20px_rgba(15,23,42,0.08)]"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-neutral-100 to-neutral-200">
         {imageUrl ? (
           <Image
             src={imageUrl}
@@ -55,17 +55,19 @@ export function ListingCard({
             className="object-cover transition duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-neutral-300">
-            <FallbackIcon size={36} strokeWidth={1.5} />
+          <div className="flex h-full items-center justify-center text-neutral-400">
+            <FallbackIcon size={32} strokeWidth={1.5} />
           </div>
         )}
         {country && (
-          <span className="badge-neutral absolute start-2.5 top-2.5 bg-white/90 shadow-sm">{country}</span>
+          <span className="badge-neutral absolute start-2.5 top-2.5 bg-white/90 shadow-sm backdrop-blur-sm">
+            {country}
+          </span>
         )}
         {saleBadge && (
           <span
-            className={`badge absolute end-2.5 top-2.5 shadow-sm ${
-              saleBadge.variant === "accent" ? "bg-accent-500 text-white" : "bg-brand-600 text-white"
+            className={`badge absolute end-2.5 top-2.5 bg-white/90 shadow-sm backdrop-blur-sm ${
+              saleBadge.variant === "accent" ? "text-accent-700" : "text-brand-700"
             }`}
           >
             {saleBadge.label}

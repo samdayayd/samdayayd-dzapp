@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Building2, Car, DoorOpen, Fuel, Gauge, Ruler, ShoppingBag, Sparkles, Tag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -135,48 +134,55 @@ export default async function Home() {
 
   return (
     <div>
-      {/* Hero — photo-backed with a working search bar as the main act.
-          Marketplaces (Leboncoin, Idealista, Airbnb) lead with search over
-          a real, warm photo. Desktop/mobile use different crops of the
-          same photo so both skylines (France, Algeria) stay visible
-          either way — see the aspect-ratio comments below. */}
-      <section className="relative hidden bg-neutral-900 sm:block">
-        <div className="relative w-full" style={{ aspectRatio: "1672 / 941" }}>
-          <Image src="/hero-photo-v2.png" alt="" fill priority className="object-cover" sizes="100vw" />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 46% 76% at 50% 46%, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.46) 55%, rgba(255,255,255,0) 80%)",
-            }}
+      {/* Hero — a dark gradient field with a faint route arc (Paris↔Alger)
+          and dot-grid texture, not a stock photo. A working search bar on
+          a bright floating card is the main act — the contrast against the
+          dark background is what makes it feel like a product, not a
+          travel brochure. */}
+      <section className="relative overflow-hidden bg-neutral-950">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 55% at 50% 15%, rgba(33,154,97,0.35) 0%, rgba(33,154,97,0) 70%)",
+          }}
+        />
+        <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.07]" aria-hidden="true">
+          <pattern id="dzDotGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+            <circle cx="1.5" cy="1.5" r="1.5" fill="white" />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#dzDotGrid)" />
+        </svg>
+        <svg
+          className="pointer-events-none absolute inset-0 hidden h-full w-full sm:block"
+          viewBox="0 0 1600 700"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="dzRouteGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#43b57c" stopOpacity="0" />
+              <stop offset="50%" stopColor="#5fc98f" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#e23b4e" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M 160 540 Q 800 140 1440 540"
+            fill="none"
+            stroke="url(#dzRouteGrad)"
+            strokeWidth="2"
+            strokeDasharray="2 10"
+            strokeLinecap="round"
           />
-          <div className="absolute inset-0 flex items-center justify-center px-[14%]">
-            <HeroContent />
-          </div>
-        </div>
-      </section>
+          <circle cx="160" cy="540" r="4" fill="#5fc98f" />
+          <circle cx="160" cy="540" r="11" fill="#43b57c" opacity="0.2" />
+          <circle cx="1440" cy="540" r="4" fill="#e9586a" />
+          <circle cx="1440" cy="540" r="11" fill="#e23b4e" opacity="0.2" />
+        </svg>
+        <div className="bg-grain pointer-events-none absolute inset-0" />
 
-      <section className="relative bg-neutral-900 sm:hidden">
-        <div className="relative w-full" style={{ aspectRatio: "16 / 15" }}>
-          <Image
-            src="/hero-photo-v2.png"
-            alt=""
-            fill
-            priority
-            className="object-cover"
-            style={{ objectPosition: "40% center" }}
-            sizes="100vw"
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 72% 80% at 50% 40%, rgba(255,255,255,0.86) 0%, rgba(255,255,255,0.5) 55%, rgba(255,255,255,0) 82%)",
-            }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center px-4 py-6">
-            <HeroContent compact />
-          </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+          <HeroContent />
         </div>
       </section>
 

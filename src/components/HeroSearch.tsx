@@ -34,7 +34,7 @@ export function HeroSearch() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full rounded-2xl bg-white p-3 shadow-xl shadow-neutral-900/15 ring-1 ring-neutral-900/5 sm:p-4"
+      className="w-full rounded-2xl bg-white p-3 shadow-2xl shadow-black/40 ring-1 ring-black/5 sm:p-4"
     >
       <p className="px-1 text-start text-[11px] font-bold uppercase tracking-wider text-neutral-400">
         {t("searchWhatLabel")}
