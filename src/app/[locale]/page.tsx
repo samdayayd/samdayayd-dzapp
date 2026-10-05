@@ -1,5 +1,6 @@
+import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Building2, Car, DoorOpen, Fuel, Gauge, Ruler, ShoppingBag, Sparkles, Tag } from "lucide-react";
+import { Building2, Car, DoorOpen, Fuel, Gauge, LayoutGrid, MessageCircle, Ruler, Search, ShoppingBag, Sparkles, Tag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { HeroContent } from "@/components/HeroContent";
 import { CategoryDropdown } from "@/components/CategoryDropdown";
@@ -18,33 +19,9 @@ export default async function Home() {
   const tAchatVente = await getTranslations("achatVente");
 
   const steps = [
-    { n: "01", title: t("step1Title"), body: t("step1Body") },
-    { n: "02", title: t("step2Title"), body: t("step2Body") },
-    { n: "03", title: t("step3Title"), body: t("step3Body") },
-  ];
-
-  const categories = [
-    {
-      href: "/voitures",
-      icon: Car,
-      name: t("catVoituresName"),
-      note: t("catVoituresNote"),
-      accent: "from-brand-500 to-brand-700",
-    },
-    {
-      href: "/immobilier",
-      icon: Building2,
-      name: t("catImmobilierName"),
-      note: t("catImmobilierNote"),
-      accent: "from-accent-500 to-accent-700",
-    },
-    {
-      href: "/achat-vente",
-      icon: ShoppingBag,
-      name: t("catAchatVenteName"),
-      note: t("catAchatVenteNote"),
-      accent: "from-neutral-700 to-neutral-900",
-    },
+    { icon: LayoutGrid, title: t("step1Title"), body: t("step1Body") },
+    { icon: Search, title: t("step2Title"), body: t("step2Body") },
+    { icon: MessageCircle, title: t("step3Title"), body: t("step3Body") },
   ];
 
   // Featured listings — a marketplace homepage has to show the actual
@@ -70,6 +47,37 @@ export default async function Home() {
       take: 2,
     }),
   ]);
+
+  // Category tiles use a real listing photo as the background when one's
+  // available — not an icon sitting in a colored square, which is the
+  // generic SaaS-feature-card pattern this redesign is specifically
+  // trying to get away from.
+  const categories = [
+    {
+      href: "/voitures",
+      icon: Car,
+      name: t("catVoituresName"),
+      note: t("catVoituresNote"),
+      accent: "from-brand-700 to-brand-900",
+      imageUrl: listings[0]?.images[0]?.url,
+    },
+    {
+      href: "/immobilier",
+      icon: Building2,
+      name: t("catImmobilierName"),
+      note: t("catImmobilierNote"),
+      accent: "from-accent-700 to-accent-900",
+      imageUrl: properties[0]?.images[0]?.url,
+    },
+    {
+      href: "/achat-vente",
+      icon: ShoppingBag,
+      name: t("catAchatVenteName"),
+      note: t("catAchatVenteNote"),
+      accent: "from-neutral-700 to-neutral-950",
+      imageUrl: items[0]?.images[0]?.url,
+    },
+  ];
 
   const listingCards = listings.map((l) => ({
     key: `listing-${l.id}`,
@@ -252,35 +260,44 @@ export default async function Home() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map(({ href, icon: Icon, name, note, accent }, i) => (
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+            {categories.map(({ href, icon: Icon, name, note, accent, imageUrl }, i) => (
               <Reveal key={href} delay={i * 0.08}>
-                <Link href={href} className="card-interactive group block overflow-hidden">
-                  <div className={`flex h-28 items-center justify-center bg-gradient-to-br ${accent} text-white`}>
-                    <Icon size={34} strokeWidth={1.6} className="transition-transform group-hover:scale-110" />
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="text-lg font-bold text-neutral-900">{name}</p>
-                      <span className="badge-brand shrink-0">{t("catAvailable")}</span>
-                    </div>
-                    <p className="mt-1 text-sm text-neutral-500">{note}</p>
+                <Link
+                  href={href}
+                  className="group relative block aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[3/4]"
+                >
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt=""
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className={`absolute inset-0 bg-gradient-to-br ${accent}`} />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                  <Icon size={18} strokeWidth={2} className="absolute start-4 top-4 text-white/80" />
+                  <span className="badge absolute end-4 top-4 bg-white/90 text-neutral-900 shadow-sm">
+                    {t("catAvailable")}
+                  </span>
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <p className="text-xl font-bold text-white">{name}</p>
+                    <p className="mt-1 text-sm text-white/75">{note}</p>
                   </div>
                 </Link>
               </Reveal>
             ))}
 
             <Reveal delay={categories.length * 0.08}>
-              <div className="card flex h-full flex-col overflow-hidden opacity-60">
-                <div className="flex h-28 items-center justify-center bg-neutral-100 text-neutral-400">
-                  <Sparkles size={30} strokeWidth={1.6} />
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="text-lg font-bold text-neutral-700">{t("catTravailName")}</p>
-                    <span className="badge-neutral shrink-0">{t("catComingSoon")}</span>
-                  </div>
-                  <p className="mt-1 text-sm text-neutral-400">{t("catTravailNote")}</p>
+              <div className="group relative block aspect-[4/5] overflow-hidden rounded-2xl opacity-70 sm:aspect-[3/4]">
+                <div className="absolute inset-0 bg-neutral-200" />
+                <Sparkles size={18} strokeWidth={2} className="absolute start-4 top-4 text-neutral-500" />
+                <span className="badge-neutral absolute end-4 top-4 shadow-sm">{t("catComingSoon")}</span>
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <p className="text-xl font-bold text-neutral-700">{t("catTravailName")}</p>
+                  <p className="mt-1 text-sm text-neutral-500">{t("catTravailNote")}</p>
                 </div>
               </div>
             </Reveal>
@@ -306,15 +323,13 @@ export default async function Home() {
           <p className="mt-2 text-neutral-500">{t("howItWorksSubtitle")}</p>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-t border-neutral-200 sm:grid-cols-3">
-          {steps.map(({ n, title, body }, i) => (
-            <Reveal
-              key={n}
-              delay={i * 0.1}
-              className="border-neutral-200 pt-7 sm:border-s sm:first:border-s-0 sm:[&:not(:first-child)]:ps-8"
-            >
-              <p className="text-sm font-bold text-brand-600">{n}</p>
-              <p className="mt-2 text-lg font-semibold text-neutral-900">{title}</p>
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          {steps.map(({ icon: Icon, title, body }, i) => (
+            <Reveal key={title} delay={i * 0.1}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-900 text-white">
+                <Icon size={20} strokeWidth={1.75} />
+              </div>
+              <p className="mt-4 text-lg font-semibold text-neutral-900">{title}</p>
               <p className="mt-2 text-sm leading-relaxed text-neutral-500">{body}</p>
             </Reveal>
           ))}
