@@ -6,25 +6,28 @@ services:
     buildCommand: npm install && npx prisma generate && npm run build
     startCommand: npx prisma migrate deploy && npm start
     envVars:
-      # SQLite file on the service's own disk — chosen because Render
-      # allows only one free-tier Postgres per account and this account's
-      # is already used by another project. Data (users/listings) does
-      # NOT persist across redeploys or restarts on Render's free plan —
-      # fine for trying the app out; move to a real Postgres database
-      # (see the commented-out block below) before any real usage.
+      # Postgres on Neon (external — not Render's own managed Postgres,
+      # to avoid a paid plan requirement there). Both the pooled
+      # connection (DATABASE_URL, what the app queries through at
+      # runtime) and the direct one (DIRECT_URL, what `prisma migrate
+      # deploy` needs — PgBouncer's pooled connections don't support
+      # the session-level features migrations use) come from the
+      # project's Neon dashboard → Connection Details. Set both here
+      # manually; never commit real values for these.
       - key: DATABASE_URL
-        value: file:./prod.db
+        sync: false
+      - key: DIRECT_URL
+        sync: false
       - key: AUTH_SECRET
         generateValue: true
       # Signup is invite-only (existing users mint codes from the
       # /invites page). This is the one code that's always valid and
       # never consumed, no matter how empty the database is — including
-      # right after the very first deploy, or after any reset on this
-      # ephemeral-SQLite free plan, when there are zero users and so no
-      # way to mint a real invite at all. Use it to create the first
-      # account, then ignore it — see README's "Invite-only signup"
-      # section. Render generates a random value; find it in this
-      # service's Environment tab.
+      # right after the very first deploy, when there are zero users and
+      # so no way to mint a real invite at all. Use it to create the
+      # first account, then ignore it — see README's "Invite-only
+      # signup" section. Render generates a random value; find it in
+      # this service's Environment tab.
       - key: BOOTSTRAP_INVITE_CODE
         generateValue: true
       # Can't be known until the service exists and gets its
@@ -44,18 +47,11 @@ services:
         value: "DZ APP <onboarding@resend.dev>"
 
 # Notes:
-# - Free plan has no persistent disk, so both the SQLite database and
-#   uploaded listing photos (./uploads) reset on every redeploy or
-#   restart. Fine for a first look/demo; before real usage:
-#     1. Switch prisma/schema.prisma's datasource back to `postgresql`
-#        (see git history — this repo started on Postgres) and uncomment
-#        the `databases:` block below, on a paid plan since this account's
-#        one free Postgres is already used elsewhere.
-#     2. Swap the upload route (src/app/api/upload/route.ts) for an
-#        S3-compatible object store (Render Disks on a paid plan, or R2/S3).
-#
-# databases:
-#   - name: dzapp-db
-#     plan: starter
-#     databaseName: dzapp
-#     user: dzapp
+# - The database (Postgres on Neon) now persists across redeploys and
+#   restarts — users, listings and jobs survive a `git push`.
+# - Uploaded listing photos (./uploads) do NOT persist yet — they're
+#   still written to the service's own ephemeral disk, same as before.
+#   This is a separate problem from the database and is still open; fix
+#   it by swapping the upload route (src/app/api/upload/route.ts) for
+#   an S3-compatible object store (R2/S3) before relying on photo
+#   uploads for real listings.
