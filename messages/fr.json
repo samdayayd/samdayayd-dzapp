@@ -9,6 +9,7 @@
     "logout": "Déconnexion",
     "immobilier": "Immobilier",
     "achatVente": "Achat/Vente",
+    "emploi": "Emploi",
     "invites": "Invitations",
     "menu": "Menu",
     "home": "Accueil",
@@ -25,6 +26,7 @@
     "publish": "Publier une annonce",
     "immobilier": "Immobilier",
     "achatVente": "Achat/Vente",
+    "emploi": "Emploi",
     "countriesHeading": "Parcourir",
     "france": "France",
     "algeria": "Algérie"
@@ -70,7 +72,7 @@
     "featuredEmptyTitle": "Aucune annonce pour l'instant.",
     "featuredEmptyBody": "Soyez le premier à publier une annonce.",
     "categoriesTitle": "Catégories",
-    "categoriesSubtitle": "Voitures, Immobilier et Achat/Vente sont disponibles — les autres catégories arrivent bientôt.",
+    "categoriesSubtitle": "Voitures, immobilier, achat/vente et emploi — tout au même endroit.",
     "catVoituresName": "Voitures",
     "catVoituresNote": "Achat, vente, toutes marques",
     "catAvailable": "Disponible",
@@ -256,6 +258,7 @@
     "GENERIC": "Une erreur est survenue",
     "INVALID_PROPERTY_TYPE": "Type de bien invalide",
     "INVALID_ITEM_CATEGORY": "Catégorie invalide",
+    "INVALID_JOB_TYPE": "Type de contrat invalide",
     "SESSION_STALE": "Votre session a expiré, merci de vous reconnecter.",
     "INVALID_PRICE": "Ce prix est trop élevé (max 2 000 000 000).",
     "UPLOAD_NOT_CONFIGURED": "L'envoi de photos n'est pas encore configuré sur ce serveur.",
@@ -451,5 +454,80 @@
       "FRANCE": "France",
       "ALGERIE": "Algérie"
     }
+  },
+  "emploi": {
+    "category": "Emploi",
+    "metaDescription": "Offres d'emploi entre la France et l'Algérie — CDI, CDD, stages et freelance.",
+    "resultsFound": "{count, plural, =0 {Aucune offre trouvée} one {# offre trouvée} other {# offres trouvées}}",
+    "resultsAvailable": "{count, plural, =0 {Aucune offre disponible} one {# offre disponible} other {# offres disponibles}}",
+    "filters": {
+      "queryLabel": "Mot-clé",
+      "queryPlaceholder": "Recherchez par mot-clé…",
+      "villeLabel": "Ville",
+      "villePlaceholder": "ex: Lyon, Alger…",
+      "paysLabel": "Pays",
+      "paysAll": "Tous les pays",
+      "france": "France",
+      "algerie": "Algérie",
+      "typeLabel": "Type de contrat",
+      "typeAll": "Tous les types",
+      "search": "Rechercher"
+    },
+    "empty": {
+      "title": "Aucune offre ne correspond à votre recherche.",
+      "body": "Essayez d'élargir vos filtres, ou soyez le premier à publier.",
+      "cta": "Publier une offre"
+    },
+    "detail": {
+      "specsTitle": "Détails",
+      "jobType": "Type de contrat",
+      "company": "Entreprise",
+      "location": "Localisation",
+      "salary": "Salaire",
+      "remote": "Télétravail",
+      "remoteYes": "Télétravail possible",
+      "remoteNo": "Sur site",
+      "descriptionTitle": "Description",
+      "sellerDefault": "Employeur",
+      "verified": "Vérifié",
+      "call": "Appeler",
+      "email": "Envoyer un email"
+    },
+    "create": {
+      "title": "Publier une offre d'emploi",
+      "subtitle": "Catégorie Emploi",
+      "titleLabel": "Intitulé du poste",
+      "titlePlaceholder": "ex: Développeur Full-Stack",
+      "companyLabel": "Entreprise",
+      "typeLabel": "Type de contrat",
+      "paysLabel": "Pays",
+      "villeLabel": "Ville",
+      "remoteLabel": "Ce poste est ouvert au télétravail",
+      "salaryMinLabel": "Salaire min (optionnel)",
+      "salaryMaxLabel": "Salaire max (optionnel)",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Missions, profil recherché, avantages…",
+      "contactTitle": "Coordonnées de contact",
+      "contactNameLabel": "Nom du contact",
+      "contactEmailLabel": "Email de contact",
+      "contactPhoneLabel": "Téléphone",
+      "submit": "Publier l'offre",
+      "submitting": "Publication...",
+      "loginRequiredTitle": "Connectez-vous pour publier",
+      "loginRequiredBody": "Vous devez avoir un compte DZ APP pour publier une offre.",
+      "loginCta": "Se connecter"
+    },
+    "jobType": {
+      "CDI": "CDI",
+      "CDD": "CDD",
+      "STAGE": "Stage",
+      "FREELANCE": "Freelance",
+      "INTERIM": "Intérim"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algérie"
+    },
+    "salaryNotSpecified": "Non précisé"
   }
 }

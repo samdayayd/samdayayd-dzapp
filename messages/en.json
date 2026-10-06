@@ -9,6 +9,7 @@
     "logout": "Log out",
     "immobilier": "Real estate",
     "achatVente": "Buy & Sell",
+    "emploi": "Jobs",
     "invites": "Invites",
     "menu": "Menu",
     "home": "Home",
@@ -25,6 +26,7 @@
     "publish": "Post an ad",
     "immobilier": "Real estate",
     "achatVente": "Buy & Sell",
+    "emploi": "Jobs",
     "countriesHeading": "Browse",
     "france": "France",
     "algeria": "Algeria"
@@ -70,7 +72,7 @@
     "featuredEmptyTitle": "No listings yet.",
     "featuredEmptyBody": "Be the first to post one.",
     "categoriesTitle": "Categories",
-    "categoriesSubtitle": "Cars, Real estate, and Buy & Sell are live — the rest are coming soon.",
+    "categoriesSubtitle": "Cars, real estate, buy & sell, and jobs — all in one place.",
     "catVoituresName": "Cars",
     "catVoituresNote": "Buy, sell, all makes",
     "catAvailable": "Available",
@@ -256,6 +258,7 @@
     "GENERIC": "Something went wrong",
     "INVALID_PROPERTY_TYPE": "Invalid property type",
     "INVALID_ITEM_CATEGORY": "Invalid category",
+  "INVALID_JOB_TYPE": "Invalid job type",
     "SESSION_STALE": "Your session has expired — please log in again.",
     "INVALID_PRICE": "This price is too high (max 2,000,000,000).",
     "UPLOAD_NOT_CONFIGURED": "Photo uploads aren't configured on this server yet.",
@@ -451,5 +454,80 @@
       "FRANCE": "France",
       "ALGERIE": "Algeria"
     }
+  },
+  "emploi": {
+    "category": "Jobs",
+    "metaDescription": "Job listings between France and Algeria — permanent, fixed-term, internships and freelance.",
+    "resultsFound": "{count, plural, =0 {No jobs found} one {# job found} other {# jobs found}}",
+    "resultsAvailable": "{count, plural, =0 {No jobs available} one {# job available} other {# jobs available}}",
+    "filters": {
+      "queryLabel": "Keyword",
+      "queryPlaceholder": "Search by keyword…",
+      "villeLabel": "City",
+      "villePlaceholder": "e.g. Lyon, Algiers…",
+      "paysLabel": "Country",
+      "paysAll": "All countries",
+      "france": "France",
+      "algerie": "Algeria",
+      "typeLabel": "Job type",
+      "typeAll": "All types",
+      "search": "Search"
+    },
+    "empty": {
+      "title": "No jobs match your search.",
+      "body": "Try widening your filters, or be the first to post one.",
+      "cta": "Post a job"
+    },
+    "detail": {
+      "specsTitle": "Details",
+      "jobType": "Job type",
+      "company": "Company",
+      "location": "Location",
+      "salary": "Salary",
+      "remote": "Remote",
+      "remoteYes": "Remote possible",
+      "remoteNo": "On-site",
+      "descriptionTitle": "Description",
+      "sellerDefault": "Employer",
+      "verified": "Verified",
+      "call": "Call",
+      "email": "Send an email"
+    },
+    "create": {
+      "title": "Post a job",
+      "subtitle": "Jobs category",
+      "titleLabel": "Job title",
+      "titlePlaceholder": "e.g. Full-Stack Developer",
+      "companyLabel": "Company",
+      "typeLabel": "Job type",
+      "paysLabel": "Country",
+      "villeLabel": "City",
+      "remoteLabel": "This position can be done remotely",
+      "salaryMinLabel": "Min salary (optional)",
+      "salaryMaxLabel": "Max salary (optional)",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Responsibilities, requirements, benefits…",
+      "contactTitle": "Contact details",
+      "contactNameLabel": "Contact name",
+      "contactEmailLabel": "Contact email",
+      "contactPhoneLabel": "Phone",
+      "submit": "Post job",
+      "submitting": "Posting...",
+      "loginRequiredTitle": "Log in to post a job",
+      "loginRequiredBody": "You need a DZ APP account to post a job.",
+      "loginCta": "Log in"
+    },
+    "jobType": {
+      "CDI": "Permanent (CDI)",
+      "CDD": "Fixed-term (CDD)",
+      "STAGE": "Internship",
+      "FREELANCE": "Freelance",
+      "INTERIM": "Temp"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algeria"
+    },
+    "salaryNotSpecified": "Not specified"
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Building2, Car, ChevronDown, ShoppingBag } from "lucide-react";
+import { Briefcase, Building2, Car, ChevronDown, ShoppingBag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
   DropdownMenu,
@@ -29,6 +29,7 @@ export function CountryDropdown({
     { href: `/voitures?pays=${country}`, label: tNav("voitures"), icon: Car },
     { href: `/immobilier?pays=${country}`, label: tNav("immobilier"), icon: Building2 },
     { href: `/achat-vente?pays=${country}`, label: tNav("achatVente"), icon: ShoppingBag },
+    { href: `/emploi?pays=${country}`, label: tNav("emploi"), icon: Briefcase },
   ] as const;
 
   return (

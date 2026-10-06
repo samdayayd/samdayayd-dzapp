@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import {
+  Briefcase,
   Building2,
   Car,
   Home,
@@ -24,7 +25,7 @@ import { UserMenu } from "./UserMenu";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
-const CATEGORY_PREFIXES = ["/voitures", "/immobilier", "/achat-vente"];
+const CATEGORY_PREFIXES = ["/voitures", "/immobilier", "/achat-vente", "/emploi"];
 
 function Logo() {
   return (
@@ -57,6 +58,7 @@ export function NavBar() {
     { href: "/voitures", label: t("voitures"), icon: Car },
     { href: "/immobilier", label: t("immobilier"), icon: Building2 },
     { href: "/achat-vente", label: t("achatVente"), icon: ShoppingBag },
+    { href: "/emploi", label: t("emploi"), icon: Briefcase },
   ] as const;
 
   const navLinkClass =

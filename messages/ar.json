@@ -9,6 +9,7 @@
     "logout": "تسجيل الخروج",
     "immobilier": "عقارات",
     "achatVente": "بيع وشراء",
+    "emploi": "وظائف",
     "invites": "الدعوات",
     "menu": "القائمة",
     "home": "الرئيسية",
@@ -25,6 +26,7 @@
     "publish": "أضف إعلانًا",
     "immobilier": "عقارات",
     "achatVente": "بيع وشراء",
+    "emploi": "وظائف",
     "countriesHeading": "تصفح",
     "france": "فرنسا",
     "algeria": "الجزائر"
@@ -70,7 +72,7 @@
     "featuredEmptyTitle": "لا توجد إعلانات بعد.",
     "featuredEmptyBody": "كن أول من ينشر إعلانًا.",
     "categoriesTitle": "الفئات",
-    "categoriesSubtitle": "سيارات وعقارات وبيع وشراء متاحة الآن — البقية قريبًا.",
+    "categoriesSubtitle": "سيارات وعقارات وبيع وشراء ووظائف — كل شيء في مكان واحد.",
     "catVoituresName": "سيارات",
     "catVoituresNote": "شراء، بيع، جميع الماركات",
     "catAvailable": "متاح",
@@ -256,6 +258,7 @@
     "GENERIC": "حدث خطأ ما",
     "INVALID_PROPERTY_TYPE": "نوع عقار غير صالح",
     "INVALID_ITEM_CATEGORY": "فئة غير صالحة",
+    "INVALID_JOB_TYPE": "نوع عقد غير صالح",
     "SESSION_STALE": "انتهت صلاحية جلستك، يرجى تسجيل الدخول مرة أخرى.",
     "INVALID_PRICE": "هذا السعر مرتفع جدًا (الحد الأقصى 2,000,000,000).",
     "UPLOAD_NOT_CONFIGURED": "لم يتم إعداد رفع الصور على هذا الخادم بعد.",
@@ -451,5 +454,80 @@
       "FRANCE": "فرنسا",
       "ALGERIE": "الجزائر"
     }
+  },
+  "emploi": {
+    "category": "وظائف",
+    "metaDescription": "عروض عمل بين فرنسا والجزائر — عقود دائمة ومؤقتة وتدريب وعمل حر.",
+    "resultsFound": "{count, plural, =0 {لم يتم العثور على وظائف} one {تم العثور على وظيفة واحدة} other {تم العثور على # وظيفة}}",
+    "resultsAvailable": "{count, plural, =0 {لا توجد وظائف متاحة} one {وظيفة واحدة متاحة} other {# وظيفة متاحة}}",
+    "filters": {
+      "queryLabel": "كلمة مفتاحية",
+      "queryPlaceholder": "ابحث بكلمة مفتاحية…",
+      "villeLabel": "المدينة",
+      "villePlaceholder": "مثال: ليون، الجزائر العاصمة…",
+      "paysLabel": "البلد",
+      "paysAll": "كل الدول",
+      "france": "فرنسا",
+      "algerie": "الجزائر",
+      "typeLabel": "نوع العقد",
+      "typeAll": "كل الأنواع",
+      "search": "بحث"
+    },
+    "empty": {
+      "title": "لا توجد وظيفة تطابق بحثك.",
+      "body": "حاول توسيع عوامل التصفية، أو كن أول من ينشر.",
+      "cta": "انشر وظيفة"
+    },
+    "detail": {
+      "specsTitle": "التفاصيل",
+      "jobType": "نوع العقد",
+      "company": "الشركة",
+      "location": "الموقع",
+      "salary": "الراتب",
+      "remote": "العمل عن بعد",
+      "remoteYes": "العمل عن بعد متاح",
+      "remoteNo": "حضوري",
+      "descriptionTitle": "الوصف",
+      "sellerDefault": "صاحب العمل",
+      "verified": "موثّق",
+      "call": "اتصال",
+      "email": "إرسال بريد إلكتروني"
+    },
+    "create": {
+      "title": "انشر عرض عمل",
+      "subtitle": "فئة وظائف",
+      "titleLabel": "المسمى الوظيفي",
+      "titlePlaceholder": "مثال: مطوّر Full-Stack",
+      "companyLabel": "الشركة",
+      "typeLabel": "نوع العقد",
+      "paysLabel": "البلد",
+      "villeLabel": "المدينة",
+      "remoteLabel": "هذا المنصب يمكن العمل فيه عن بعد",
+      "salaryMinLabel": "الراتب الأدنى (اختياري)",
+      "salaryMaxLabel": "الراتب الأقصى (اختياري)",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "المهام، الملف المطلوب، المزايا…",
+      "contactTitle": "معلومات الاتصال",
+      "contactNameLabel": "اسم جهة الاتصال",
+      "contactEmailLabel": "البريد الإلكتروني للتواصل",
+      "contactPhoneLabel": "الهاتف",
+      "submit": "نشر الوظيفة",
+      "submitting": "جارٍ النشر...",
+      "loginRequiredTitle": "سجّل الدخول للنشر",
+      "loginRequiredBody": "تحتاج إلى حساب DZ APP لنشر وظيفة.",
+      "loginCta": "تسجيل الدخول"
+    },
+    "jobType": {
+      "CDI": "عقد دائم",
+      "CDD": "عقد محدد المدة",
+      "STAGE": "تدريب",
+      "FREELANCE": "عمل حر",
+      "INTERIM": "عمل مؤقت"
+    },
+    "country": {
+      "FRANCE": "فرنسا",
+      "ALGERIE": "الجزائر"
+    },
+    "salaryNotSpecified": "غير محدد"
   }
 }

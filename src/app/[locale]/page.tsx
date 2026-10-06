@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import {
   ArrowUpRight,
+  Briefcase,
   Building2,
   Car,
   DoorOpen,
@@ -23,7 +24,7 @@ import { CategoryDropdown } from "@/components/CategoryDropdown";
 import { ListingCard } from "@/components/ListingCard";
 import { Reveal } from "@/components/Reveal";
 import { prisma } from "@/lib/prisma";
-import { formatPrice, formatKm } from "@/lib/format";
+import { formatPrice, formatKm, formatSalaryRange } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -33,6 +34,7 @@ export default async function Home() {
   const tVoitures = await getTranslations("voitures");
   const tImmobilier = await getTranslations("immobilier");
   const tAchatVente = await getTranslations("achatVente");
+  const tEmploi = await getTranslations("emploi");
 
   const steps = [
     { icon: LayoutGrid, title: t("step1Title"), body: t("step1Body") },
@@ -50,7 +52,7 @@ export default async function Home() {
   // Featured listings — a marketplace homepage has to show the actual
   // marketplace, not just describe it. Two most recent per category,
   // interleaved so one category can't crowd the others out.
-  const [listings, properties, items] = await Promise.all([
+  const [listings, properties, items, jobs] = await Promise.all([
     prisma.listing.findMany({
       where: { status: "ACTIVE" },
       include: { images: { orderBy: { position: "asc" }, take: 1 } },
@@ -66,6 +68,11 @@ export default async function Home() {
     prisma.item.findMany({
       where: { status: "ACTIVE" },
       include: { images: { orderBy: { position: "asc" }, take: 1 } },
+      orderBy: { createdAt: "desc" },
+      take: 2,
+    }),
+    prisma.job.findMany({
+      where: { status: "ACTIVE" },
       orderBy: { createdAt: "desc" },
       take: 2,
     }),
@@ -99,6 +106,14 @@ export default async function Home() {
       note: t("catAchatVenteNote"),
       accent: "from-neutral-700 to-neutral-950",
       imageUrl: items[0]?.images[0]?.url,
+    },
+    {
+      href: "/emploi",
+      icon: Briefcase,
+      name: t("catTravailName"),
+      note: t("catTravailNote"),
+      accent: "from-brand-800 to-accent-700",
+      imageUrl: undefined,
     },
   ];
 
@@ -150,13 +165,27 @@ export default async function Home() {
     fallbackIcon: ShoppingBag,
     meta: [{ icon: Tag, label: tAchatVente(`condition.${it.condition}` as "condition.NEUF") }],
   }));
+  const jobCards = jobs.map((j) => ({
+    key: `job-${j.id}`,
+    href: `/emploi/${j.id}`,
+    imageUrl: undefined,
+    title: `${j.title} — ${j.company}`,
+    price: formatSalaryRange(j.salaryMin, j.salaryMax, j.currency, locale, tEmploi("salaryNotSpecified")),
+    priceSuffix: undefined,
+    country: tEmploi(`country.${j.country}` as "country.FRANCE"),
+    city: j.city,
+    categoryBadge: tEmploi("category"),
+    saleBadge: j.remote ? { label: tEmploi("detail.remoteYes"), variant: "accent" as const } : undefined,
+    fallbackIcon: Briefcase,
+    meta: [{ icon: Briefcase, label: tEmploi(`jobType.${j.jobType}` as "jobType.CDI") }],
+  }));
 
   // Interleave by category (round-robin) instead of a random shuffle, so
   // the section order is stable across renders rather than reshuffling
   // every time the page re-renders.
-  type FeaturedCard = (typeof listingCards | typeof propertyCards | typeof itemCards)[number];
+  type FeaturedCard = (typeof listingCards | typeof propertyCards | typeof itemCards | typeof jobCards)[number];
   const featured: FeaturedCard[] = [];
-  const buckets: FeaturedCard[][] = [listingCards, propertyCards, itemCards];
+  const buckets: FeaturedCard[][] = [listingCards, propertyCards, itemCards, jobCards];
   for (let i = 0; i < 2; i++) {
     for (const bucket of buckets) {
       if (bucket[i]) featured.push(bucket[i]);
@@ -311,20 +340,6 @@ export default async function Home() {
                 </Link>
               </Reveal>
             ))}
-
-            <Reveal delay={categories.length * 0.08}>
-              <div className="relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 opacity-60 sm:aspect-[3/4]">
-                <div className="absolute inset-0 bg-neutral-900" />
-                <span className="absolute start-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/60 backdrop-blur-sm">
-                  <Sparkles size={15} strokeWidth={2} />
-                </span>
-                <span className="badge-neutral absolute end-4 top-4 shadow-sm">{t("catComingSoon")}</span>
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <p className="text-xl font-bold text-white/70">{t("catTravailName")}</p>
-                  <p className="mt-1 text-sm text-white/40">{t("catTravailNote")}</p>
-                </div>
-              </div>
-            </Reveal>
           </div>
         </div>
       </section>

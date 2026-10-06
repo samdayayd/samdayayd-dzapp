@@ -17,6 +17,7 @@ datasource db {
 //               PropertyType = APPARTEMENT | MAISON | TERRAIN | LOCAL
 //               ItemCategory = ELECTRONIQUE | MEUBLE | VETEMENTS | LOISIRS | MAISON | AUTRE
 //               ItemCondition = NEUF | OCCASION
+//               JobType = CDI | CDD | STAGE | FREELANCE | INTERIM
 
 model User {
   id            String    @id @default(cuid())
@@ -30,6 +31,7 @@ model User {
   listings      Listing[]
   properties    Property[]
   items         Item[]
+  jobs          Job[]
   favorites     Favorite[]
   sentMessages  Message[]      @relation("MessagesSent")
   conversationsAsBuyer  Conversation[] @relation("Buyer")
@@ -201,6 +203,36 @@ model ItemImage {
 
   item     Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId   String
+}
+
+model Job {
+  id            String        @id @default(cuid())
+  title         String
+  description   String
+  company       String
+  country       String
+  city          String
+  jobType       String        @default("CDI")
+  remote        Boolean       @default(false)
+
+  // Optional — not every poster wants to state a salary.
+  salaryMin     Int?
+  salaryMax     Int?
+  currency      String        @default("EUR")
+
+  contactName   String
+  contactEmail  String
+  contactPhone  String
+
+  status        String        @default("ACTIVE")
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  seller        User          @relation(fields: [sellerId], references: [id])
+  sellerId      String
+
+  @@index([country, city])
+  @@index([jobType])
 }
 
 model Favorite {
