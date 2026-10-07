@@ -7,6 +7,7 @@ import {
   DoorOpen,
   Fuel,
   Gauge,
+  Heart,
   LayoutGrid,
   MessageCircle,
   Ruler,
@@ -113,6 +114,18 @@ export default async function Home() {
       name: t("catTravailName"),
       note: t("catTravailNote"),
       accent: "from-brand-800 to-accent-700",
+      imageUrl: undefined,
+    },
+    {
+      href: "/mariage",
+      icon: Heart,
+      name: t("catMariageName"),
+      note: t("catMariageNote"),
+      accent: "from-accent-600 to-brand-800",
+      // No photo here, deliberately — unlike the other tiles, which can
+      // use a real listing's photo. Pulling a real member's profile
+      // photo onto the public homepage would expose them to anyone
+      // browsing, not just people using the matchmaking feature itself.
       imageUrl: undefined,
     },
   ];
@@ -309,7 +322,7 @@ export default async function Home() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-5">
             {categories.map(({ href, icon: Icon, name, note, accent, imageUrl }, i) => (
               <Reveal key={href} delay={i * 0.08}>
                 <Link

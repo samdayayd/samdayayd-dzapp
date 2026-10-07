@@ -19,6 +19,10 @@ datasource db {
 //               ItemCategory = ELECTRONIQUE | MEUBLE | VETEMENTS | LOISIRS | MAISON | AUTRE
 //               ItemCondition = NEUF | OCCASION
 //               JobType = CDI | CDD | STAGE | FREELANCE | INTERIM
+//               Gender = HOMME | FEMME
+//               ReligiousPractice = PRATIQUANT | MODEREMENT_PRATIQUANT | NON_PRATIQUANT
+//               MaritalStatus = CELIBATAIRE | DIVORCE | VEUF
+//               WantsChildren = OUI | NON | PEUT_ETRE
 
 model User {
   id            String    @id @default(cuid())
@@ -33,6 +37,7 @@ model User {
   properties    Property[]
   items         Item[]
   jobs          Job[]
+  marriageProfile MarriageProfile?
   favorites     Favorite[]
   sentMessages  Message[]      @relation("MessagesSent")
   conversationsAsBuyer  Conversation[] @relation("Buyer")
@@ -234,6 +239,60 @@ model Job {
 
   @@index([country, city])
   @@index([jobType])
+}
+
+// One profile per user — not a repeatable listing like the other
+// categories. Contact fields exist here but are NEVER sent to the
+// client until a mutual match exists (see /api/mariage and the
+// [id] detail page) — unlike every other category, where contact
+// info is public on the listing itself.
+model MarriageProfile {
+  id                String   @id @default(cuid())
+  displayName       String
+  age               Int
+  gender            String
+  lookingForGender  String
+  country           String
+  city              String
+
+  religiousPractice String
+  maritalStatus     String
+  wantsChildren     String
+  bio               String
+
+  photoUrl          String?
+
+  contactEmail      String
+  contactPhone      String
+
+  status            String   @default("ACTIVE")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String   @unique
+
+  interestsSent     MarriageInterest[] @relation("InterestFrom")
+  interestsReceived MarriageInterest[] @relation("InterestTo")
+
+  @@index([gender, lookingForGender])
+  @@index([country, city])
+}
+
+// One-way "interested" signal. A match is derived — both directions
+// existing between the same two profiles — rather than stored as its
+// own row, so there's one source of truth and no way for it to drift.
+model MarriageInterest {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+
+  fromProfile   MarriageProfile @relation("InterestFrom", fields: [fromProfileId], references: [id], onDelete: Cascade)
+  fromProfileId String
+  toProfile     MarriageProfile @relation("InterestTo", fields: [toProfileId], references: [id], onDelete: Cascade)
+  toProfileId   String
+
+  @@unique([fromProfileId, toProfileId])
+  @@index([toProfileId])
 }
 
 model Favorite {

@@ -6,7 +6,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { CategoryDropdown } from "./CategoryDropdown";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-const CATEGORY_PREFIXES = ["/voitures", "/immobilier", "/achat-vente", "/emploi"];
+const CATEGORY_PREFIXES = ["/voitures", "/immobilier", "/achat-vente", "/emploi", "/mariage"];
 
 /** Three columns, nothing invented: categories that exist, country
     browsing that exists (via the `pays` filter), and the language
@@ -53,6 +53,9 @@ export function Footer() {
               </Link>
               <Link href="/emploi" className="w-fit hover:text-white">
                 {t("emploi")}
+              </Link>
+              <Link href="/mariage" className="w-fit hover:text-white">
+                {t("mariage")}
               </Link>
               {publishHref ? (
                 <Link href={publishHref} className="w-fit hover:text-white">

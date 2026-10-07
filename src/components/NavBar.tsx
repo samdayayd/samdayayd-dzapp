@@ -7,6 +7,7 @@ import {
   Briefcase,
   Building2,
   Car,
+  Heart,
   Home,
   KeyRound,
   LogIn,
@@ -25,7 +26,7 @@ import { UserMenu } from "./UserMenu";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
-const CATEGORY_PREFIXES = ["/voitures", "/immobilier", "/achat-vente", "/emploi"];
+const CATEGORY_PREFIXES = ["/voitures", "/immobilier", "/achat-vente", "/emploi", "/mariage"];
 
 function Logo() {
   return (
@@ -59,6 +60,7 @@ export function NavBar() {
     { href: "/immobilier", label: t("immobilier"), icon: Building2 },
     { href: "/achat-vente", label: t("achatVente"), icon: ShoppingBag },
     { href: "/emploi", label: t("emploi"), icon: Briefcase },
+    { href: "/mariage", label: t("mariage"), icon: Heart },
   ] as const;
 
   const navLinkClass =

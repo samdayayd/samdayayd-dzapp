@@ -10,6 +10,7 @@
     "immobilier": "Immobilier",
     "achatVente": "Achat/Vente",
     "emploi": "Emploi",
+    "mariage": "Mariage",
     "invites": "Invitations",
     "menu": "Menu",
     "home": "Accueil",
@@ -27,6 +28,7 @@
     "immobilier": "Immobilier",
     "achatVente": "Achat/Vente",
     "emploi": "Emploi",
+    "mariage": "Mariage",
     "countriesHeading": "Parcourir",
     "france": "France",
     "algeria": "Algérie"
@@ -72,7 +74,7 @@
     "featuredEmptyTitle": "Aucune annonce pour l'instant.",
     "featuredEmptyBody": "Soyez le premier à publier une annonce.",
     "categoriesTitle": "Catégories",
-    "categoriesSubtitle": "Voitures, immobilier, achat/vente et emploi — tout au même endroit.",
+    "categoriesSubtitle": "Voitures, immobilier, achat/vente, emploi et mariage — tout au même endroit.",
     "catVoituresName": "Voitures",
     "catVoituresNote": "Achat, vente, toutes marques",
     "catAvailable": "Disponible",
@@ -83,6 +85,8 @@
     "catTravailNote": "Chercher ou proposer",
     "catAchatVenteName": "Achat/Vente",
     "catAchatVenteNote": "Achetez tout, vendez tout",
+    "catMariageName": "Mariage",
+    "catMariageNote": "Rencontrez, matchez, connectez",
     "statementPlain": "Chercher une voiture à Lyon, un appartement à Alger, ou revendre son téléphone —",
     "statementBold": "tout ça ne devrait pas demander cinq applications différentes.",
     "howItWorksTitle": "Comment ça marche",
@@ -259,6 +263,13 @@
     "INVALID_PROPERTY_TYPE": "Type de bien invalide",
     "INVALID_ITEM_CATEGORY": "Catégorie invalide",
     "INVALID_JOB_TYPE": "Type de contrat invalide",
+  "INVALID_AGE": "L'âge doit être compris entre 18 et 100 ans",
+  "INVALID_GENDER": "Genre invalide",
+  "INVALID_RELIGIOUS_PRACTICE": "Pratique religieuse invalide",
+  "INVALID_MARITAL_STATUS": "Statut marital invalide",
+  "INVALID_WANTS_CHILDREN": "Réponse invalide pour les enfants",
+  "PROFILE_REQUIRED": "Créez votre propre profil avant d'exprimer un intérêt pour quelqu'un",
+  "CANNOT_LIKE_SELF": "Vous ne pouvez pas exprimer d'intérêt pour votre propre profil",
     "SESSION_STALE": "Votre session a expiré, merci de vous reconnecter.",
     "INVALID_PRICE": "Ce prix est trop élevé (max 2 000 000 000).",
     "UPLOAD_NOT_CONFIGURED": "L'envoi de photos n'est pas encore configuré sur ce serveur.",
@@ -529,5 +540,108 @@
       "ALGERIE": "Algérie"
     },
     "salaryNotSpecified": "Non précisé"
+  },
+  "mariage": {
+    "category": "Mariage",
+    "metaDescription": "Un espace matrimonial pour la diaspora franco-algérienne — exprimez un intérêt, les coordonnées ne sont partagées qu'en cas d'intérêt mutuel.",
+    "resultsFound": "{count, plural, =0 {Aucun profil trouvé} one {# profil trouvé} other {# profils trouvés}}",
+    "resultsAvailable": "{count, plural, =0 {Aucun profil disponible} one {# profil disponible} other {# profils disponibles}}",
+    "filters": {
+      "queryLabel": "Nom",
+      "queryPlaceholder": "Recherchez par nom…",
+      "villeLabel": "Ville",
+      "villePlaceholder": "ex: Lyon, Alger…",
+      "paysLabel": "Pays",
+      "paysAll": "Tous les pays",
+      "france": "France",
+      "algerie": "Algérie",
+      "genreLabel": "Genre",
+      "genreAll": "Tous",
+      "search": "Rechercher"
+    },
+    "empty": {
+      "title": "Aucun profil ne correspond à votre recherche.",
+      "body": "Essayez d'élargir vos filtres, ou soyez le premier à créer un profil.",
+      "cta": "Créer mon profil"
+    },
+    "gender": {
+      "HOMME": "Homme",
+      "FEMME": "Femme"
+    },
+    "religiousPractice": {
+      "PRATIQUANT": "Pratiquant(e)",
+      "MODEREMENT_PRATIQUANT": "Modérément pratiquant(e)",
+      "NON_PRATIQUANT": "Non pratiquant(e)"
+    },
+    "maritalStatus": {
+      "CELIBATAIRE": "Célibataire",
+      "DIVORCE": "Divorcé(e)",
+      "VEUF": "Veuf/veuve"
+    },
+    "wantsChildren": {
+      "OUI": "Souhaite des enfants",
+      "NON": "Ne souhaite pas d'enfants",
+      "PEUT_ETRE": "Ouvert(e) à la question"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algérie"
+    },
+    "detail": {
+      "age": "Âge",
+      "maritalStatus": "Statut marital",
+      "religiousPractice": "Pratique religieuse",
+      "wantsChildren": "Enfants",
+      "specsTitle": "En bref",
+      "bioTitle": "En ses propres mots",
+      "verified": "Vérifié",
+      "ownProfile": "C'est votre propre profil.",
+      "editProfile": "Modifier mon profil",
+      "expressInterest": "Exprimer un intérêt",
+      "interestSent": "Intérêt envoyé — vous verrez un match ici si c'est réciproque.",
+      "interestError": "Échec de l'envoi — veuillez réessayer.",
+      "matched": "C'est un match ! Coordonnées ci-dessous.",
+      "call": "Appeler",
+      "email": "Envoyer un email"
+    },
+    "create": {
+      "title": "Créer votre profil",
+      "editTitle": "Modifier votre profil",
+      "subtitle": "Catégorie Mariage — un profil par compte.",
+      "displayNameLabel": "Nom affiché",
+      "displayNamePlaceholder": "Prénom ou pseudonyme visible par les autres membres",
+      "ageLabel": "Âge",
+      "genderLabel": "Vous êtes",
+      "lookingForLabel": "Vous recherchez",
+      "paysLabel": "Pays",
+      "villeLabel": "Ville",
+      "religiousPracticeLabel": "Pratique religieuse",
+      "maritalStatusLabel": "Statut marital",
+      "wantsChildrenLabel": "Enfants",
+      "bioLabel": "À propos de vous",
+      "bioPlaceholder": "Qui vous êtes, ce qui compte pour vous, ce que vous recherchez…",
+      "contactTitle": "Coordonnées",
+      "contactHint": "Partagées uniquement une fois l'intérêt réciproque confirmé — jamais affichées publiquement.",
+      "contactEmailLabel": "Email de contact",
+      "contactPhoneLabel": "Téléphone",
+      "photoLabel": "Photo",
+      "photoCta": "Ajouter une photo",
+      "photoHint": "JPG, PNG, WebP — 8MB max",
+      "submit": "Enregistrer le profil",
+      "submitting": "Enregistrement...",
+      "loginRequiredTitle": "Connectez-vous pour créer un profil",
+      "loginRequiredBody": "Vous devez avoir un compte DZ APP pour créer un profil Mariage.",
+      "loginCta": "Se connecter"
+    },
+    "matches": {
+      "title": "Vos matchs",
+      "subtitle": "Les personnes avec qui l'intérêt est réciproque.",
+      "noProfileTitle": "Créez d'abord un profil",
+      "noProfileBody": "Vous devez avoir votre propre profil avant de pouvoir matcher avec quelqu'un.",
+      "createProfile": "Créer mon profil",
+      "emptyTitle": "Aucun match pour l'instant.",
+      "emptyBody": "Parcourez les profils et exprimez un intérêt — les matchs apparaissent ici dès qu'ils sont réciproques.",
+      "browse": "Parcourir les profils"
+    }
   }
 }

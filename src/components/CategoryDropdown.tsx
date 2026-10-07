@@ -2,7 +2,7 @@
 
 import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { Briefcase, Building2, Car, ChevronDown, ShoppingBag } from "lucide-react";
+import { Briefcase, Building2, Car, ChevronDown, Heart, ShoppingBag } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
   DropdownMenu,
@@ -54,6 +54,11 @@ export function CategoryDropdown({
       href: mode === "browse" ? "/emploi" : "/emploi/nouvelle",
       label: tNav("emploi"),
       icon: Briefcase,
+    },
+    {
+      href: mode === "browse" ? "/mariage" : "/mariage/nouvelle",
+      label: tNav("mariage"),
+      icon: Heart,
     },
   ] as const;
 

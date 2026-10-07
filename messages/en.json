@@ -10,6 +10,7 @@
     "immobilier": "Real estate",
     "achatVente": "Buy & Sell",
     "emploi": "Jobs",
+    "mariage": "Marriage",
     "invites": "Invites",
     "menu": "Menu",
     "home": "Home",
@@ -27,6 +28,7 @@
     "immobilier": "Real estate",
     "achatVente": "Buy & Sell",
     "emploi": "Jobs",
+    "mariage": "Marriage",
     "countriesHeading": "Browse",
     "france": "France",
     "algeria": "Algeria"
@@ -72,7 +74,7 @@
     "featuredEmptyTitle": "No listings yet.",
     "featuredEmptyBody": "Be the first to post one.",
     "categoriesTitle": "Categories",
-    "categoriesSubtitle": "Cars, real estate, buy & sell, and jobs — all in one place.",
+    "categoriesSubtitle": "Cars, real estate, buy & sell, jobs, and marriage — all in one place.",
     "catVoituresName": "Cars",
     "catVoituresNote": "Buy, sell, all makes",
     "catAvailable": "Available",
@@ -83,6 +85,8 @@
     "catTravailNote": "Find or offer work",
     "catAchatVenteName": "Buy & Sell",
     "catAchatVenteNote": "Buy anything, sell anything",
+    "catMariageName": "Marriage",
+    "catMariageNote": "Meet, match, connect",
     "statementPlain": "Searching for a car in Lyon, an apartment in Algiers, or reselling your phone —",
     "statementBold": "that shouldn't take five different apps.",
     "howItWorksTitle": "How it works",
@@ -259,6 +263,13 @@
     "INVALID_PROPERTY_TYPE": "Invalid property type",
     "INVALID_ITEM_CATEGORY": "Invalid category",
   "INVALID_JOB_TYPE": "Invalid job type",
+  "INVALID_AGE": "Age must be between 18 and 100",
+  "INVALID_GENDER": "Invalid gender",
+  "INVALID_RELIGIOUS_PRACTICE": "Invalid religious practice",
+  "INVALID_MARITAL_STATUS": "Invalid marital status",
+  "INVALID_WANTS_CHILDREN": "Invalid answer for children",
+  "PROFILE_REQUIRED": "Create your own profile before expressing interest in someone",
+  "CANNOT_LIKE_SELF": "You can't express interest in your own profile",
     "SESSION_STALE": "Your session has expired — please log in again.",
     "INVALID_PRICE": "This price is too high (max 2,000,000,000).",
     "UPLOAD_NOT_CONFIGURED": "Photo uploads aren't configured on this server yet.",
@@ -529,5 +540,108 @@
       "ALGERIE": "Algeria"
     },
     "salaryNotSpecified": "Not specified"
+  },
+  "mariage": {
+    "category": "Marriage",
+    "metaDescription": "A matrimonial space for the Franco-Algerian diaspora — express interest, and contact details are shared only once it's mutual.",
+    "resultsFound": "{count, plural, =0 {No profiles found} one {# profile found} other {# profiles found}}",
+    "resultsAvailable": "{count, plural, =0 {No profiles available} one {# profile available} other {# profiles available}}",
+    "filters": {
+      "queryLabel": "Name",
+      "queryPlaceholder": "Search by name…",
+      "villeLabel": "City",
+      "villePlaceholder": "e.g. Lyon, Algiers…",
+      "paysLabel": "Country",
+      "paysAll": "All countries",
+      "france": "France",
+      "algerie": "Algeria",
+      "genreLabel": "Gender",
+      "genreAll": "All",
+      "search": "Search"
+    },
+    "empty": {
+      "title": "No profiles match your search.",
+      "body": "Try widening your filters, or be the first to create a profile.",
+      "cta": "Create your profile"
+    },
+    "gender": {
+      "HOMME": "Man",
+      "FEMME": "Woman"
+    },
+    "religiousPractice": {
+      "PRATIQUANT": "Practicing",
+      "MODEREMENT_PRATIQUANT": "Moderately practicing",
+      "NON_PRATIQUANT": "Non-practicing"
+    },
+    "maritalStatus": {
+      "CELIBATAIRE": "Single",
+      "DIVORCE": "Divorced",
+      "VEUF": "Widowed"
+    },
+    "wantsChildren": {
+      "OUI": "Wants children",
+      "NON": "Doesn't want children",
+      "PEUT_ETRE": "Open to it"
+    },
+    "country": {
+      "FRANCE": "France",
+      "ALGERIE": "Algeria"
+    },
+    "detail": {
+      "age": "Age",
+      "maritalStatus": "Marital status",
+      "religiousPractice": "Religious practice",
+      "wantsChildren": "Children",
+      "specsTitle": "About",
+      "bioTitle": "In their own words",
+      "verified": "Verified",
+      "ownProfile": "This is your own profile.",
+      "editProfile": "Edit my profile",
+      "expressInterest": "Express interest",
+      "interestSent": "Interest sent — you'll see a match here if they're interested too.",
+      "interestError": "Couldn't send that — please try again.",
+      "matched": "It's a match! Contact details below.",
+      "call": "Call",
+      "email": "Send an email"
+    },
+    "create": {
+      "title": "Create your profile",
+      "editTitle": "Edit your profile",
+      "subtitle": "Marriage category — one profile per account.",
+      "displayNameLabel": "Display name",
+      "displayNamePlaceholder": "First name or alias shown to other members",
+      "ageLabel": "Age",
+      "genderLabel": "You are",
+      "lookingForLabel": "Looking for",
+      "paysLabel": "Country",
+      "villeLabel": "City",
+      "religiousPracticeLabel": "Religious practice",
+      "maritalStatusLabel": "Marital status",
+      "wantsChildrenLabel": "Children",
+      "bioLabel": "About you",
+      "bioPlaceholder": "Who you are, what matters to you, what you're looking for…",
+      "contactTitle": "Contact details",
+      "contactHint": "Only ever shared with someone once you've both expressed interest in each other — never shown publicly.",
+      "contactEmailLabel": "Contact email",
+      "contactPhoneLabel": "Phone",
+      "photoLabel": "Photo",
+      "photoCta": "Add a photo",
+      "photoHint": "JPG, PNG, WebP — 8MB max",
+      "submit": "Save profile",
+      "submitting": "Saving...",
+      "loginRequiredTitle": "Log in to create a profile",
+      "loginRequiredBody": "You need a DZ APP account to create a marriage profile.",
+      "loginCta": "Log in"
+    },
+    "matches": {
+      "title": "Your matches",
+      "subtitle": "People you've both expressed interest in.",
+      "noProfileTitle": "Create a profile first",
+      "noProfileBody": "You need your own profile before you can match with anyone.",
+      "createProfile": "Create your profile",
+      "emptyTitle": "No matches yet.",
+      "emptyBody": "Browse profiles and express interest — matches appear here once it's mutual.",
+      "browse": "Browse profiles"
+    }
   }
 }

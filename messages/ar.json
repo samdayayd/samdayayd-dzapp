@@ -10,6 +10,7 @@
     "immobilier": "عقارات",
     "achatVente": "بيع وشراء",
     "emploi": "وظائف",
+    "mariage": "زواج",
     "invites": "الدعوات",
     "menu": "القائمة",
     "home": "الرئيسية",
@@ -27,6 +28,7 @@
     "immobilier": "عقارات",
     "achatVente": "بيع وشراء",
     "emploi": "وظائف",
+    "mariage": "زواج",
     "countriesHeading": "تصفح",
     "france": "فرنسا",
     "algeria": "الجزائر"
@@ -72,7 +74,7 @@
     "featuredEmptyTitle": "لا توجد إعلانات بعد.",
     "featuredEmptyBody": "كن أول من ينشر إعلانًا.",
     "categoriesTitle": "الفئات",
-    "categoriesSubtitle": "سيارات وعقارات وبيع وشراء ووظائف — كل شيء في مكان واحد.",
+    "categoriesSubtitle": "سيارات وعقارات وبيع وشراء ووظائف وزواج — كل شيء في مكان واحد.",
     "catVoituresName": "سيارات",
     "catVoituresNote": "شراء، بيع، جميع الماركات",
     "catAvailable": "متاح",
@@ -83,6 +85,8 @@
     "catTravailNote": "ابحث عن عمل أو اعرضه",
     "catAchatVenteName": "بيع وشراء",
     "catAchatVenteNote": "اشترِ كل شيء، بع كل شيء",
+    "catMariageName": "زواج",
+    "catMariageNote": "تعارف، تطابق، تواصل",
     "statementPlain": "البحث عن سيارة في ليون، أو شقة في الجزائر، أو بيع هاتفك —",
     "statementBold": "كل ذلك لا يجب أن يتطلب خمسة تطبيقات مختلفة.",
     "howItWorksTitle": "كيف يعمل",
@@ -259,6 +263,13 @@
     "INVALID_PROPERTY_TYPE": "نوع عقار غير صالح",
     "INVALID_ITEM_CATEGORY": "فئة غير صالحة",
     "INVALID_JOB_TYPE": "نوع عقد غير صالح",
+    "INVALID_AGE": "يجب أن يكون العمر بين 18 و100 سنة",
+    "INVALID_GENDER": "جنس غير صالح",
+    "INVALID_RELIGIOUS_PRACTICE": "التزام ديني غير صالح",
+    "INVALID_MARITAL_STATUS": "حالة اجتماعية غير صالحة",
+    "INVALID_WANTS_CHILDREN": "إجابة غير صالحة بخصوص الأطفال",
+    "PROFILE_REQUIRED": "أنشئ ملفك الخاص قبل التعبير عن اهتمامك بشخص ما",
+    "CANNOT_LIKE_SELF": "لا يمكنك التعبير عن اهتمامك بملفك الخاص",
     "SESSION_STALE": "انتهت صلاحية جلستك، يرجى تسجيل الدخول مرة أخرى.",
     "INVALID_PRICE": "هذا السعر مرتفع جدًا (الحد الأقصى 2,000,000,000).",
     "UPLOAD_NOT_CONFIGURED": "لم يتم إعداد رفع الصور على هذا الخادم بعد.",
@@ -529,5 +540,108 @@
       "ALGERIE": "الجزائر"
     },
     "salaryNotSpecified": "غير محدد"
+  },
+  "mariage": {
+    "category": "زواج",
+    "metaDescription": "مساحة للتعارف بغرض الزواج لأبناء الجالية الفرنسية-الجزائرية — عبّر عن اهتمامك، ولا تُشارَك بيانات التواصل إلا عند التوافق المتبادل.",
+    "resultsFound": "{count, plural, =0 {لم يتم العثور على ملفات} one {تم العثور على ملف واحد} other {تم العثور على # ملف}}",
+    "resultsAvailable": "{count, plural, =0 {لا توجد ملفات متاحة} one {ملف واحد متاح} other {# ملف متاح}}",
+    "filters": {
+      "queryLabel": "الاسم",
+      "queryPlaceholder": "ابحث بالاسم…",
+      "villeLabel": "المدينة",
+      "villePlaceholder": "مثال: ليون، الجزائر العاصمة…",
+      "paysLabel": "البلد",
+      "paysAll": "كل الدول",
+      "france": "فرنسا",
+      "algerie": "الجزائر",
+      "genreLabel": "الجنس",
+      "genreAll": "الكل",
+      "search": "بحث"
+    },
+    "empty": {
+      "title": "لا يوجد ملف يطابق بحثك.",
+      "body": "حاول توسيع عوامل التصفية، أو كن أول من ينشئ ملفًا.",
+      "cta": "أنشئ ملفك"
+    },
+    "gender": {
+      "HOMME": "رجل",
+      "FEMME": "امرأة"
+    },
+    "religiousPractice": {
+      "PRATIQUANT": "ملتزم دينيًا",
+      "MODEREMENT_PRATIQUANT": "ملتزم نسبيًا",
+      "NON_PRATIQUANT": "غير ملتزم"
+    },
+    "maritalStatus": {
+      "CELIBATAIRE": "أعزب/عزباء",
+      "DIVORCE": "مطلّق(ة)",
+      "VEUF": "أرمل(ة)"
+    },
+    "wantsChildren": {
+      "OUI": "يرغب في الإنجاب",
+      "NON": "لا يرغب في الإنجاب",
+      "PEUT_ETRE": "منفتح على الفكرة"
+    },
+    "country": {
+      "FRANCE": "فرنسا",
+      "ALGERIE": "الجزائر"
+    },
+    "detail": {
+      "age": "العمر",
+      "maritalStatus": "الحالة الاجتماعية",
+      "religiousPractice": "الالتزام الديني",
+      "wantsChildren": "الأطفال",
+      "specsTitle": "نبذة",
+      "bioTitle": "بكلماته/كلماتها",
+      "verified": "موثّق",
+      "ownProfile": "هذا ملفك الشخصي.",
+      "editProfile": "تعديل ملفي",
+      "expressInterest": "عبّر عن اهتمامك",
+      "interestSent": "تم إرسال اهتمامك — سترى تطابقًا هنا إذا كان الاهتمام متبادلاً.",
+      "interestError": "تعذّر الإرسال — يرجى المحاولة مرة أخرى.",
+      "matched": "إنه تطابق! بيانات التواصل أدناه.",
+      "call": "اتصال",
+      "email": "إرسال بريد إلكتروني"
+    },
+    "create": {
+      "title": "أنشئ ملفك",
+      "editTitle": "عدّل ملفك",
+      "subtitle": "فئة الزواج — ملف واحد لكل حساب.",
+      "displayNameLabel": "الاسم المعروض",
+      "displayNamePlaceholder": "الاسم الأول أو اسم مستعار يظهر للأعضاء الآخرين",
+      "ageLabel": "العمر",
+      "genderLabel": "أنت",
+      "lookingForLabel": "تبحث عن",
+      "paysLabel": "البلد",
+      "villeLabel": "المدينة",
+      "religiousPracticeLabel": "الالتزام الديني",
+      "maritalStatusLabel": "الحالة الاجتماعية",
+      "wantsChildrenLabel": "الأطفال",
+      "bioLabel": "نبذة عنك",
+      "bioPlaceholder": "من أنت، ما يهمك، ما تبحث عنه…",
+      "contactTitle": "بيانات التواصل",
+      "contactHint": "تُشارَك فقط بعد تأكيد الاهتمام المتبادل — لا تُعرض علنًا أبدًا.",
+      "contactEmailLabel": "البريد الإلكتروني للتواصل",
+      "contactPhoneLabel": "الهاتف",
+      "photoLabel": "الصورة",
+      "photoCta": "أضف صورة",
+      "photoHint": "JPG, PNG, WebP — 8 ميغابايت كحد أقصى",
+      "submit": "حفظ الملف",
+      "submitting": "جارٍ الحفظ...",
+      "loginRequiredTitle": "سجّل الدخول لإنشاء ملف",
+      "loginRequiredBody": "تحتاج إلى حساب DZ APP لإنشاء ملف زواج.",
+      "loginCta": "تسجيل الدخول"
+    },
+    "matches": {
+      "title": "تطابقاتك",
+      "subtitle": "الأشخاص الذين يوجد معهم اهتمام متبادل.",
+      "noProfileTitle": "أنشئ ملفًا أولاً",
+      "noProfileBody": "تحتاج إلى ملفك الخاص قبل أن تتمكن من التطابق مع أي شخص.",
+      "createProfile": "أنشئ ملفك",
+      "emptyTitle": "لا توجد تطابقات بعد.",
+      "emptyBody": "تصفح الملفات وعبّر عن اهتمامك — تظهر التطابقات هنا عند التبادل.",
+      "browse": "تصفح الملفات"
+    }
   }
 }
